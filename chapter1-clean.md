@@ -219,6 +219,7 @@ Data transfer Data persistence
 (Truyền dữ liệu Bảo tồn dữ liệu)
 
 **Figure 1.2 The user’s perspective is like an iceberg. The users mainly observe the results of the business logic code, but this is only a small part of what builds the app’s complete functionality. Like an iceberg has most of it underwater, in an enterprise app we don’t see most of the code because it’s provided by dependencies.**
+![](media/image2.png)
 (Hình 1.2 Góc nhìn của người dùng giống như một tảng băng trôi. Người dùng chủ yếu quan sát kết quả của mã logic nghiệp vụ, nhưng đây chỉ là một phần nhỏ trong quá trình xây dựng nên chức năng hoàn chỉnh của ứng dụng. Giống như một tảng băng trôi có phần lớn nằm dưới nước, trong một ứng dụng doanh nghiệp, chúng ta không thấy hầu hết mã vì nó được cung cấp bởi các phần phụ thuộc.)
 
 Moreover, the business logic code is what makes an application different from another from the functionality point of view.
