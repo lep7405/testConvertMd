@@ -1,2017 +1,514 @@
-﻿![](media/image1.png)
+The Spring framework (shortly, Spring) is an application framework that is part of the Java ecosystem.
+(Spring framework (gọi tắt là Spring) là một framework ứng dụng thuộc hệ sinh thái Java.)
 
-> LEARN WHAT YOU NEED AND LEARN IT WELL
->
-> LAURENŢIU SPILCĂ
->
-> FOREWORD BY VICTOR RENTEA
+An application framework is a set of common software functionalities that provides a foundation structure for developing an application.
+(Một framework ứng dụng là một tập hợp các chức năng phần mềm chung cung cấp cấu trúc nền tảng để phát triển một ứng dụng.)
 
-M ANNIN G
-
-> **Business logic code**
->
-> **Transactions**
->
-> **Security**
-
-**Logging**
-
-> **Caching**
->
-> **Data transfer Data persistence**
->
-> **Figure 1 The user’s perspective is similar to viewing an iceberg.
-> Users mainly observe the results of the business logic code, but this
-> is only a small part of what builds the app’s complete functionality.
-> Like an iceberg that is mostly underwater and hidden from view, we
-> don't see most of the code in an enterprise app because**
->
-> **it's provided by dependencies.**
->
-> ![](media/image5.png)
->
-> **Use
-> the Spring IoC container to manage object instances easier and glue in
-> other functionalities Spring provides.**
->
-> **Use Spring MVC or Spring WebFlux to implement the REST endpoints
-> called by the client apps or other backend solutions.**
->
-> **Use Spring Security to implement the authentication and
-> authorization configurations.**
-
-<img
-src="media/image9.png"
-style="width:0.22578in;height:0.27094in" />
-
-> **Use Spring Data to connect to the SQL and NoSQL databases your
-> backend app uses to persist the data.**
->
-> **Use Spring Boot to ease the complexity of your configurations and
-> write less code to implement the app.**
->
-> **Use Spring Integration or Spring for Apache Kafka to more easily
-> send messages to your JMS or Kafka topics.**
->
-> **Figure 2 The possibilities of using Spring in a backend application
-> are nearly endless, and include exposing functionalities that other
-> applications can call, managing the database access, securing the
-> application, and managing integration through third-party message
-> brokers.**
->
-> *Spring Start Here*
->
-> <span class="smallcaps">Learn what you need and learn it well</span>
-
-##### LAURENŢIU SPILCĂ
-
-<span class="smallcaps">Foreword by Victor Rentea</span>
-
-##### MANNING 
-
-> <span class="smallcaps">Shelter Island</span>
->
-> For online information and ordering of this and other Manning books,
-> please visit [www.manning.com](http://www.manning.com/). The publisher
-> offers discounts on this book when ordered in quantity. For more
-> information, please contact
->
-> Special Sales Department Manning Publications Co. 20 Baldwin Road
->
-> PO Box 761
->
-> Shelter Island, NY 11964 Email: <orders@manning.com>
->
-> ©2021 by Manning Publications Co. All rights reserved.
->
-> No part of this publication may be reproduced, stored in a retrieval
-> system, or transmitted, in any form or by means electronic,
-> mechanical, photocopying, or otherwise, without prior written
-> permission of the publisher.
->
-> Many of the designations used by manufacturers and sellers to
-> distinguish their products are claimed as trademarks. Where those
-> designations appear in the book, and Manning Publications was aware of
-> a trademark claim, the designations have been printed in initial caps
-> or all caps.
->
-> <img
-> src="media/image10.png" />
-> Recognizing the importance of preserving what has been written, it is
-> Manning’s policy to have the books we publish printed on acid-free
-> paper, and we exert our best efforts to that end. Recognizing also our
-> responsibility to conserve the resources of our planet, Manning books
-> are printed on paper that is at least 15 percent recycled and
-> processed without the use of elemental chlorine.
->
-> The author and publisher have made every effort to ensure that the
-> information in this book was correct at press time. The author and
-> publisher do not assume and hereby disclaim any liability to any party
-> for any loss, damage, or disruption caused by errors or omissions,
-> whether such errors or omissions result from negligence, accident, or
-> any other cause, or from any usage of the information herein.
->
-> <img
-> src="media/image11.png"
-> style="width:0.26268in;height:0.18525in" />Manning Publications Co.
-> Development editor: Marina Michaels 20 Baldwin Road Technical
-> development editor: Al Scherer
->
-> PO Box 761 Review editor: Mihaela Batinic´ Shelter Island, NY 11964
-> Production editor: Andy Marinkovich
->
-> Copy editor: Michele Mitchell Proofreader: Keri Hales
->
-> Technical proofreader: Jean-François Morin Typesetter: Gordan
-> Salinovic
->
-> Cover designer: Marija Tudor
->
-> ISBN 9781617298691
->
-> Printed in the United States of America
-
-# brief contents
-
-[<span class="smallcaps">Part 1 Fundamentals 1</span>](#_bookmark9)
-
-1.  ■ [Spring in the real world 3](#_bookmark10)
-
-2.  ■ [The Spring context: Defining beans 22](#_bookmark73)
-
-3.  ■ [The Spring context: Wiring beans 50](#_bookmark111)
-
-4.  ■ [The Spring context: Using abstractions 75](#_bookmark145)
-
-5.  ■ [The Spring context: Bean scopes and life cycle 99](#_bookmark192)
-
-6.  ■ [Using aspects with Spring AOP 121](#_bookmark228)
-
-[<span class="smallcaps">Part 2 Implementation
-151</span>](#_bookmark287)
-
-7.  ■ [Understanding Spring Boot and Spring MVC 153](#_bookmark288)
-
-8.  ■ [Implementing web apps with Spring Boot](#_bookmark326) [and
-    Spring MVC 176](#_bookmark326)
-
-9.  ■ [Using the Spring web scopes 199](#_bookmark357)
-
-10. ■ [Implementing REST services 224](#_bookmark383)
-
-11. ■ [Consuming REST endpoints 245](#_bookmark426)
-
-12. ■ [Using data sources in Spring apps 264](#_bookmark450)
-
-13. ■ [Using transactions in Spring apps 284](#_bookmark495)
-
-14. ■ [Implementing data persistence with Spring Data
-    302](#_bookmark513)
-
-15. ■ [Testing your Spring app 323](#_bookmark540)
-
-> **iii**
-
-# contents
-
-> *[foreword xi](#foreword) [preface xiii](#preface)*
->
-> *[acknowledgments xv](#acknowledgments) [about this book
-> xvii](#about-this-book) [about the author xxi](#about-the-author)*
->
-> [*about the cover illustration xxii*](#about-the-cover-illustration)
-
-[*1*](#_bookmark10)
-
-> [***Spring in the real world 3***](#_bookmark10)
-
-1.  [Why should we use frameworks? 4](#_bookmark10)
-
-2.  [The Spring ecosystem 7](#the-spring-ecosystem)
-
-> *[Discovering Spring Core: The foundation of Spring 8](#_bookmark22)*
-> ■
-> *[Using](#using-spring-data-access-feature-to-implement-the-apps-persistence)
-> [Spring Data Access feature to implement the app’s persistence
-> 10](#using-spring-data-access-feature-to-implement-the-apps-persistence)*
->
-> *[The Spring MVC capabilities for developing web apps
-> 10](#the-spring-mvc-capabilities-for-developing-web-apps)* ■
-> *[The](#the-spring-testing-feature) [Spring testing feature
-> 10](#the-spring-testing-feature)* ■ [*Projects from the Spring
-> ecosystem 10*](#projects-from-the-spring-ecosystem)
-
-3.  [Spring in real-world scenarios 12](#spring-in-real-world-scenarios)
-
-> *[Using Spring in the development of a backend app
-> 12](#using-spring-in-the-development-of-a-backend-app)* ■
-> *[Using](#using-spring-in-a-automation-test-app) [Spring in a test
-> automation app 14](#using-spring-in-a-automation-test-app)* ■ *[Using
-> Spring for the](#using-spring-for-the-development-of-a-desktop-app)
-> [development of a desktop app
-> 16](#using-spring-for-the-development-of-a-desktop-app)* ■ *[Using
-> Spring in mobile](#using-spring-in-mobile-apps) [apps
-> 16](#using-spring-in-mobile-apps)*
->
-> **v**
->
-> **vi CONTENTS**
-
-4.  [When not to use frameworks 17](#when-not-to-use-frameworks)
-
-> *[You need to have a small footprint
-> 17](#you-need-to-have-a-small-footprint)* ■ *[Security needs
-> dictate](#security-needs-dictate-custom-code) [custom code
-> 18](#security-needs-dictate-custom-code)* ■ *[Abundant existing
-> customizations make
-> a](#abundant-existing-customizations-make-a-framework-impractical)
-> [framework impractical
-> 18](#abundant-existing-customizations-make-a-framework-impractical)* ■
-> *[You won’t benefit from
-> switching](#you-wont-benefit-from-switching-to-a-framework) [to a
-> framework 18](#you-wont-benefit-from-switching-to-a-framework)*
-
-[*2*](#_bookmark73)
-
-> [***The Spring context: Defining beans 22***](#_bookmark73)
-
-1.  [Creating a Maven project 23](#_bookmark73)
-
-2.  [Adding new beans to the Spring context
-    29](#adding-new-beans-to-the-spring-context)
-
-> *[Using the @Bean annotation to add beans into the
-> Spring](#using-the-bean-annotation-to-add-beans-into-the-spring-context)
-> [context
-> 33](#using-the-bean-annotation-to-add-beans-into-the-spring-context)*
-> ■ [*Using stereotype annotations to add beans to
-> the*](#using-stereotype-annotations-to-add-beans-to-the-spring-context)
-
-[*3*](#_bookmark111)
-
-*[Spring context
-41](#using-stereotype-annotations-to-add-beans-to-the-spring-context)* ■
-*[Programmatically adding beans to the
-Spring](#programmatically-adding-beans-to-the-spring-context) [context
-45](#programmatically-adding-beans-to-the-spring-context)*
-
-> [***The Spring context: Wiring beans 50***](#_bookmark111)
-
-1.  [Implementing relationships among beans defined in
-    the](#_bookmark111) [configuration file
-    51](#implementing-relationships-among-beans-defined-in-the-configuration-file)
-
-> *[Wiring the beans using a direct method call between the
-> @Bean](#wiring-the-beans-using-a-direct-method-call-between-the-bean-methods)
-> [methods
-> 55](#wiring-the-beans-using-a-direct-method-call-between-the-bean-methods)*
-> ■ *[Wiring the beans using the @Bean
-> annotated](#wiring-the-beans-using-the-bean-annotated-methods-parameters)
-> [method’s parameters
-> 58](#wiring-the-beans-using-the-bean-annotated-methods-parameters)*
-
-2.  [Using the @Autowired annotation to inject beans
-    61](#using-the-autowired-annotation-to-inject-beans) *[Using
-    @Autowired to inject the values through the class fields
-    61](#using-autowired-to-inject-the-values-through-the-class-fields)
-    [Using @Autowired to inject the values through the constructor
-    64](#using-autowired-to-inject-the-values-through-the-constructor)*
-
-> [*Using dependency injection through the setter
-> 65*](#using-dependency-injection-through-the-setter)
-
-3.  [Dealing with circular dependencies
-    66](#dealing-with-circular-dependencies)
-
-[*4*](#_bookmark145)
-
-[***The Spring context: Using abstractions 75***](#_bookmark145)
-
-1.  [Using interfaces to define contracts 76](#_bookmark145)
-
-> *[Using interfaces for decoupling implementations
-> 76](#using-interfaces-for-decoupling-implementations)* ■
-> *[The](#the-requirement-of-the-scenario) [requirement of the scenario
-> 79](#the-requirement-of-the-scenario)* ■ *[Implementing the
-> requirement](#implementing-the-requirement-without-using-a-framework)
-> [without using a framework
-> 80](#implementing-the-requirement-without-using-a-framework)*
-
-2.  [Using dependency injection with abstractions
-    85](#using-dependency-injection-with-abstractions) *[Deciding which
-    objects should be part of the Spring context
-    85](#deciding-which-objects-should-be-part-of-the-spring-context)
-    [Choosing what to auto-wire from multiple
-    implementations](#choosing-what-to-auto-wire-from-multiple-implementations-of-an-abstraction)*
-
-> [*of an abstraction
-> 91*](#choosing-what-to-auto-wire-from-multiple-implementations-of-an-abstraction)
-
-3.  [Focusing on object responsibilities with
-    stereotype](#focusing-on-object-responsibilities-with-stereotype-annotations)
-    [annotations
-    96](#focusing-on-object-responsibilities-with-stereotype-annotations)
-
-[*5*](#_bookmark192)
-
-1.  [Using the singleton bean scope 100](#_bookmark192)
-
-> *[How singleton beans work 100](#how-singleton-beans-work)* ■
-> *[Singleton beans in
-> real-world](#singleton-beans-in-real-world-scenarios) [scenarios
-> 107](#singleton-beans-in-real-world-scenarios)* ■ [*Using eager and
-> lazy instantiation 108*](#using-eager-and-lazy-instantiation)
-
-2.  [Using the prototype bean scope
-    111](#using-the-prototype-bean-scope)
-
-[*6*](#_bookmark228)
-
-*[How prototype beans work 111](#how-prototype-beans-work)* ■
-*[Prototype beans in
-real-world](#prototype-beans-in-real-world-scenarios) [scenarios
-115](#prototype-beans-in-real-world-scenarios)*
-
-> [***Using aspects with Spring AOP 121***](#_bookmark228)
-
-1.  [How aspects work in Spring 123](#_bookmark228)
-
-2.  [Implementing aspects with Spring AOP
-    126](#implementing-aspects-with-spring-aop) *[Implementing a simple
-    aspect 127](#implementing-a-simple-aspect)* ■ *[Altering the
-    intercepted](#altering-the-intercepted-methods-parameters-and-the-returned-value)
-    [method’s parameters and the returned value
-    135](#altering-the-intercepted-methods-parameters-and-the-returned-value)*
-    ■ [*Intercepting*](#intercepting-annotated-methods)
-
-> *[annotated methods 140](#intercepting-annotated-methods)* ■ [*Other
-> advice annotations you*](#other-advice-annotations-you-can-use)
->
-> [*can use 143*](#other-advice-annotations-you-can-use)
-
-[*7*](#_bookmark288)
-
-[*8*](#_bookmark326)
-
-### [<span class="smallcaps">Part 2 Implementation 151</span>](#_bookmark287)
-
-> [***Understanding Spring Boot and Spring MVC 153***](#_bookmark288)
-
-1.  [What is a web app? 154](#_bookmark288)
-
-> *[A general overview of a web app
-> 155](#a-general-overview-of-a-web-app)* ■ *[Different fashions
-> of](#different-fashions-of-implementing-a-web-app-with-spring)
-> [implementing a web app with Spring
-> 156](#different-fashions-of-implementing-a-web-app-with-spring)* ■
-> *[Using a servlet](#using-a-servlet-container-in-web-app-development)
-> [container in web app development
-> 159](#using-a-servlet-container-in-web-app-development)*
-
-2.  [The magic of Spring Boot 162](#the-magic-of-spring-boot)
-
-> [*Using a project initialization service to create a Spring
-> Boot*](#using-a-project-initialization-service-to-create-a-spring-boot-project)
->
-> *[project
-> 162](#using-a-project-initialization-service-to-create-a-spring-boot-project)*
-> ■ *[Using dependency starters to simplify the
-> dependency](#using-dependency-starters-to-simplify-the-dependency-management)
-> [management
-> 168](#using-dependency-starters-to-simplify-the-dependency-management)*
-> ■ *[Using autoconfiguration by convention
-> based](#using-autoconfiguration-by-convention-based-on-dependencies)
-> [on dependencies
-> 169](#using-autoconfiguration-by-convention-based-on-dependencies)*
-
-3.  [Implementing a web app with Spring MVC
-    170](#implementing-a-web-app-with-spring-mvc)
-
-> [***Implementing web apps with Spring Boot and Spring MVC
-> 176***](#_bookmark326)
-
-1.  [Implementing web apps with a dynamic view 177](#_bookmark326)
-
-> *[Getting data on the HTTP request
-> 182](#getting-data-on-the-http-request)* ■ *[Using request
-> parameters](#using-request-parameters-to-send-data-from-client-to-server)
-> [to send data from client to server
-> 183](#using-request-parameters-to-send-data-from-client-to-server)* ■
-> *[Using path variables
-> to](#using-path-variables-to-send-data-from-client-to-server) [send
-> data from client to server
-> 187](#using-path-variables-to-send-data-from-client-to-server)*
-
-2.  [Using the GET and POST HTTP methods
-    189](#using-the-get-and-post-http-methods)
-
-[*9*](#_bookmark357)
-
-1.  [Using the request scope in a Spring web app 201](#_bookmark357)
-
-2.  [Using the session scope in a Spring web app
-    209](#using-the-session-scope-in-a-spring-web-app)
-
-[*10*](#_bookmark383)
-
-> [***Implementing REST services 224***](#_bookmark383)
-
-1.  [Using REST services to exchange data between apps
-    226](#_bookmark383)
-
-2.  [Implementing a REST endpoint 227](#implementing-a-rest-endpoint)
-
-3.  [Managing the HTTP response 231](#managing-the-http-response)
-
-> *[Sending objects as a response body
-> 232](#sending-objects-as-a-response-body)* ■ *[Setting the response
-> status](#setting-the-response-status-and-headers) [and headers
-> 234](#setting-the-response-status-and-headers)* ■ [*Managing
-> exceptions at the
-> endpoint*](#managing-exceptions-at-the-endpoint-level)
->
-> [*level 237*](#managing-exceptions-at-the-endpoint-level)
-
-[*11*](#_bookmark426)
-
-> [***Consuming REST endpoints 245***](#_bookmark426)
-
-1.  [Calling REST endpoints using Spring Cloud OpenFeign
-    249](#_bookmark426)
-
-2.  [Calling REST endpoints using RestTemplate
-    253](#calling-rest-endpoints-using-resttemplate)
-
-[*12*](#_bookmark450)
-
-> [***Using data sources in Spring apps 264***](#_bookmark450)
-
-1.  [What a data source is 265](#_bookmark450)
-
-2.  [Using JdbcTemplate to work with persisted data
-    269](#using-jdbctemplate-to-work-with-persisted-data)
-
-[*13*](#_bookmark495)
-
-[Customizing the configuration of the data source
-278](#customizing-the-configuration-of-the-data-source) *[Defining the
-data source in the application properties file
-279](#defining-the-data-source-in-the-application-properties-file)
-[Using a custom DataSource bean 280](#using-a-custom-datasource-bean)*
-
-> [***Using transactions in Spring apps 284***](#_bookmark495)
-
-1.  [Transactions 287](#_bookmark495)
-
-2.  [How transactions work in Spring
-    289](#how-transactions-work-in-spring)
-
-[*14*](#_bookmark513)
-
-> [***Implementing data persistence with Spring Data
-> 302***](#_bookmark513)
-
-1.  [What Spring Data is 303](#_bookmark513)
-
-2.  [How Spring Data works 306](#how-spring-data-works)
-
-3.  [Using Spring Data JDBC 311](#using-spring-data-jdbc)
-
-[*15*](#_bookmark540)
-
-1.  [Writing correctly implemented tests 325](#_bookmark540)
-
-2.  [Implementing tests in Spring apps
-    327](#implementing-tests-in-spring-apps) *[Implementing unit tests
-    328](#implementing-unit-tests)* ■ *[Implementing
-    integration](#implementing-integration-tests) [tests
-    341](#implementing-integration-tests)*
-
-> [*appendix A Architectural approaches
-> 347*](#appendix-a-architectural-approaches)
->
-> *[appendix B Using XML for the context configuration
-> 358](#appendix-b-using-xml-for) [appendix C A quick introduction to
-> HTTP 360](#appendix-c)*
->
-> [*appendix D Using JSON formatting
-> 369*](#appendix-d-using-json-formatting)
->
-> *[appendix E Installing MySQL and creating a database
-> 372](#appendix-e-installing-mysql) [appendix F Recommended tools
-> 380](#appendix-f-recommended-tools)*
->
-> *[appendix G Recommended learning materials for further study
-> 382](#appendix-g-recommended-learning-materials-for-further-study)
-> [index 385](#index)*
-
-# foreword
-
-> <span id="_bookmark1" class="anchor"></span>Born as an alternative to
-> EJBs in the early 2000s, the Spring framework quickly over-took its
-> opponent with the simplicity of its programming model, the variety of
-> its fea-tures, and its third-party library integrations. The Spring
-> ecosystem grew over the years into the broadest and most mature
-> development framework available in any pro-gramming language. Its main
-> competitor quit the race when Oracle stopped the evo-lution of Java EE
-> 8, and the community took over its maintenance via Jakarta EE.
->
-> According to recent surveys (<http://mng.bz/l9VB> and
-> <http://mng.bz/B1Ar>), Spring is the framework underlying more than
-> half of the Java applications. This fact builds up an enormous
-> codebase that makes it critical for any Java developer to learn
-> Spring, as it’s inevitable you’ll encounter this technology in your
-> career. I’ve been developing applications with Spring for 15 years,
-> and today the teams that I train in hundreds of companies are almost
-> all using Spring.
->
-> The reality is that despite being so popular, it’s pretty hard to find
-> quality introduc-tory material. The reference documentation is
-> thousands of pages long, describing all the subtleties and details
-> that could be helpful in very specific scenarios, so it’s not an
-> option for a newcomer. While online videos and tutorials typically
-> fail to engage the student, very few books capture the essence of
-> Spring framework, often spending long pages debating topics that prove
-> to be irrelevant to the problems faced in modern application
-> development. With this book, however, it’s very hard to find anything
-> to remove; all the concepts covered are recurring topics in the
-> development of any Spring application.
->
-> **xi**
->
-> The reader is gently brought to a level sufficient to become rapidly
-> productive in a project based on the Spring framework. My own
-> experience training thousands of employees showed me that the vast
-> majority of developers working with Spring today don’t see the ideas
-> as clearly as this book paints them. Furthermore, developers are
-> unaware of the many pitfalls about which this book warns its readers.
-> In my opinion, this book is a must-read for any developer starting on
-> their first Spring project.
->
-> The attention with which Laurenţiu anticipates the typical questions
-> occurring in the reader’s mind proves his extensive experience
-> teaching Spring in class. This teach-ing fluency allows the author to
-> adopt a personal, warm tone that makes this book an effortless and
-> pleasant read. The book has a clear, sharp structure, and I really
-> loved how complex topics were progressively revealed and explained and
-> reiterated in sub-sequent chapters.
->
-> This book shines in that the reader is also introduced to fundamental
-> concerns regarding a legacy project using the Spring framework. In an
-> ecosystem dominated by Spring Boot, I find it very useful to sneak a
-> peek under the hood. On the other end, the book also gently introduces
-> the reader to last-generation technologies, like Feign clients and
-> even reactive programming.
->
-> I wish you a pleasant reading, and never hesitate to get your hands
-> dirty with some code whenever you think things get complicated.
->
-> <span class="smallcaps">—Victor Rentea Java champion, trainer, and
-> consultant</span>
-
-# preface
-
-> Sharing knowledge and creating learning material is a hobby for me. In
-> addition to being a software developer, I’m also a teacher. As a Java
-> trainer since 2009, I’ve taught Java to thousands of developers with
-> various levels of experience, from university stu-dents to experienced
-> developers in large corporations. In the past few years, I’ve come to
-> consider Spring a must-learn for beginners. Apps today are no longer
-> imple-mented with vanilla languages—almost everything relies on
-> frameworks. Since Spring is the most popular application framework in
-> the Java world today, Spring is some-thing a developer needs to learn
-> in their first software development steps.
->
-> In teaching Spring to beginners, I’ve realized that it is still
-> treated as something you learn only when you already have some
-> experience coding. When I started writing *Spring Start Here*, there
-> were already plenty of tutorials, books, and articles on the topic,
-> but my students continued to tell me they found those materials hard
-> to under-stand. I realized the problem was not that the existing
-> learning material wasn’t excel-lent, but that there was no dedicated
-> study guide for an absolute beginner, so I decided to write a book
-> that doesn’t consider Spring something you learn after you have some
-> experience, but instead something you can learn with minimal
-> founda-tional knowledge.
->
-> Technology changes quickly. But it’s not only the technology changing.
-> We also need to consider how we can improve the way we teach these
-> technologies. Some years ago, one would start learning the language
-> fundamentals and get employed as a developer without even knowing what
-> a framework is. But today, these things are different. Learning all
-> the details of a language up-front is no longer the way to quickly
->
-> **xiii**
->
-> develop the skills you need to work in a software development team.
-> Now, I recommend developers start with the fundamentals and, once they
-> feel comfortable with the basics, start learning an application
-> framework. Spring is, in my opinion, the best application framework to
-> start learning. Understanding the Spring basics also opens doors to
-> learning other technologies and changes the old, linear learning
-> approach into something that looks more like a tree—and each branch of
-> the tree is a new framework you learn in parallel with others.
->
-> I designed *Spring Start Here* to be the book you want to start
-> learning the Spring framework with. This book leads you step-by-step,
-> providing you with all the essential theoretical knowledge,
-> accompanied by examples that practically apply the discussed topics. I
-> hope this book will bring significant value to you, the reader, and
-> help you quickly boost your Spring knowledge and open doors for
-> further learning.
-
-# acknowledgments
-
-> This book wouldn’t be possible without the large number of smart,
-> professional, and friendly people who helped me throughout its
-> development process.
->
-> First, a big thank you to my wife, Daniela, who was always there for
-> me, and whose valuable opinions, continuous support, and encouragement
-> were a huge help to me.
->
-> I’d also like to express my gratitude and send special thanks to all
-> the colleagues and friends who helped me from the very first table of
-> contents and proposal with their valuable advice.
->
-> A big thank you goes to the entire Manning team for their huge help in
-> making this book a reality. I especially want to recognize Marina
-> Michaels, Al Scherer, and Jean-François Morin for always being
-> incredibly supportive and professional. Your advice has brought great
-> value to this book.
->
-> I’d like to thank my friend Ioana Göz for the drawings she created for
-> the book.
->
-> She turned my thoughts into the cartoons in the book.
->
-> I also want to express my appreciation to all the reviewers who
-> provided such useful feedback at every step. To Alain Lompo, Aleksandr
-> Karpenko, Andrea Carlo Granata, Andrea Paciolla, Andres Damian Sacco,
-> Andrew Oswald, Bobby Lin, Bonnie Malec, Christian Kreutzer-Beck,
-> Daniel Carl, David Lisle Orpen, DeUndre’ Rushon, Harinath
-> Kuntamukkala, Håvard Wall, Jérôme Baton, Jim Welch, João Miguel Pires
-> Dias, Lucian Enache, Matt D., Matthew Greene, Mikael Byström, Mladen
-> Knežic´, Nathan B.
->
-> **xv**
->
-> Crocker, Pierre-Michel Ansel, Rajesh Mohanan, Ricardo Di Pasquale,
-> Sunita Chowd-hury, Tan Wee, and Zoheb Ainapore, your input has made
-> this a much better book.
->
-> Finally, a special thank you to my friends, Maria Chiţu, Andreea
-> Tudose, Florin Ciuculescu, and Daniela Ileana for advising me along
-> the way.
-
-# about this book
-
-> Since you’ve opened this book, I assume you’re a software developer in
-> the Java eco-system who found out it’s useful to learn Spring. This
-> book teaches you the Spring foundations, assuming you know nothing in
-> the first place about frameworks and, of course, about Spring.
->
-> You’ll start with what a framework is and then gradually learn the
-> basics of Spring with applied examples. You will not only learn to use
-> the framework’s components and capabilities, but you’ll also learn the
-> essentials of what happens behind the scenes in these capabilities.
-> Knowing how the framework operates when you use a particular component
-> helps you design better apps, and solve problems faster.
->
-> When you finish this book, you’ll have learned the following skills,
-> which are highly relevant in implementing apps:
-
-- Configuring and using the Spring context and dependency injection with
-  Spring
-
-- Designing and using aspects
-
-- Implementing web apps
-
-- Implementing data exchange between apps
-
-- Persisting data
-
-- Testing implementations
-
-> You’ll find this book is valuable for the following:
-
-- Working on an app using Spring for your job
-
-- Succeeding in a technical interview for a Java developer role
-
-- Obtaining your Spring certification
-
-> **xvii**
->
-> **xviii ABOUT THIS BOOK**
->
-> Even if this book’s first purpose is not to prepare you for a Spring
-> certification, I con-sider it a must-read before digging into details
-> a certification exam typically requires.
-
-#### Who should read this book
-
-> This book is for developers who understand basic object-oriented
-> programming and Java concepts and want to learn Spring or refresh
-> their Spring fundamentals knowl-edge. You do not need to have previous
-> experience with any framework, but you need to understand Java because
-> this is the language we use throughout the book’s examples. Spring is
-> one of the most encountered technologies in Java apps and will most
-> likely be used even more in the future. For a Java developer, this
-> makes Spring a must-know today. Learning what I teach you in this book
-> will help you upskill, provide you with the Spring foundation
-> knowledge and skills you need to successfully pass a Java interview,
-> and work on an app using Spring technologies. The book also opens
-> doors
->
-> to further study Spring details that are more complex.
-
-#### How this book is organized: A roadmap
-
-> This book is divided into two parts that cover 15 chapters. We’ll
-> start our discussion (in the first part of the book) with
-> straightforward examples to show you how to make Spring aware of your
-> application. We’ll then build examples that enable you to under-stand
-> the core of any real-world Spring app. Once we finish with Spring Core
-> basics, we’ll discuss Spring Data and Spring Boot basics.
->
-> From chapter 2 to the end of this book, you’ll find that theoretical
-> aspects are accompanied by projects in which we apply the notions we
-> discuss. I explain the code in these examples snippet by snippet. My
-> recommendation is you build these exam-ples with me while reading.
-> Then, you can compare your result with my solution.
->
-> As presented in the following figure, I designed the book’s chapters
-> to be read in the given order. In chapters 2 through 5, where we
-> discuss the Spring context, you might find the examples predominantly
-> theoretical. For anyone with little or no expe-rience with Spring,
-> it’s essential to start this way. Don’t worry! I present the
-> founda-tions in the easiest possible way, and then our examples and
-> discussions gradually become more sophisticated to reflect real-world,
-> production-ready code.
-
-![](media/image12.png)
-
-> **Figure 1 If you start with no (or very little) knowledge about
-> Spring, the best way to read the book is to start with the first
-> chapter and read everything in order.**
->
-> If you already understand the Spring context and Spring AOP well, you
-> can skip part 1 and go directly to part 2, “Implementation” (chapters
-> 7–15), as presented in the next figure.
-
-![](media/image14.png)
-
-> **Figure 2 If you already understand the Spring framework’s foundation
-> and know how to use the Spring context and design aspects, you can
-> start with part 2, where we use Spring capabilities to implement apps
-> mirroring scenarios you face in real-world systems.**
->
-> Once you finish reading this book, you’ll have learned plenty of
-> skills to develop apps like a professional. You’ll learn to connect to
-> databases using the most encountered techniques today, and you’ll
-> learn how to make apps communicate with each other. We’ll end the book
-> with teaching a critical topic: testing. I’ll season the text here and
-> there by adding stories of my experience and notes with valuable
-> pieces of advice.
->
-> Remember that Spring is a vast universe, and one book won’t teach you
-> everything about it. With this book, you get started with the
-> framework and learn the fundamen-tal skills of using Spring’s valuable
-> components. Throughout the book, I refer, where appropriate, to other
-> resources and books that detail the topics we discuss. I strongly
-> recommend you read those additional resources and books to broaden
-> your perspec-tive on the discussed topics.
-
-#### About the code
-
-> The book provides about 70 projects, which we’ll work on in chapters 2
-> through 14. When working on a specific example, I mention the
-> project’s name, which imple-ments that example. My recommendation is
-> to try to write your example from scratch and then use the provided
-> project only to compare your solution with mine. This approach will
-> help you better understand the concepts you’re learning.
->
-> Each of the projects is built with Maven, making it easy to import
-> into any IDE. I used IntelliJ IDEA to write the projects, but you can
-> choose to run them in Eclipse, Netbeans, or any other tool of your
-> choice. Appendix F gives you an overview of the recommended tools.
->
-> This book contains many examples of source code, both in numbered
-> listings and in line with normal text. In both cases, source code is
-> formatted in a fixed-width font like this to separate it from ordinary
-> text. Sometimes code is also **in bold** to
->
-> **xx ABOUT THIS BOOK**
->
-> highlight code that has changed from previous steps in the chapter,
-> such as when a new feature adds to an existing line of code. In many
-> cases, the original source code has been reformatted; we’ve added line
-> breaks and reworked indentation to accom-modate the available page
-> space in the book. In rare cases, even this was not enough,
->
-> and listings include line-continuation markers (➥). Additionally,
-> comments in the source code have often been removed from the listings
-> when the code is described in the text. Code annotations accompany
-> many of the listings, highlighting important
->
-> concepts.
-
-#### liveBook discussion forum
-
-> Purchase of *Spring Start Here* includes free access to a private web
-> forum run by Man-ning Publications where you can make comments about
-> the book, ask technical ques-tions, and receive help from the author
-> and from other users. To access the forum, go to
-> [https://livebook.manning.com/#!/book/spring-start-here/discussion](https://livebook.manning.com/%23!/book/spring-quickly/discussion).
-> You can also learn more about Manning’s forums and the rules of
-> conduct at
-> [https://livebook](https://livebook.manning.com/%23!/discussion)
->
-> [.manning.com/#!/discussion](https://livebook.manning.com/%23!/discussion).
->
-> Manning’s commitment to our readers is to provide a venue where a
-> meaningful dialogue between individual readers and between readers and
-> the author can take place. It is not a commitment to any specific
-> amount of participation on the part of the author, whose contribution
-> to the forum remains voluntary (and unpaid). We sug-gest you try
-> asking the author some challenging questions lest his interest stray!
-> The forum and the archives of previous discussions will be accessible
-> from the publisher’s website as long as the book is in print.
-
-# <img
-src="media/image15.jpeg"
-style="width:1in;height:1in" />about the author
-
-> **<span class="smallcaps">Laurenţiu Spilcă</span>** is a dedicated
-> development lead and trainer at Endava, where he leads the development
-> of projects in the finan-cial market with users in Europe, the US, and
-> Asia. He has over 10 years of experience. Laurenţiu believes it’s
-> important to not only deliver high-quality software, but also share
-> knowledge and help others to upskill. These beliefs have driven him to
-> design and teach
->
-> courses related to Java technologies and deliver presentations and
-> workshops. His Twitter handle is @laurspilca.
->
-> **xxi**
-
-# about the cover illustration
-
-> The figure on the cover of *Spring Start Here* is captioned “Femme
-> d’ajaccio isle de Corse,” or a woman from Ajaccio on the island of
-> Corsica. The illustration is taken from a collection of dress costumes
-> from various countries by Jacques Grasset de Saint-Sauveur
-> (1757–1810), titled *Costumes de Différents Pays,* published in France
-> in 1797. Each illustration is finely drawn and colored by hand. The
-> rich variety of Grasset de Saint-Sauveur’s collection reminds us
-> vividly of how culturally apart the world’s towns and regions were
-> just 200 years ago. Isolated from each other, people spoke different
-> dialects and languages. In the streets or in the countryside, it was
-> easy to identify where they lived and what their trade or station in
-> life was just by their dress.
->
-> The way we dress has changed since then and the diversity by region,
-> so rich at the time, has faded away. It is now hard to tell apart the
-> inhabitants of different conti-nents, let alone different towns,
-> regions, or countries. Perhaps we have traded cultural diversity for a
-> more varied personal life—certainly for a more varied and fast-paced
-> technological life.
->
-> At a time when it is hard to tell one computer book from another,
-> Manning cele-brates the inventiveness and initiative of the computer
-> business with book covers based on the rich diversity of regional life
-> of two centuries ago, brought back to life by Grasset de
-> Saint-Sauveur’s pictures.
-
-**xxii**
-
-A
-
-Part 1 <span id="_bookmark9" class="anchor"></span>Fundamentals
-
-> ny building stands on a foundation. A framework is no different in
-> this regard. In part 1, you’ll learn to use the basic components that
-> enable the Spring framework. These components are the Spring context
-> and Spring aspects. Further in the book, you’ll discover that all
-> Spring capabilities rely on these essential components.
->
-> ***This chapter covers***
-
-- What a framework is
-
-- When to use and when to avoid using frameworks
-
-- What the Spring framework is
-
-- Using Spring in real-world scenarios
-
-> The Spring framework (shortly, Spring) is <span id="_bookmark11"
-> class="anchor"></span>an application framework that is part of the
-> Java ecosystem. An *application framework* is a set of common software
-> functional-ities that provides a foundation structure for developing
-> an application. An applica-tion framework eases the effort of writing
-> an application by taking out the effort of writing all the program
-> code from scratch.
->
-> We use Spring in the development of many kinds of applications
-> nowadays, from large backend solutions to automation testing apps.
-> According to many sur-vey reports on Java technologies (like this one
-> of JRebel from 2020: [http://](http://mng.bz/N4V7)
-> [mng.bz/N4V7](http://mng.bz/N4V7); or this one from JAXEnter:
-> <http://mng.bz/DK9a>), Spring is the most used Java framework today.
->
-> Spring is popular, and developers have started to use it more often
-> with other JVM languages than Java as well. In the last few years, we
-> observed an impressive
->
-> **3**
->
-> growth of developers using Spring with Kotlin (another appreciated
-> language from the JVM family). In this book, we’ll focus on the
-> foundations of Spring, and I’ll teach you essential skills for using
-> Spring in real-world examples. To make the subject more comfortable
-> for you and allow you to focus on Spring, we’ll use only Java
-> examples. Throughout the book, we’ll discuss and apply, with examples,
-> essential skills like con-necting to a database, establishing
-> communication between applications, and secur-ing and testing an app.
->
-> Before diving into more technical details in the next chapters, let’s
-> talk about the Spring framework and where you’ll actually use it. Why
-> is Spring so appreciated, and when should you even use it?
->
-> In this chapter, we’ll focus on what a framework is, referring in
-> particular to the Spring framework. In section 1.1, we discuss the
-> advantages of using a framework. In section 1.2, we discuss the Spring
-> ecosystem with the components you need to learn to get started with
-> Spring. Then I’ll take you through possible usages of the Spring
-> framework—in particular, real-world scenarios in section 1.3. In
-> section 1.4, we’ll dis-cuss when using frameworks might not be the
-> right approach. You need to under-stand all these things about the
-> Spring framework before trying to use it. Otherwise, you might try to
-> use a hammer to dig your garden.
->
-> Depending on your level, you might feel this chapter difficult. I
-> might introduce some notions that you haven’t heard about, and this
-> aspect might disturb you. But don’t worry; even if you don’t
-> understand some of the things now, they will be clarified later in the
-> book. Sometimes, throughout the book, I’ll refer to something said in
-> earlier chapters. I use this approach because learning a framework
-> like Spring doesn’t always offer us a linear learning path, and
-> sometimes you need to wait until you get more pieces of the puzzle
-> before you see the complete picture. But in the end, you’ll get a
-> clear image, and you’ll get the valuable skills you need to develop
-> apps like a professional.
-
-#### Why should we use frameworks?
-
-> In this section, we discuss frameworks. What are they? How did this
-> concept appear, and why? To be motivated to use something, you need to
-> know how that something brings you value. And that’s also the case
-> with Spring. I’ll teach you these essential details by sharing the
-> knowledge I gathered from my own experience and by studying and using
-> various frameworks in real-world scenarios, including Spring.
->
-> An application framework is a set of functionalities on top of which
-> we build appli-cations. The application framework provides us a broad
-> set of tools and functionalities that you can use to build apps. You
-> don’t need to use all the features the framework offers. Depending on
-> the requirements of the app you make, you’ll choose the right parts of
-> the framework to use.
->
-> Here’s an analogy I like for application frameworks. Did you ever buy
-> a piece of furniture from a DIY store like Ikea? Say you buy a
-> wardrobe—you won’t get an assem-bled wardrobe, but the right
-> components you need to build it and a manual on how to assemble your
-> piece of furniture. Now imagine you ordered a wardrobe, but instead
->
-> of getting only the right components you need, you get all the
-> possible components you can use to assemble any piece of furniture: a
-> table, a wardrobe, and so on. If you want a wardrobe, you have to find
-> the right parts and assemble them. It’s like an appli-cation
-> framework. The application framework offers you various pieces of
-> software you need to build your app. You need to know what features to
-> choose and how to assemble them to achieve the right result (figure
-> 1.1).
-
-<img
-src="media/image16.png"
-style="width:5.16667in;height:3.20333in" />
-
-> **Figure 1.1 David ordered a wardrobe from the UAssemble store. But
-> the store (framework) doesn’t deliver to David (the programmer) just
-> the components (software capabilities) he needs to build his new
-> wardrobe (the app). The store ships him all the possible parts he
-> might need to build the wardrobe. It’s David’s (the programmer’s)
-> choice on which components (software capabilities) are right and how
-> to assemble them to get the right result (the application).**
->
-> The idea of a framework isn’t new. Throughout the history of software
-> development, programmers observed they could reuse parts of code
-> they’d written in multiple appli-cations. Initially, when not so many
-> applications were implemented, each application was unique and
-> developed from scratch using a specific programming language. When the
-> software development domain extended, and more and more applications
-> started to be published on the market, it became easier to observe
-> that many of these apps had similar requirements. Let’s name a few of
-> them:
-
-- Logging error, warning, and info messages happen in every app.
-
-- Most applications use transactions to process data changes.
-  Transactions repre-sent an important mechanism that takes care of data
-  consistency. We’ll discuss this subject in detail in chapter 13.
-
-- Most applications use protection mechanisms against the same common
-  vulnerabilities.
-
-- Most applications use similar ways to communicate with each other.
-
-- Most applications use similar mechanisms to improve their performance,
-  like caching or data compression.
-
-> And the list continues. It turns out that the business logic code
-> implemented in an app is significantly smaller than the wheels and
-> belts that make the engine of the application (also often referred to
-> as “the plumbing”).
->
-> When I say “business logic code,” I refer to the code that implements
-> the business requirements of the application. This code is what
-> implements the user’s expectations in an application. For example,
-> “clicking on a specific link will generate an invoice” is something
-> users expect to happen. Some code of the application you develop
-> imple-ments this functionality, and this part of code is what
-> developers call the business logic code. However, any app takes care
-> of several more aspects: security, logging, data con-sistency, and so
-> on (figure 1.2).
->
-> **Business logic code**
->
-> **Transactions**
->
-> **Caching**
-
-**Security**
-
-> **Logging**
->
-> **Data transfer Data persistence**
->
-> **Figure 1.2 The user’s perspective is like an iceberg. The users
-> mainly observe the results of the business logic code, but this is
-> only a small part of what builds the app’s complete functionality.
-> Like an iceberg has most of it underwater, in an enterprise app we
-> don’t see most of the code because it’s provided by dependencies.**
->
-> Moreover, the business logic code is what makes an application
-> different from another from the functionality point of view. If you
-> take two different apps, say a ride-sharing system and a social
-> networking app, they have different use cases.
->
-> **NOTE** A *use case* represents the reason a person uses the app. For
-> example, in a ridesharing app, a use case is “requesting a car.” For
-> an app managing food delivery, a use case is “ordering a pizza.”
->
-> You take different actions, but they both need data storing, data
-> transfer, logging, security configurations, probably caching, and so
-> on. Various applications can reuse these nonbusiness implementations.
-> Is it then efficient to rewrite the same functional-ities every time?
-> Of course not:
-
-- You spare a lot of time and money by reusing something rather than
-  developing it yourself.
-
-- An existing implementation that many apps already use has fewer
-  chances to introduce bugs, as others have tested it.
-
-- You benefit from the advice of a community because you now have a lot
-  of developers understanding the same functionality. If you had
-  implemented your own code, only a few people would know it.
-
-###### A story of transition
-
-> One of the first applications I worked on was a huge system developed
-> in Java. This system was composed of multiple applications designed
-> around an old-fashioned architecture server, all of them written from
-> scratch using Java SE. The development of this application started
-> with the language about 25 years ago. This was the main reason for its
-> shape. And almost no one could have imagined how big it would become.
-> At that time, more advanced concepts of system architectures didn’t
-> exist, and things in general worked differently from the individual
-> systems due to the slow internet connection.
->
-> But time passed, and years later, the app was more like a big ball of
-> mud. For valid reasons I won’t cover here, the team decided they had
-> to go to a modern architecture. This change implied first cleaning up
-> the code, and one of the main steps was using a framework. We decided
-> to go with Spring. At that time, we had as an alternative Java EE (now
-> named Jakarta EE), but most members of the team considered it’s
-> bet-ter to go with Spring, which offered a lighter alternative that
-> was easier to implement and that we also considered easier to
-> maintain.
->
-> The transition wasn’t an easy one. Together with a few colleagues,
-> experts in their domain and knowledgeable about the application
-> itself, we invested a lot of effort into this transformation.
->
-> The result was amazing! We removed over 40% of the lines of code. This
-> transition was the first moment I understood how significant the
-> impact of using a framework could be.
->
-> **NOTE** Choosing and using a framework is linked to the design and
-> architec-ture of an application. You’ll find it useful to learn more
-> about these subjects along with learning the Spring framework. In
-> appendix A, you’ll find a discus-sion <span id="_bookmark14"
-> class="anchor"></span>about software architectures with excellent
-> resources if you’d like to go into details.
-
-#### The Spring ecosystem
-
-> In this section, we will discuss Spring and related projects like
-> Spring Boot or Spring Data. You’ll learn all about these in this book,
-> and the links among them. In real-world scenarios, it’s common to use
-> different frameworks together, where each frame-work is designed to
-> help you implement a specific part of the app faster.
->
-> We refer to Spring as a framework, but it is much more complex. Spring
-> is an eco-system of frameworks. Usually, when developers refer to the
-> Spring framework, they refer to a part of <span id="_bookmark17"
-> class="anchor"></span>the software capabilities that include the
-> following:
->
-> **1** *Spring Core* —One of the fundamental parts of Spring that
-> includes foundational capabilities. One of these features is the
-> Spring context. As you’ll learn in detail in chapter 2, the Spring
-> context is a fundamental capability of the Spring frame-work that
-> enables Spring to manage instances of your app. Also, as part of
-> Spring Core, you find the Spring aspects functionality. Aspects help
-> Spring inter-cept and manipulate methods you define in your app. We
-> <span id="_bookmark18" class="anchor"></span>discuss more details of
-> the aspects in chapter 6. The Spring Expression Language (SpEL) is
-> another capability you’ll find as part of Spring Core, which enables
-> you to describe con-figurations for Spring using a specific language.
-> All of these are new notions, and I don’t expect you to know them yet.
-> But soon you’ll understand that Spring Core holds the
-> me<span id="_bookmark19" class="anchor"></span>chanisms Spring uses to
-> integrate into your app.
->
-> **2** *Spring model-view-controller (MVC)* —The part of the Spring
-> framework that enables you to develop web applications that serve HTTP
-> requests. We’ll use Spring MVC <span id="_bookmark20"
-> class="anchor"></span>starting in chapter 7.
->
-> **3** *Spring Data Access* —Also one of the fundamental parts of
-> Spring. It provides basic tools you can use to connect to SQL
-> databases to implement the per-sistence laye<span id="_bookmark21"
-> class="anchor"></span>r of your app. We’ll use Spring Data Access
-> starting in chapter 13.
->
-> **4** *Spring testing*—The part holding the tools you need to write
-> tests for your Spring application. We’ll discuss this subject in
-> chapter 15.
->
-> You can initially imagine the Spring framework as a solar system,
-> where Spring Core represents the star in the middle, which holds all
-> the framework together (figure 1.3).
->
-> **Spring MVC**
->
-> **Spring testing**
->
-> **Spring Core**
->
-> <img
-> src="media/image17.png"
-> style="width:2.10867in;height:1.40582in" />**Spring Data Access**
->
-> **Figure 1.3 You can imagine the Spring framework as a solar system
-> with the Spring Core in the center. The software capabilities are
-> planets around Spring Core kept close to it by its gravitational
-> field.**
-
-The Spring framework (shortly, Spring) is an application framework that
-is part of the Java ecosystem.\
-(Spring framework (gọi tắt là Spring) là một framework ứng dụng thuộc hệ
-sinh thái Java.)
-
-####### An application framework is a set of common software functionalities that provides a foundation structure for developing an application.\
-(Một framework ứng dụng là một tập hợp các chức năng phần mềm chung cung cấp cấu trúc nền tảng để phát triển một ứng dụng.)\
-\
-An application framework eases the effort of writing an application by taking out the effort of writing all the program code from scratch.\
+An application framework eases the effort of writing an application by taking out the effort of writing all the program code from scratch.
 (Một framework ứng dụng giúp giảm bớt nỗ lực viết ứng dụng bằng cách loại bỏ việc phải viết toàn bộ mã chương trình từ đầu.)
 
-> We use Spring in the development of many kinds of applications
-> nowadays, from large backend solutions to automation testing apps.\
-> (Ngày nay, chúng ta sử dụng Spring để phát triển nhiều loại ứng dụng,
-> từ các giải pháp backend lớn đến các ứng dụng kiểm thử tự động.)\
-> \
-> According to many survey reports on Java technologies, Spring is the
-> most used Java framework today.\
-> (Theo nhiều báo cáo khảo sát về công nghệ Java, hiện nay Spring là
-> framework Java được sử dụng nhiều nhất.)
+We use Spring in the development of many kinds of applications nowadays, from large backend solutions to automation testing apps.
+(Ngày nay, chúng ta sử dụng Spring để phát triển nhiều loại ứng dụng, từ các giải pháp backend lớn đến các ứng dụng kiểm thử tự động.)
 
-Spring is popular, and developers have started to use it more often with
-other JVM languages than Java as well.\
-(Spring rất phổ biến, và các lập trình viên cũng bắt đầu sử dụng nó
-thường xuyên hơn với các ngôn ngữ JVM khác ngoài Java.)
+According to many survey reports on Java technologies, Spring is the most used Java framework today.
+(Theo nhiều báo cáo khảo sát về công nghệ Java, hiện nay Spring là framework Java được sử dụng nhiều nhất.)
 
-> write, which defines the logic of the app. Here’s where the
-> “inversion” in IoC comes from: you don’t let the app control the
-> execution by its own code and use dependen-cies. Instead, we allow the
-> framework (the dependency) to control the app and its code (figure
-> 1.4).
->
-> **NOTE** In this context the term “controls” refers to actions like
-> “creating an instance” or “calling a method.” A framework can create
-> objects of the classes you define in your app. Based on the
-> configurations that you write, Spring intercepts the method to augment
-> it with various features. For example, Spring can intercept a specific
-> method to log any error that might appear during the method’s
-> execution.
+Spring is popular, and developers have started to use it more often with other JVM languages than Java as well.
+(Spring rất phổ biến, và các lập trình viên cũng bắt đầu sử dụng nó thường xuyên hơn với các ngôn ngữ JVM khác ngoài Java.)
+
+write, which defines the logic of the app. Here’s where the “inversion” in IoC comes from: you don’t let the app control the execution by its own code and use dependen-cies. Instead, we allow the framework (the dependency) to control the app and its code (figure 1.4).
+(write, xác định logic của ứng dụng. Đây là nguồn gốc của sự “đảo ngược” trong IoC: bạn không để ứng dụng kiểm soát việc thực thi bằng mã riêng của nó và sử dụng các phần phụ thuộc. Thay vào đó, chúng tôi cho phép framework (phần phụ thuộc) kiểm soát ứng dụng và mã của nó (hình 1.4).)
+
+**NOTE** In this context the term “controls” refers to actions like
+(LƯU Ý Trong ngữ cảnh này thuật ngữ “kiểm soát” đề cập đến các hành động như)
+“creating an instance” or “calling a method.” A framework can create objects of the classes you define in your app. Based on the configurations that you write, Spring intercepts the method to augment it with various features. For example, Spring can intercept a specific method to log any error that might appear during the method’s execution.
+(“tạo một thể hiện” hoặc “gọi một phương thức”. Một framework có thể tạo các đối tượng của các lớp mà bạn xác định trong ứng dụng của mình. Dựa trên các cấu hình mà bạn viết, Spring chặn phương thức này để tăng cường nó bằng nhiều tính năng khác nhau. Ví dụ: Spring có thể chặn một phương thức cụ thể để ghi lại bất kỳ lỗi nào có thể xuất hiện trong quá trình thực thi phương thức đó.)
 
 **Without IoC**
+(Không có IoC)
 
-> **The application executes and controls (uses) the dependencies it
-> needs.**
+**The application executes and controls (uses) the dependencies it needs.**
+(Ứng dụng thực thi và kiểm soát (sử dụng) các phần phụ thuộc mà nó cần.)
 
-In the last few years, we observed an impressive growth of developers
-using Spring with Kotlin (another appreciated language from the JVM
-family).\
-(Trong những năm gần đây, số lượng lập trình viên sử dụng Spring với
-Kotlin, một ngôn ngữ được đánh giá cao trong hệ JVM, đã tăng trưởng ấn
-tượng.)\
-\
-In this book, we'll focus on the foundations of Spring, and I'll teach
-you essential skills for using Spring in real-world examples.\
-(Trong cuốn sách này, chúng ta sẽ tập trung vào nền tảng của Spring, và
-tôi sẽ hướng dẫn bạn những kỹ năng cốt lõi để sử dụng Spring trong các
-ví dụ thực tế.)\
-\
-To make the subject more comfortable for you and allow you to focus on
-Spring, we'll use only Java examples.\
-(Để giúp nội dung dễ tiếp cận hơn và để bạn tập trung vào Spring, chúng
-ta sẽ chỉ sử dụng các ví dụ bằng Java.)\
-\
-Throughout the book, we'll discuss and apply, with examples, essential
-skills like connecting to a database, establishing communication between
-applications, and securing and testing an app.\
-(Xuyên suốt cuốn sách, chúng ta sẽ thảo luận và áp dụng qua ví dụ các kỹ
-năng quan trọng như kết nối cơ sở dữ liệu, thiết lập giao tiếp giữa các
-ứng dụng, cũng như bảo mật và kiểm thử ứng dụng.)
+In the last few years, we observed an impressive growth of developers using Spring with Kotlin (another appreciated language from the JVM family).
+(Trong những năm gần đây, số lượng lập trình viên sử dụng Spring với Kotlin, một ngôn ngữ được đánh giá cao trong hệ JVM, đã tăng trưởng ấn tượng.)
 
-> Before diving into more technical details in the next chapters, let's
-> talk about the Spring framework and where you'll actually use it.\
-> (Trước khi đi sâu hơn vào các chi tiết kỹ thuật ở những chương tiếp
-> theo, hãy cùng nói về Spring framework và những nơi bạn thực sự sẽ sử
-> dụng nó.)\
-> \
-> Why is Spring so appreciated, and when should you even use it?\
-> (Vì sao Spring được đánh giá cao đến vậy, và khi nào thì bạn nên sử
-> dụng nó?)
->
-> Application
+In this book, we'll focus on the foundations of Spring, and I'll teach you essential skills for using Spring in real-world examples.
+(Trong cuốn sách này, chúng ta sẽ tập trung vào nền tảng của Spring, và tôi sẽ hướng dẫn bạn những kỹ năng cốt lõi để sử dụng Spring trong các ví dụ thực tế.)
+
+To make the subject more comfortable for you and allow you to focus on Spring, we'll use only Java examples.
+(Để giúp nội dung dễ tiếp cận hơn và để bạn tập trung vào Spring, chúng ta sẽ chỉ sử dụng các ví dụ bằng Java.)
+
+Throughout the book, we'll discuss and apply, with examples, essential skills like connecting to a database, establishing communication between applications, and securing and testing an app.
+(Xuyên suốt cuốn sách, chúng ta sẽ thảo luận và áp dụng qua ví dụ các kỹ năng quan trọng như kết nối cơ sở dữ liệu, thiết lập giao tiếp giữa các ứng dụng, cũng như bảo mật và kiểm thử ứng dụng.)
+
+Before diving into more technical details in the next chapters, let's talk about the Spring framework and where you'll actually use it.
+(Trước khi đi sâu hơn vào các chi tiết kỹ thuật ở những chương tiếp theo, hãy cùng nói về Spring framework và những nơi bạn thực sự sẽ sử dụng nó.)
+
+Why is Spring so appreciated, and when should you even use it?
+(Vì sao Spring được đánh giá cao đến vậy, và khi nào thì bạn nên sử dụng nó?)
 
 **With IoC**
+(Với IoC)
 
-> **The application executes being controlled by the framework
-> (dependency).**
->
-> Framework (dependency)
->
-> **Figure 1.4 Inversion of control. Instead of executing its own code,
-> which makes use of several other dependencies, in case of an IoC
-> scenario, the app execution is controlled by the dependency. The
-> Spring framework controls an app during its execution. Therefore, it
-> implements an IoC scenario of execution.**
->
-> You will start learning Spring with Spring Core by discussing the
-> Spring IoC function-ality in chapters 2 through 5. The IoC container
-> glues Spring components and com-ponents of your application to the
-> framework together. Using the IoC container, to which you often refer
-> as the Spring context, you make certain objects known to Spring, which
-> enables the framework to use them in the way you configured.
->
-> <span id="_bookmark25" class="anchor"></span>In chapter 6, we’ll
-> continue our discussion with Spring aspect-oriented program-ming
-> (AOP). Spring can control instances added to its IoC container, and
-> one of the things it can do is intercept m<span id="_bookmark26"
-> class="anchor"></span>ethods that represent the behavior of these
-> instances. This capability is called *aspecting* the method. Spring
-> AOP is one of the most common ways the framework interacts with what
-> your app does. This trait makes Spring AOP part of the essentials as
-> well. Part of the Spring Core, we also find resource management,
->
-> internationalizati<span id="_bookmark27" class="anchor"></span>on
-> (i18n), type conversi<span id="_bookmark28" class="anchor"></span>on,
-> and SpEL. We’ll encounter aspects of these features in examples
-> throughout the book.
+**The application executes being controlled by the framework (dependency).**
 
-####### Using Spring Data Access feature to implement the app’s persistence
+**Framework (dependency)**
+(Khung (phụ thuộc))
 
-> For most applications, it’s critical to persist part of the data they
-> process. Working with databases is a fundamental subject, and in
-> Spring, it’s the Data Access module that you’ll use to take care of
-> data persistence in many cases. <span id="_bookmark31"
-> class="anchor"></span>The Spring Data Access includes using JDBC,
-> integrating with *object-relational mapping* (ORM) frameworks like
-> Hibernate (don’t worry if you don’t yet know what an ORM framework is
-> or haven’t heard about Hibernate; we’ll discuss these aspects later in
-> the book), and managing transactions. In <span id="_bookmark32"
-> class="anchor"></span>chapters 12 through 14, we’ll cover everything
-> needed to get you started with Spring Data Access.
+**Figure 1.4 Inversion of control. Instead of executing its own code, which makes use of several other dependencies, in case of an IoC scenario, the app execution is controlled by the dependency. The Spring framework controls an app during its execution. Therefore, it implements an IoC scenario of execution.**
+(Hình 1.4 Đảo ngược điều khiển. Thay vì thực thi mã của chính nó, sử dụng một số phần phụ thuộc khác, trong trường hợp kịch bản IoC, việc thực thi ứng dụng được kiểm soát bởi phần phụ thuộc. Khung công tác Spring kiểm soát một ứng dụng trong quá trình thực thi. Do đó, nó thực hiện một kịch bản thực thi IoC.)
 
-####### The Spring MVC capabilities for developing web apps
+You will start learning Spring with Spring Core by discussing the Spring IoC functionality in chapters 2 through 5. The IoC container glues Spring components and components of your application to the framework together. Using the IoC container, to which you often refer as the Spring context, you make certain objects known to Spring, which enables the framework to use them in the way you configured.
+(Bạn sẽ bắt đầu học Spring với Spring Core bằng cách thảo luận về chức năng Spring IoC trong các chương từ 2 đến 5. Bộ chứa IoC gắn kết các thành phần Spring và các thành phần của ứng dụng của bạn với framework với nhau. Bằng cách sử dụng bộ chứa IoC, mà bạn thường gọi là bối cảnh Spring, bạn làm cho một số đối tượng nhất định được biết đến với Spring, điều này cho phép framework sử dụng chúng theo cách bạn đã định cấu hình.)
 
-> The most common applications developed with Spring are web apps, and
-> within the Spring ecosystem, you’ll find a large set of tools that
-> enables you to write web applica-tions and web services in different
-> fashions. You can use the Spring MVC to develop apps using a standard
-> servlet fashion, which is common in a vast number of applica-tions
-> today. In chapter 7, we’ll go into more detail on using the Spring
-> MVC.
+In chapter 6, we’ll continue our discussion with Spring aspect-oriented programming
+(Trong ch??ng 6, ch?ng ta s? ti?p t?c v?i l?p tr?nh h??ng kh?a c?nh trong Spring (AOP). Spring c? th? ki?m so?t c?c instance ???c th?m v?o IoC container c?a n?, v?)
+one of the things it can do is intercept methods that represent the behavior of these instances. This capability is called *aspecting* the method. Spring AOP is one of the most common ways the framework interacts with what your app does. This trait makes Spring AOP part of the essentials as well. Part of the Spring Core, we also find resource management,
+(một trong những điều nó có thể làm là chặn các phương thức thể hiện hành vi của những trường hợp này. Khả năng này được gọi là khía cạnh phương pháp. Spring AOP là một trong những cách phổ biến nhất mà framework tương tác với ứng dụng của bạn. Đặc điểm này làm cho Spring AOP trở thành một phần thiết yếu. Một phần của Spring Core, chúng tôi cũng tìm thấy tính năng quản lý tài nguyên,)
 
-####### The Spring testing feature
+internationalization (i18n), type conversion, and SpEL. We?ll encounter aspects of these features in examples throughout the book.
+(qu?c t? h?a (i18n), chuy?n ??i ki?u d? li?u, v? SpEL. Ch?ng ta s? g?p c?c kh?a c?nh c?a nh?ng t?nh n?ng n?y trong c?c v? d? xuy?n su?t cu?n s?ch.)
+and SpEL. We’ll encounter aspects of these features in examples throughout the book.
+(và SpEL. Chúng ta sẽ gặp các khía cạnh của những đặc điểm này trong các ví dụ xuyên suốt cuốn sách.)
 
-> The Spring testing module offers us a large set of tools that we’ll
-> use to write unit and integration tests. There have been many pages
-> written about the testing topic, but we’ll discuss everything that is
-> essential to get you started with Spring testing in chap-ter 15. I’ll
-> also refer to some valuable resources you need to read to get all the
-> details of this topic. My rule of thumb is that you’re not a mature
-> developer if you don’t understand testing, so this topic is one you
-> should care about.
+### Using Spring Data Access feature to implement the app’s persistence
+(Sử dụng tính năng Spring Data Access để triển khai tính bền vững của ứng dụng)
 
-####### Projects from the Spring ecosystem
+For most applications, it’s critical to persist part of the data they process. Working with databases is a fundamental subject, and in Spring, it’s the Data Access module that you’ll use to take care of data persistence in many cases. The Spring Data Access includes using JDBC, integrating with *object-relational mapping* (ORM) frameworks like Hibernate (don’t worry if you don’t yet know what an ORM framework is or haven’t heard about Hibernate; we’ll discuss these aspects later in the book), and managing transactions. In chapters 12 through 14, we’ll cover everything needed to get you started with Spring Data Access.
+(Đối với hầu hết các ứng dụng, điều quan trọng là phải duy trì một phần dữ liệu mà chúng xử lý. Làm việc với cơ sở dữ liệu là một chủ đề cơ bản và trong Spring, đó là mô-đun Truy cập dữ liệu mà bạn sẽ sử dụng để đảm bảo tính bền vững của dữ liệu trong nhiều trường hợp. Truy cập dữ liệu Spring bao gồm sử dụng JDBC, tích hợp với các framework ánh xạ quan hệ đối tượng (ORM) như Hibernate (đừng lo lắng nếu bạn chưa biết framework ORM là gì hoặc chưa nghe nói về Hibernate; chúng ta sẽ thảo luận về các khía cạnh này sau trong cuốn sách) và quản lý các giao dịch. Trong các chương 12 đến 14, chúng tôi sẽ đề cập đến mọi thứ cần thiết để giúp bạn bắt đầu với Spring Data Access.)
 
-> The Spring ecosystem is so much more than just the capabilities
-> discussed earlier in this section. It includes a big collection of
-> other frameworks that integrate well and form a larger universe. Here
-> we have projects like Spring Data, Spring Security, Spring Cloud,
-> Spring Batch, Spring Boot, and so on. When you develop an app, you can
-> use more of these projects together. For example, you can build an app
-> using all of Spring Boot, Spring Security, and Spring Data. In the
-> next few chapters, we’ll work on smaller projects that make use of
-> various projects of the Spring ecosystem. When I say project, I refer
-> to a part of the Spring ecosystem that is independently developed.
-> Each of these projects has a separate team that works on extending its
-> capabilities. Also, each project is separately described and has its
-> own reference on the Spring official web-site:
-> <https://spring.io/projects>.
->
-> Out of this vast universe created by Spring, we’ll also refer to
-> Spring Data and Spring Boot. These projects are often encountered in
-> apps, so it’s important to get to know them from the beginning.
->
-> **<span class="smallcaps">E</span>**<span id="_bookmark39"
-> class="anchor"></span>**<span class="smallcaps">xtending the
-> persistence capabilities with Spring Data</span>**
->
-> The Spring Data project implements a part of the Spring ecosystem that
-> enables you to easily connect to databases and use the persistence
-> layer with a minimum number of lines of code written. The project
-> refers to both SQL and NoSQL technologies and creates a high-level
-> layer, which simplifies the way you work with data persistence.
->
-> **NOTE** We have Spring Data Access, which is a module of Spring Core,
-> and we also have an independent project in the Spring ecosystem named
-> Spring Data. Spring Data Access contains fundamental data access
-> implementations like the transaction mechanism and JDBC tools. Spring
-> Data enhances access to databases and offers a broader set of tools,
-> which makes development more accessible and enables your app to
-> connect to different kinds of data sources. We’ll discuss this subject
-> in chapter 14.
->
-> **<span class="smallcaps">Spring</span>** <span id="_bookmark40"
-> class="anchor"></span>**<span class="smallcaps">Boot</span>**
->
-> Spring Boot is a project part of the Spring ecosystem that introduces
-> the concept of “convention over configuration.” The main idea of this
-> concept is that instead of set-ting up all the configurations of a
-> framework yourself, Spring Boot offers you a default configuration
-> that you can customize as needed. The result, in general, is that you
-> write less code because you follow known conventions and your app
-> differs from others in few or small ways. So instead of writing all
-> the configurations for each and every app, it’s more efficient to
-> start with a default configuration and only change what’s different
-> from the convention. We’ll discuss more about Spring Boot starting in
-> chapter 7.
->
-> The Spring ecosystem is vast and contains many projects. Some of them
-> you encounter more often than others, and some you may not use at all
-> if you’re building an application without a particular need. In this
-> book, we refer only to the projects that are essential for you to get
-> started: Spring Core, Spring Data, and Spring Boot. You
-> ca<span id="_bookmark41" class="anchor"></span>n find a
-> <span id="_bookmark42" class="anchor"></span>full list of projects
-> that are part of the Spring ecosystem on the official
->
-> Spring website: <https://spring.io/projects/>.
->
-> **Alternatives for using Spring**
->
-> We can’t really discuss alternatives to Spring because someone could
-> misunder-stand them as alternatives to the entire ecosystem. But for
-> many of the individual components and projects that create the Spring
-> ecosystem, you can find other options like other open source or
-> commercial frameworks or libraries.
->
-> For example, let’s take the Spring IoC container. Years ago, the Java
-> EE specification was a solution very much appreciated by the
-> developers. With a slightly different phi-losophy, Java EE (which in
-> 2017 was open sourced and remade in Jakarta EE, <https://jakarta.ee/>)
-> offered <span id="_bookmark44" class="anchor"></span>specifications
-> like Context and Dependency Injection (CDI) or Enterprise Java Beans
-> (EJB). You could use CDI or EJB to manage a context of object
-> instances and implement aspects (named “interceptors” in the EE
-> terminol<span id="_bookmark43" class="anchor"></span>-ogy). Also,
-> throughout history, Google Guice (<https://github.com/google/guice>)
-> was an appreciated framework for the management of object instances in
-> a container.
->
-> ***(continued)***
->
-> For some of the projects taken individually, you could find one or
-> more alternatives. For example, you could choose to use Apache Shiro
-> (<https://shiro.apache.org/>) instead of Spring Security. Or you could
-> decide to implement your web app using the Play framework
-> (<https://www.playframework.com/>) instead of Spring MVC and
-> Spring-related technologies.
->
-> A more recent project that looks promising is Red Hat Quarkus. Quarkus
-> is designed for cloud native implementations and becomes more and more
-> mature with rapid steps. I wouldn’t be surprised to see it as one of
-> the lead projects in developing enter-prise apps in the Java ecosystem
-> in the future (<https://quarkus.io/>).
->
-> My advice for you is to always take into consideration your
-> alternatives. In software development, you need to be open-minded and
-> never trust one solution as being “the one.” You’ll always find
-> scenarios in which a specific technology works better than another.
+### The Spring MVC capabilities for developing web apps
+(Các khả năng của Spring MVC để phát triển ứng dụng web)
 
-#### Spring in real-world scenarios
+The most common applications developed with Spring are web apps, and within the Spring ecosystem, you’ll find a large set of tools that enables you to write web applications and web services in different fashions. You can use the Spring MVC to develop apps using a standard servlet fashion, which is common in a vast number of applications today. In chapter 7, we’ll go into more detail on using the Spring MVC.
+(Các ứng dụng phổ biến nhất được phát triển với Spring là các ứng dụng web và trong hệ sinh thái Spring, bạn sẽ tìm thấy một bộ công cụ lớn cho phép bạn viết các ứng dụng web và dịch vụ web theo nhiều kiểu khác nhau. Bạn có thể sử dụng Spring MVC để phát triển ứng dụng bằng cách sử dụng kiểu servlet tiêu chuẩn, kiểu này phổ biến trong rất nhiều ứng dụng hiện nay. Trong chương 7, chúng ta sẽ đi vào chi tiết hơn về cách sử dụng Spring MVC.)
 
-> Now that you have an overview of Spring, you’re aware of when and why
-> you should use a framework. In this section, I’ll give you some
-> application scenarios in which using the Spring framework might be an
-> excellent fit. Too often, I’ve seen developers only refer to backend
-> applications for using a framework like Spring. I’ve even seen a trend
-> of restricting, even more, the scenario to backend web applications.
-> While it’s true that in plenty of cases we see Spring used in this
-> way, it’s important to remember that the framework isn’t limited to
-> this scenario. I’ve seen teams successfully using Spring in different
-> kinds of applications, such as the development of an automation
-> testing app or even in standalone desktop scenarios.
->
-> I’ll further describe to you some common real-world scenarios in which
-> I’ve seen Spring used successfully. These are not the only possible
-> scenarios, and Spring might not work all the time in these cases.
-> Remember what we discussed in section 1.2: a framework is not always a
-> good choice. But these are common cases in which gener-ally Spring is
-> a good fit:
->
-> **1** The development of a backend app
->
-> **2** The development of an automation testing framework
->
-> **3** The development of a desktop app
->
-> **4** The development of a mobile app
+### The Spring testing feature
+(Tính năng kiểm tra mùa xuân)
 
-####### Using Spring in the development of a backend app
+The Spring testing module offers us a large set of tools that we’ll use to write unit and integration tests. There have been many pages written about the testing topic, but we’ll discuss everything that is essential to get you started with Spring testing in chapter 15. I’ll also refer to some valuable resources you need to read to get all the details of this topic. My rule of thumb is that you’re not a mature developer if you don’t understand testing, so this topic is one you should care about.
+(Mô-đun kiểm thử Spring cung cấp cho chúng ta một bộ công cụ lớn mà chúng ta sẽ sử dụng để viết các bài kiểm thử đơn vị và tích hợp. Đã có nhiều trang viết về chủ đề kiểm thử, nhưng chúng ta sẽ thảo luận mọi thứ cần thiết để giúp bạn bắt đầu kiểm thử mùa xuân ở chương 15. Tôi cũng sẽ tham khảo một số tài nguyên có giá trị mà bạn cần đọc để biết tất cả thông tin chi tiết về chủ đề này. Nguyên tắc nhỏ của tôi là bạn không phải là nhà phát triển trưởng thành nếu bạn không hiểu về kiểm thử, vì vậy chủ đề này là chủ đề bạn nên quan tâm.)
 
-> A backend application is the part of a system that executes on the
-> server side and has the responsibility of managing data and serving
-> client applications’ requests. The users access functionalities by
-> using the client apps directly. Further, the client apps make requests
-> to the backend app to work with the users’ data. The backend app
->
-> might use databases to store data or communicate with other backend
-> apps in differ-ent fashions.
->
-> You can imagine, in a real-world scenario, that the app would be the
-> backend application managing the transactions in your bank accounts.
-> Users may access their accounts and manage them via a web application
-> (online banking) or a mobile app. Both the mobile apps and the web
-> apps represent clients for the backend application. To manage users’
-> transactions, the backend application needs to communicate with other
-> backend solutions, and part of the data it manages needs to be
-> persisted in a database. In figure 1.5, you can visualize the
-> architecture of such a system.
->
-> **The users interact with the**
->
-> **client apps to manage their data.**
->
-> **Other backend solutions make direct requests to your backend app.**
->
-> <img
-> src="media/image18.png"
-> style="width:0.2474in;height:0.29687in" />
->
-> **Your backend app directly communicates with other backend
-> solutions.**
->
-> **The client app make requests to your backend app to resolve users’
-> requests.**
->
-> **Your backend app uses a message broker and adds messages in a queue
-> or topic.**
->
-> ![](media/image19.png)
->
-> **Figure
-> 1.5 A backend app interacts in several ways with other apps and uses
-> databases to manage data. Usually, a backend app is complex and may
-> require the use of various technologies. Frameworks simplify the
-> implementation by providing tools you can use to implement the backend
-> solution faster.**
->
-> **NOTE** Don’t worry if you don’t understand all the details of figure
-> 1.5. I don’t expect you to know what a message broker is and not even
-> how to establish the data exchange among the components. What I want
-> you to see is that such a system can become complex in the real world
-> and then understand that projects from the Spring ecosystem were built
-> to help you eliminate this complexity as much as possible.
->
-> Spring offers an excellent set of tools for implementing backend
-> applications. It makes your life easier with the different
-> functionalities you generally implement in a backend solution, from
-> integration with other apps to persistence in various database
-> technologies. It’s no wonder developers often use Spring for such
-> applications. The
->
-> framework basically offers you everything you need in such
-> implementations and is an excellent fit for any kind of
-> <span id="_bookmark49" class="anchor"></span>architectural style.
-> Figure 1.6 indicates the possibilities of using Spring for a backend
-> app.
->
-> ![](media/image23.png)
->
-> **Use
-> the Spring IoC container to manage object instances easier and glue in
-> other functionalities Spring provides.**
->
-> **Use Spring MVC or Spring WebFlux to implement the REST endpoints
-> called by the client apps or other backend solutions.**
->
-> **Use Spring Security to implement the authentication and
-> authorization configurations.**
+### Projects from the Spring ecosystem
+(Các dự án từ hệ sinh thái Spring)
 
-<img
-src="media/image9.png"
-style="width:0.22578in;height:0.27094in" />
+The Spring ecosystem is so much more than just the capabilities discussed earlier in this section. It includes a big collection of other frameworks that integrate well and form a larger universe. Here we have projects like Spring Data, Spring Security, Spring Cloud, Spring Batch, Spring Boot, and so on. When you develop an app, you can use more of these projects together. For example, you can build an app using all of Spring Boot, Spring Security, and Spring Data. In the next few chapters, we’ll work on smaller projects that make use of various projects of the Spring ecosystem. When I say project, I refer to a part of the Spring ecosystem that is independently developed. Each of these projects has a separate team that works on extending its capabilities. Also, each project is separately described and has its own reference on the Spring official web-site: <https://spring.io/projects>.
+(Hệ sinh thái Spring không chỉ có những khả năng được thảo luận trước đó trong phần này. Nó bao gồm một bộ sưu tập lớn các framework khác tích hợp tốt và tạo thành một vũ trụ lớn hơn. Ở đây chúng tôi có các dự án như Spring Data, Spring Security, Spring Cloud, Spring Batch, Spring Boot, v.v. Khi bạn phát triển một ứng dụng, bạn có thể sử dụng nhiều dự án này cùng nhau. Ví dụ: bạn có thể xây dựng một ứng dụng bằng cách sử dụng tất cả Spring Boot, Spring Security và Spring Data. Trong một số chương tiếp theo, chúng ta sẽ làm việc trên các dự án nhỏ hơn sử dụng nhiều dự án khác nhau của hệ sinh thái Spring. Khi nói đến dự án, tôi muốn nói đến một phần của hệ sinh thái Spring được phát triển độc lập. Mỗi dự án này có một nhóm riêng biệt làm việc để mở rộng khả năng của mình. Ngoài ra, mỗi dự án được mô tả riêng và có tài liệu tham khảo riêng trên trang web chính thức của Spring: .)
 
-> **Use Spring Data to connect to the SQL and NoSQL databases your
-> backend app uses to persist the data.**
->
-> **Use Spring Boot to ease the complexity of your configurations and
-> write less code to implement the app.**
->
-> **Use Spring Integration or Spring for Apache Kafka to more easily
-> send messages to your JMS or Kafka topics.**
->
-> **Figure 1.6 The possibilities of using Spring in a backend
-> application are endless, from exposing functionalities that other
-> applications can call to managing the database access, and from
-> securing the application to managing integration though third-party
-> message brokers.**
+Out of this vast universe created by Spring, we’ll also refer to Spring Data and Spring Boot. These projects are often encountered in apps, so it’s important to get to know them from the beginning.
+(Ngoài vũ trụ rộng lớn do Spring tạo ra này, chúng ta cũng sẽ đề cập đến Spring Data và Spring Boot. Những dự án này thường gặp trong ứng dụng, vì vậy điều quan trọng là bạn phải tìm hiểu chúng ngay từ đầu.)
 
-####### Using Spring in a automation test app
+**E****xtending the persistence capabilities with Spring Data**
+(Mở rộng khả năng kiên trì với Spring Data)
 
-> Nowadays, we often use automation testing for end-to-end testing of
-> systems we imple-ment. Automation testing refers to implementing
-> software that development teams use to make sure an application
-> behaves as expected. A development team can sched-ule the automation
-> testing implementation to frequently test the app and notify the
-> developers if something is wrong. Having such functionality gives
-> developers confi-dence because they know they’ll be notified if they
-> break anything in the existing capabilities of the app while
-> developing new features.
->
-> While with small systems you can do the testing manually, it’s always
-> a good idea to automate the test cases. For more complex systems,
-> manually testing all the flows isn’t even an option. Because the flows
-> are so numerous, it’d require a massive number of hours and too much
-> energy to cover it completely.
->
-> It turns out that the most efficient solution is to have a separate
-> team implement an app that has the responsibility of validating all
-> the flows of the tested system. While developers add new
-> functionalities to the system, this testing app is also enhanced to
-> cover what’s new, and the teams use it to validate that everything
-> still works as desired. The developers eventually use an integration
-> tool and schedule the app to run regu-larly to get feedback as soon as
-> possible for their changes (figure 1.7).
->
-> **The team continuously adds new tests to cover all the flows
-> developed in the system. Usually, the app is stored in a repository of
-> a version management system like Git.**
+The Spring Data project implements a part of the Spring ecosystem that enables you to easily connect to databases and use the persistence layer with a minimum number of lines of code written. The project refers to both SQL and NoSQL technologies and creates a high-level layer, which simplifies the way you work with data persistence.
+(Dự án Spring Data triển khai một phần của hệ sinh thái Spring cho phép bạn dễ dàng kết nối với cơ sở dữ liệu và sử dụng lớp lưu giữ lâu dài với số dòng mã được viết tối thiểu. Dự án đề cập đến cả công nghệ SQL và NoSQL, đồng thời tạo ra một lớp cấp cao, giúp đơn giản hóa cách bạn làm việc với tính lưu giữ dữ liệu.)
+
+**NOTE** We have Spring Data Access, which is a module of Spring Core,
+(LƯU Ý Chúng tôi có Spring Data Access, một mô-đun của Spring Core,)
+and we also have an independent project in the Spring ecosystem named Spring Data. Spring Data Access contains fundamental data access implementations like the transaction mechanism and JDBC tools. Spring Data enhances access to databases and offers a broader set of tools, which makes development more accessible and enables your app to connect to different kinds of data sources. We’ll discuss this subject in chapter 14.
+(và chúng tôi cũng có một dự án độc lập trong hệ sinh thái Spring mang tên Spring Data. Truy cập dữ liệu mùa xuân chứa các triển khai truy cập dữ liệu cơ bản như cơ chế giao dịch và các công cụ JDBC. Spring Data tăng cường quyền truy cập vào cơ sở dữ liệu và cung cấp bộ công cụ rộng hơn, giúp việc phát triển dễ tiếp cận hơn và cho phép ứng dụng của bạn kết nối với các loại nguồn dữ liệu khác nhau. Chúng ta sẽ thảo luận về chủ đề này trong chương 14.)
+
+**Spring** **Boot**
+(Khởi động mùa xuân)
+
+Spring Boot is a project part of the Spring ecosystem that introduces the concept of “convention over configuration.” The main idea of this concept is that instead of set-ting up all the configurations of a framework yourself, Spring Boot offers you a default configuration that you can customize as needed. The result, in general, is that you write less code because you follow known conventions and your app differs from others in few or small ways. So instead of writing all the configurations for each and every app, it’s more efficient to start with a default configuration and only change what’s different from the convention. We’ll discuss more about Spring Boot starting in chapter 7.
+(Spring Boot là một phần dự án của hệ sinh thái Spring giới thiệu khái niệm “quy ước về cấu hình”. Ý tưởng chính của khái niệm này là thay vì tự mình thiết lập tất cả các cấu hình của một framework, Spring Boot cung cấp cho bạn một cấu hình mặc định mà bạn có thể tùy chỉnh khi cần. Nói chung, kết quả là bạn viết ít mã hơn vì bạn tuân theo các quy ước đã biết và ứng dụng của bạn khác với các ứng dụng khác ở một vài điểm hoặc một số điểm nhỏ. Vì vậy, thay vì viết tất cả cấu hình cho từng ứng dụng, sẽ hiệu quả hơn nếu bắt đầu với cấu hình mặc định và chỉ thay đổi những gì khác với quy ước. Chúng ta sẽ thảo luận thêm về Spring Boot bắt đầu từ chương 7.)
+
+The Spring ecosystem is vast and contains many projects. Some of them you encounter more often than others, and some you may not use at all if you’re building an application without a particular need. In this book, we refer only to the projects that are essential for you to get started: Spring Core, Spring Data, and Spring Boot. You can find a full list of projects that are part of the Spring ecosystem on the official
+(Hệ sinh thái Spring rất rộng lớn và chứa nhiều dự án. Một số trong số chúng bạn gặp thường xuyên hơn những thứ khác và một số bạn có thể không sử dụng chút nào nếu bạn đang xây dựng một ứng dụng mà không có nhu cầu cụ thể. Trong cuốn sách này, chúng tôi chỉ đề cập đến các dự án cần thiết để bạn bắt đầu: Spring Core, Spring Data và Spring Boot. Bạn có thể tìm thấy danh sách đầy đủ các dự án thuộc hệ sinh thái Spring trên trang chính thức)
+
+Spring website: <https://spring.io/projects/>.
+(Trang web mùa xuân: .)
+
+**Alternatives for using Spring**
+(Các lựa chọn thay thế cho việc sử dụng Spring)
+
+We can’t really discuss alternatives to Spring because someone could misunderstand them as alternatives to the entire ecosystem. But for many of the individual components and projects that create the Spring ecosystem, you can find other options like other open source or commercial frameworks or libraries.
+(Chúng ta thực sự không thể thảo luận về các lựa chọn thay thế cho Spring vì ai đó có thể hiểu nhầm chúng là những lựa chọn thay thế cho toàn bộ hệ sinh thái. Nhưng đối với nhiều thành phần và dự án riêng lẻ tạo ra hệ sinh thái Spring, bạn có thể tìm thấy các tùy chọn khác như các thư viện hoặc framework thương mại hoặc nguồn mở khác.)
+
+For example, let’s take the Spring IoC container. Years ago, the Java EE specification was a solution very much appreciated by the developers. With a slightly different philosophy, Java EE (which in 2017 was open sourced and remade in Jakarta EE, <https://jakarta.ee/>) offered specifications like Context and Dependency Injection (CDI) or Enterprise Java Beans
+(EJB). You could use CDI or EJB to manage a context of object
+instances and implement aspects (named “interceptors” in the EE terminology). Also, throughout history, Google Guice (<https://github.com/google/guice>) was an appreciated framework for the management of object instances in a container.
+(các trường hợp và các khía cạnh triển khai (được đặt tên là “các thiết bị chặn” trong thuật ngữ EE). Ngoài ra, trong suốt lịch sử, Google Guice () là một framework được đánh giá cao để quản lý các phiên bản đối tượng trong vùng chứa.)
+
+***(continued)***
+((tiếp theo))
+
+For some of the projects taken individually, you could find one or more alternatives. For example, you could choose to use Apache Shiro
+(<https://shiro.apache.org/>) instead of Spring Security. Or you could
+decide to implement your web app using the Play framework
+(<https://www.playframework.com/>) instead of Spring MVC and
+Spring-related technologies.
+(Các công nghệ liên quan đến mùa xuân.)
+
+A more recent project that looks promising is Red Hat Quarkus. Quarkus is designed for cloud native implementations and becomes more and more mature with rapid steps. I wouldn’t be surprised to see it as one of the lead projects in developing enter-prise apps in the Java ecosystem in the future (<https://quarkus.io/>).
+(Một dự án gần đây có vẻ hứa hẹn hơn là Red Hat Quarkus. Quarkus được thiết kế để triển khai trên nền tảng đám mây và ngày càng hoàn thiện hơn với các bước nhanh chóng. Tôi sẽ không ngạc nhiên khi coi đây là một trong những dự án hàng đầu trong việc phát triển các ứng dụng dành cho doanh nghiệp trong hệ sinh thái Java trong tương lai ().)
+
+My advice for you is to always take into consideration your alternatives. In software development, you need to be open-minded and never trust one solution as being “the one.” You’ll always find scenarios in which a specific technology works better than another.
+(Lời khuyên của tôi dành cho bạn là hãy luôn cân nhắc các lựa chọn thay thế của mình. Trong quá trình phát triển phần mềm, bạn cần phải có tư duy cởi mở và không bao giờ tin tưởng vào một giải pháp là “duy nhất”. Bạn sẽ luôn tìm thấy các tình huống trong đó một công nghệ cụ thể hoạt động tốt hơn một công nghệ khác.)
+
+## Spring in real-world scenarios
+(Mùa xuân trong các tình huống thực tế)
+
+Now that you have an overview of Spring, you’re aware of when and why you should use a framework. In this section, I’ll give you some application scenarios in which using the Spring framework might be an excellent fit. Too often, I’ve seen developers only refer to backend applications for using a framework like Spring. I’ve even seen a trend of restricting, even more, the scenario to backend web applications. While it’s true that in plenty of cases we see Spring used in this way, it’s important to remember that the framework isn’t limited to this scenario. I’ve seen teams successfully using Spring in different kinds of applications, such as the development of an automation testing app or even in standalone desktop scenarios.
+(Bây giờ bạn đã có cái nhìn tổng quan về Spring, bạn đã biết khi nào và tại sao bạn nên sử dụng một framework. Trong phần này, tôi sẽ cung cấp cho bạn một số kịch bản ứng dụng trong đó việc sử dụng Spring framework có thể rất phù hợp. Thông thường, tôi thấy các nhà phát triển chỉ đề cập đến các ứng dụng phụ trợ để sử dụng một framework như Spring. Tôi thậm chí còn nhận thấy xu hướng hạn chế, thậm chí nhiều hơn, kịch bản phụ trợ các ứng dụng web. Mặc dù đúng là trong nhiều trường hợp chúng ta thấy Spring được sử dụng theo cách này, nhưng điều quan trọng cần nhớ là framework không bị giới hạn trong trường hợp này. Tôi đã thấy các nhóm sử dụng thành công Spring trong nhiều loại ứng dụng khác nhau, chẳng hạn như phát triển ứng dụng thử nghiệm tự động hóa hoặc thậm chí trong các tình huống máy tính để bàn độc lập.)
+
+I’ll further describe to you some common real-world scenarios in which I’ve seen Spring used successfully. These are not the only possible scenarios, and Spring might not work all the time in these cases. Remember what we discussed in section 1.2: a framework is not always a good choice. But these are common cases in which gener-ally Spring is a good fit:
+(Tôi sẽ mô tả thêm cho bạn một số tình huống thực tế phổ biến mà tôi đã thấy Spring được sử dụng thành công. Đây không phải là tình huống duy nhất có thể xảy ra và Spring có thể không hoạt động mọi lúc trong những trường hợp này. Hãy nhớ những gì chúng ta đã thảo luận trong phần 1.2: một framework không phải lúc nào cũng là một lựa chọn tốt. Nhưng đây là những trường hợp phổ biến trong đó Spring nói chung là phù hợp:)
+
+**1** The development of a backend app
+(1 Phát triển ứng dụng phụ trợ)
+
+**2** The development of an automation testing framework
+(2 Sự phát triển của framework thử nghiệm tự động hóa)
+
+**3** The development of a desktop app
+(3 Phát triển ứng dụng dành cho máy tính để bàn)
+
+**4** The development of a mobile app
+(4 Phát triển ứng dụng di động)
+
+### Using Spring in the development of a backend app
+(Sử dụng Spring trong việc phát triển ứng dụng phụ trợ)
+
+A backend application is the part of a system that executes on the server side and has the responsibility of managing data and serving client applications’ requests. The users access functionalities by using the client apps directly. Further, the client apps make requests to the backend app to work with the users’ data. The backend app
+(Ứng dụng phụ trợ là một phần của hệ thống thực thi ở phía máy chủ và có trách nhiệm quản lý dữ liệu cũng như phục vụ các yêu cầu của ứng dụng khách. Người dùng truy cập các chức năng bằng cách sử dụng trực tiếp các ứng dụng khách. Hơn nữa, các ứng dụng khách sẽ yêu cầu ứng dụng phụ trợ hoạt động với dữ liệu của người dùng. Ứng dụng phụ trợ)
+
+might use databases to store data or communicate with other backend apps in differ-ent fashions.
+(có thể sử dụng cơ sở dữ liệu để lưu trữ dữ liệu hoặc liên lạc với các ứng dụng phụ trợ khác theo các kiểu khác nhau.)
+
+You can imagine, in a real-world scenario, that the app would be the backend application managing the transactions in your bank accounts. Users may access their accounts and manage them via a web application
+(online banking) or a mobile app. Both the mobile apps and the web
+apps represent clients for the backend application. To manage users’ transactions, the backend application needs to communicate with other backend solutions, and part of the data it manages needs to be persisted in a database. In figure 1.5, you can visualize the architecture of such a system.
+(ứng dụng đại diện cho khách hàng cho ứng dụng phụ trợ. Để quản lý các giao dịch của người dùng, ứng dụng phụ trợ cần liên lạc với các giải pháp phụ trợ khác và một phần dữ liệu mà nó quản lý cần phải được lưu giữ trong cơ sở dữ liệu. Trong hình 1.5, bạn có thể hình dung kiến ​​trúc của một hệ thống như vậy.)
+
+**The users interact with the**
+(Người dùng tương tác với)
+
+**client apps to manage their data.**
+(ứng dụng khách để quản lý dữ liệu của họ.)
+
+**Other backend solutions make direct requests to your backend app.**
+(Các giải pháp phụ trợ khác đưa ra yêu cầu trực tiếp tới ứng dụng phụ trợ của bạn.)
+
+<img src="media/image18.png" style="width:0.2474in;height:0.29687in" />
+
+**Your backend app directly communicates with other backend solutions.**
+(Ứng dụng phụ trợ của bạn giao tiếp trực tiếp với các giải pháp phụ trợ khác.)
+
+**The client app make requests to your backend app to resolve users’ requests.**
+(Ứng dụng khách đưa ra yêu cầu tới ứng dụng phụ trợ của bạn để giải quyết yêu cầu của người dùng.)
+
+**Your backend app uses a message broker and adds messages in a queue or topic.**
+(Ứng dụng phụ trợ của bạn sử dụng trình trung chuyển tin nhắn và thêm tin nhắn vào hàng đợi hoặc chủ đề.)
+
+![](media/image19.png)
+
+**Figure 1.5 A backend app interacts in several ways with other apps and uses databases to manage data. Usually, a backend app is complex and may require the use of various technologies. Frameworks simplify the implementation by providing tools you can use to implement the backend solution faster.**
+(Hình 1.5 Ứng dụng phụ trợ tương tác theo nhiều cách với các ứng dụng khác và sử dụng cơ sở dữ liệu để quản lý dữ liệu. Thông thường, một ứng dụng phụ trợ rất phức tạp và có thể yêu cầu sử dụng nhiều công nghệ khác nhau. Các framework đơn giản hóa việc triển khai bằng cách cung cấp các công cụ mà bạn có thể sử dụng để triển khai giải pháp phụ trợ nhanh hơn.)
+
+**NOTE** Don’t worry if you don’t understand all the details of figure
+(LƯU Ý Đừng lo lắng nếu bạn không hiểu tất cả các chi tiết của hình)
+1.5. I don’t expect you to know what a message broker is and not even how to establish the data exchange among the components. What I want you to see is that such a system can become complex in the real world and then understand that projects from the Spring ecosystem were built to help you eliminate this complexity as much as possible.
+(1.5. Tôi không mong bạn biết nhà môi giới tin nhắn là gì và thậm chí không biết cách thiết lập trao đổi dữ liệu giữa các thành phần. Điều tôi muốn bạn thấy là một hệ thống như vậy có thể trở nên phức tạp trong thế giới thực và sau đó hiểu rằng các dự án từ hệ sinh thái Spring được xây dựng để giúp bạn loại bỏ sự phức tạp này nhiều nhất có thể.)
+
+Spring offers an excellent set of tools for implementing backend applications. It makes your life easier with the different functionalities you generally implement in a backend solution, from integration with other apps to persistence in various database technologies. It’s no wonder developers often use Spring for such applications. The
+(Spring cung cấp một bộ công cụ tuyệt vời để triển khai các ứng dụng phụ trợ. Nó giúp cuộc sống của bạn dễ dàng hơn với các chức năng khác nhau mà bạn thường triển khai trong giải pháp phụ trợ, từ tích hợp với các ứng dụng khác đến tính bền vững trong các công nghệ cơ sở dữ liệu khác nhau. Không có gì ngạc nhiên khi các nhà phát triển thường sử dụng Spring cho những ứng dụng như vậy. các)
+
+framework basically offers you everything you need in such implementations and is an excellent fit for any kind of architectural style. Figure 1.6 indicates the possibilities of using Spring for a backend app.
+(framework về cơ bản cung cấp cho bạn mọi thứ bạn cần trong quá trình triển khai như vậy và rất phù hợp với bất kỳ loại phong cách kiến ​​trúc nào. Hình 1.6 chỉ ra khả năng sử dụng Spring cho ứng dụng phụ trợ.)
+
+![](media/image23.png)
+
+**Use the Spring IoC container to manage object instances easier and glue in other functionalities Spring provides.**
+(Sử dụng bộ chứa Spring IoC để quản lý các phiên bản đối tượng dễ dàng hơn và kết hợp các chức năng khác mà Spring cung cấp.)
+
+**Use Spring MVC or Spring WebFlux to implement the REST endpoints called by the client apps or other backend solutions.**
+(Sử dụng Spring MVC hoặc Spring WebFlux để triển khai các điểm cuối REST được ứng dụng khách hoặc các giải pháp phụ trợ khác gọi.)
+
+**Use Spring Security to implement the authentication and authorization configurations.**
+(Sử dụng Spring Security để triển khai cấu hình xác thực và ủy quyền.)
+
+<img src="media/image9.png" style="width:0.22578in;height:0.27094in" />
+
+**Use Spring Data to connect to the SQL and NoSQL databases your backend app uses to persist the data.**
+(Sử dụng Spring Data để kết nối với cơ sở dữ liệu SQL và NoSQL mà ứng dụng phụ trợ của bạn sử dụng để duy trì dữ liệu.)
+
+**Use Spring Boot to ease the complexity of your configurations and write less code to implement the app.**
+(Sử dụng Spring Boot để giảm bớt độ phức tạp trong cấu hình của bạn và viết ít mã hơn để triển khai ứng dụng.)
+
+**Use Spring Integration or Spring for Apache Kafka to more easily send messages to your JMS or Kafka topics.**
+(Sử dụng Spring Integration hoặc Spring for Apache Kafka để gửi tin nhắn đến các chủ đề JMS hoặc Kafka của bạn dễ dàng hơn.)
+
+**Figure 1.6 The possibilities of using Spring in a backend application are endless, from exposing functionalities that other applications can call to managing the database access, and from securing the application to managing integration though third-party message brokers.**
+(Hình 1.6 Khả năng sử dụng Spring trong một ứng dụng phụ trợ là vô tận, từ việc hiển thị các chức năng mà các ứng dụng khác có thể gọi đến việc quản lý quyền truy cập cơ sở dữ liệu và từ việc bảo mật ứng dụng đến quản lý tích hợp thông qua các nhà môi giới tin nhắn của bên thứ ba.)
+
+### Using Spring in a automation test app
+(Sử dụng Spring trong ứng dụng thử nghiệm tự động hóa)
+
+Nowadays, we often use automation testing for end-to-end testing of systems we implement. Automation testing refers to implementing software that development teams use to make sure an application behaves as expected. A development team can schedule the automation testing implementation to frequently test the app and notify the developers if something is wrong. Having such functionality gives developers confi-dence because they know they’ll be notified if they break anything in the existing capabilities of the app while developing new features.
+(Ngày nay, chúng tôi thường sử dụng thử nghiệm tự động hóa để thử nghiệm từ đầu đến cuối các hệ thống mà chúng tôi triển khai. Kiểm thử tự động đề cập đến việc triển khai phần mềm mà nhóm phát triển sử dụng để đảm bảo ứng dụng hoạt động như mong đợi. Nhóm phát triển có thể lên lịch triển khai thử nghiệm tự động hóa để thường xuyên kiểm tra ứng dụng và thông báo cho nhà phát triển nếu có sự cố. Việc có chức năng như vậy mang lại sự tự tin cho các nhà phát triển vì họ biết rằng họ sẽ được thông báo nếu vi phạm bất kỳ điều gì trong khả năng hiện có của ứng dụng trong khi phát triển các tính năng mới.)
+
+While with small systems you can do the testing manually, it’s always a good idea to automate the test cases. For more complex systems, manually testing all the flows isn’t even an option. Because the flows are so numerous, it’d require a massive number of hours and too much energy to cover it completely.
+(Mặc dù với các hệ thống nhỏ, bạn có thể thực hiện kiểm thử theo cách thủ công, nhưng việc tự động hóa các trường hợp kiểm thử luôn là một ý tưởng hay. Đối với các hệ thống phức tạp hơn, việc kiểm tra thủ công tất cả các luồng thậm chí không phải là một lựa chọn. Bởi vì các dòng chảy rất nhiều nên cần rất nhiều giờ và quá nhiều năng lượng để bao phủ hoàn toàn.)
+
+It turns out that the most efficient solution is to have a separate team implement an app that has the responsibility of validating all the flows of the tested system. While developers add new functionalities to the system, this testing app is also enhanced to cover what’s new, and the teams use it to validate that everything still works as desired. The developers eventually use an integration tool and schedule the app to run regu-larly to get feedback as soon as possible for their changes (figure 1.7).
+(Hóa ra giải pháp hiệu quả nhất là nhờ một nhóm riêng biệt triển khai một ứng dụng có trách nhiệm xác thực tất cả các luồng của hệ thống đã được thử nghiệm. Trong khi các nhà phát triển thêm các chức năng mới vào hệ thống, ứng dụng thử nghiệm này cũng được cải tiến để bao gồm những tính năng mới và các nhóm sử dụng nó để xác thực rằng mọi thứ vẫn hoạt động như mong muốn. Cuối cùng, các nhà phát triển sử dụng một công cụ tích hợp và lên lịch chạy ứng dụng thường xuyên để nhận phản hồi sớm nhất có thể về những thay đổi của họ (hình 1.7).)
+
+**The team continuously adds new tests to cover all the flows developed in the system. Usually, the app is stored in a repository of a version management system like Git.**
+(Nhóm liên tục bổ sung các thử nghiệm mới để bao quát tất cả các luồng được phát triển trong hệ thống. Thông thường, ứng dụng được lưu trữ trong kho lưu trữ của hệ thống quản lý phiên bản như Git.)
 
 **GIT**
+(GIT)
 
-> **A continuous integration tool like Jenkins regularly runs all the
-> tests.**
->
-> ![](media/image27.png)
->
-> **TEST
-> 1 passed**
->
-> **TEST 2 passed**
->
-> **TEST 3 failed**
->
-> **Jenkins**
->
-> **If a test is failing,**
->
-> **Jenkins notifies the team.**
->
-> **Figure 1.7 The team deploys the testing app in a test environment. A
-> continuous integration tool like Jenkins executes the app regularly
-> and sends feedback to the team. This way, the team is always aware of
-> the system’s status, and they know if they break something during
-> development.**
->
-> Such an application might become as complex as a backend app. In order
-> to validate the flows, the app needs to communicate with the
-> components of the system and even connect to databases. Sometimes the
-> app mocks external dependencies to simulate different execution
-> scenarios. For writing the test scenarios, developers use frame-works
-> like Selenium, Cucumber, Gauge, and others. But, together with these
-> frame-works, the app could still benefit in several ways from Spring’s
-> tools. For example, the app could manage the object instances to make
-> the code more maintainable using the Spring IoC container. It could
-> use Spring Data to connect to the databases where it needs to validate
-> the data. It could send messages to queues or topics of a broker
-> sys-tem to simulate specific scenarios or simply use Spring to call
-> some REST endpoints (figure 1.8). (Remember, <span id="_bookmark52"
-> class="anchor"></span>it’s okay if this looks too advanced; meaning
-> will be clarified as you progress through the book).
->
-> ![](media/image30.png)
->
-> **The
-> testing app may use Spring MVC to simulate calls from other systems.**
+**A continuous integration tool like Jenkins regularly runs all the tests.**
+(Một công cụ tích hợp liên tục như Jenkins thường xuyên chạy tất cả các bài kiểm thử.)
 
-<img
-src="media/image34.png"
-style="width:0.24741in;height:0.29687in" />
+![](media/image27.png)
 
-> **The testing app may use Spring Data to connect to the SQL and NoSQL
-> database your backend app uses to persist the data.**
->
-> **The testing app may use Spring Integration to send messages to
-> queues or topics.**
->
-> **Figure 1.8 A testing app might need to connect to databases or
-> communicate with other systems or the tested system. The developers
-> can use components of the Spring ecosystem to simplify the
-> implementations of these functionalities.**
+**TEST 1 passed**
+(KIỂM TRA 1 đã vượt qua)
 
-####### Using Spring for the development of a desktop app
+**TEST 2 passed**
+(KIỂM TRA 2 đã vượt qua)
 
-> Today, desktop applications are not that frequently developed, as web
-> or mobile apps have taken the role of interacting with the user.
-> However, there’s still a small number of desktop applications, and
-> components of the Spring ecosystem could be a good choice in the
-> development of their features. A desktop app could successfully use
-> the Spring IoC container to manage the object instances. This way, the
-> app’s implementa-tion is cleaner and improves its maintainability.
-> Additionally, the app could potentially use Spring’s tools to
-> implement different features, for example to communicate with a
-> backend or other components (calling web services or using other
-> techniques for remote calls) or implement a caching solution.
+**TEST 3 failed**
+(THỬ NGHIỆM 3 thất bại)
 
-####### Using Spring in mobile apps
+**Jenkins**
+(Jenkins)
 
-> With its Spring for Android project
-> (<https://spring.io/projects/spring-android>), the Spring community
-> tries to help the development of mobile applications. Even though
-> you’ll probably rarely encounter this situation, it’s worth mentioning
-> that you can use Spring’s tools to develop Android apps. This Spring
-> projec<span id="_bookmark57" class="anchor"></span>t provides a REST
-> client for Android and authentication support for accessing secured
-> APIs.
+**If a test is failing,**
+(Nếu một bài kiểm tra thất bại,)
 
-#### When not to use frameworks
+**Jenkins notifies the team.**
+(Jenkins thông báo cho nhóm.)
 
-> In this section, we discuss why you should sometimes avoid using
-> frameworks. It’s essential you know when to use a framework and when
-> to avoid using them. Some-times, using a tool that’s too much for the
-> job might consume more energy and also obtain a worse result. Imagine
-> using a chainsaw to cut bread. While you could try to and even achieve
-> a final result, it’d be more difficult and energy-consuming than using
-> a regular knife (and you may end up with nothing but breadcrumbs
-> instead of sliced bread). We’ll discuss a few scenarios in which using
-> a framework isn’t a great idea, and then I’ll tell you a story about a
-> team I was part of that failed in the imple-mentation of an app
-> because of using a framework.
->
-> It turns out that, like everything else in software development, you
-> shouldn’t apply a framework in all cases. You’ll find situations in
-> which a framework is not a good fit—or maybe a framework is a good
-> fit, but not the Spring framework. In which of the fol-lowing
-> scenarios should you consider not using a framework?
->
-> **1** You need to implement a particular functionality with a
-> footprint as small as possible. By footprint, I mean the storage
-> memory occupied by the app’s files.
->
-> **2** Specific security requirements force you to implement only
-> custom code in your app without making use of any open source
-> framework.
->
-> **3** You’d have to make so many customizations over the framework
-> that you’d write more code than if you’d simply not used it at all.
->
-> **4** You already have a functional app, and by changing it to use a
-> framework you don’t gain any benefit.
->
-> Let’s discuss these points in more detail.
+**Figure 1.7 The team deploys the testing app in a test environment. A continuous integration tool like Jenkins executes the app regularly and sends feedback to the team. This way, the team is always aware of the system’s status, and they know if they break something during development.**
+(Hình 1.7 Nhóm triển khai ứng dụng thử nghiệm trong môi trường thử nghiệm. Một công cụ tích hợp liên tục như Jenkins thực thi ứng dụng thường xuyên và gửi phản hồi cho nhóm. Bằng cách này, nhóm luôn biết được trạng thái của hệ thống và họ biết liệu mình có làm hỏng thứ gì đó trong quá trình phát triển hay không.)
 
-####### You need to have a small footprint
+Such an application might become as complex as a backend app. In order to validate the flows, the app needs to communicate with the components of the system and even connect to databases. Sometimes the app mocks external dependencies to simulate different execution scenarios. For writing the test scenarios, developers use frame-works like Selenium, Cucumber, Gauge, and others. But, together with these frame-works, the app could still benefit in several ways from Spring’s tools. For example, the app could manage the object instances to make the code more maintainable using the Spring IoC container. It could use Spring Data to connect to the databases where it needs to validate the data. It could send messages to queues or topics of a broker sys-tem to simulate specific scenarios or simply use Spring to call some REST endpoints (figure 1.8). (Remember, it’s okay if this looks too advanced; meaning will be clarified as you progress through the book).
+(Một ứng dụng như vậy có thể trở nên phức tạp như một ứng dụng phụ trợ. Để xác thực các luồng, ứng dụng cần giao tiếp với các thành phần của hệ thống và thậm chí kết nối với cơ sở dữ liệu. Đôi khi ứng dụng mô phỏng các phần phụ thuộc bên ngoài để mô phỏng các tình huống thực thi khác nhau. Để viết các kịch bản thử nghiệm, các nhà phát triển sử dụng các framework hoạt động như Selenium, Cucumber, Gauge và các framework khác. Tuy nhiên, cùng với các tác phẩm framework này, ứng dụng vẫn có thể hưởng lợi từ các công cụ của Spring theo một số cách. Ví dụ: ứng dụng có thể quản lý các phiên bản đối tượng để làm cho mã dễ bảo trì hơn bằng cách sử dụng bộ chứa Spring IoC. Nó có thể sử dụng Spring Data để kết nối với cơ sở dữ liệu cần xác thực dữ liệu. Nó có thể gửi tin nhắn đến hàng đợi hoặc chủ đề của hệ thống môi giới để mô phỏng các kịch bản cụ thể hoặc đơn giản sử dụng Spring để gọi một số điểm cuối REST (hình 1.8). (Hãy nhớ rằng, điều này có vẻ quá cao cấp cũng không sao; ý nghĩa sẽ được làm rõ khi bạn đọc hết cuốn sách).)
 
-> For point one, I refer to situations in which you need to make your
-> application small. In today’s systems, we find more and more cases in
-> which the services are delivered in containers. You’ve likely heard
-> about containers, such as Docker, Kubernetes, or other terms related
-> to this subject (if not, again, that’s okay).
->
-> Containers in their entirety is a topic beyond the scope of this book,
-> so for now the only thing I need you to know is that when you use such
-> a deployment fashion, you want your application to be as small as
-> possible. A container is like a box in which your application lives.
-> One crucial principle regarding app deployment in containers is that
-> the containers should be easily disposable: they can be destroyed and
-> recreated as fast as possible. The size of the app (footprint) matters
-> a lot here. You can save sec-onds from the app initialization by
-> making it smaller. That doesn’t mean you won’t use frameworks for all
-> the apps deployed in containers.
->
-> But for some apps, which are usually also quite small, it makes more
-> sense to improve their initialization and make their footprint smaller
-> rather than adding depen-dencies <span id="_bookmark62"
-> class="anchor"></span>to different frameworks. Such a case is a kind
-> of application called *server-less function*. These server-less
-> functions are tiny applications deployed in containers.
->
-> Because you don’t have too much access to the way they’re deployed, it
-> looks like they execute without a server (hence their name). These
-> apps need to be small, and that’s why, for this specific case of apps,
-> you’ll want to avoid adding a framework as <span id="_bookmark63"
-> class="anchor"></span>much as possible. Because of its size, it’s also
-> possible that you won’t need a framework anyway.
+![](media/image30.png)
 
-####### Security needs dictate custom code
+**The testing app may use Spring MVC to simulate calls from other systems.**
+(Ứng dụng thử nghiệm có thể sử dụng Spring MVC để mô phỏng cuộc gọi từ các hệ thống khác.)
 
-> I said in point two that in specific situations, apps could not use
-> frameworks because of security requirements. This scenario usually
-> happens with apps in the field of defense or governmental
-> organizations. Again, it doesn’t mean all the apps used in
-> governmental organizations are prohibited from using frameworks, but
-> for some, restrictions are applied. You may wonder why. Well, say an
-> open source framework like Spring is used. If someone finds a specific
-> vulnerability, it will become known, and a hacker could use this
-> knowledge to exploit it. Sometimes, stakeholders of such apps want to
-> make sure the chances of someone hacking into their system is as close
-> to zero as possible. This could lead to even rebuilding a
-> functionality instead of using it from a third-party source.
->
-> **NOTE** Wait! Earlier I said that it’s more secure to use an open
-> source frame-work because if a vulnerability exists, someone will
-> likely discover it. Well, if you invest enough time and money, you
-> probably can achieve this yourself as well. In general, it’s cheaper
-> to use a framework, of course. And if you don’t want to be extra
-> cautious, it makes more sense to use a framework. But in some
-> projects, the stakeholders really want to make sure no information
-> becomes public.
+<img src="media/image34.png" style="width:0.24741in;height:0.29687in" />
 
-####### Abundant existing customizations make a framework impractical
+**The testing app may use Spring Data to connect to the SQL and NoSQL database your backend app uses to persist the data.**
+(Ứng dụng thử nghiệm có thể sử dụng Spring Data để kết nối với cơ sở dữ liệu SQL và NoSQL mà ứng dụng phụ trợ của bạn sử dụng để duy trì dữ liệu.)
 
-> Another case (point three) in which you might want to avoid using a
-> framework is when you’d have to customize its components so much that
-> you end up writing more code than if it hadn’t been used. As I
-> specified in section 1.1, a framework provides you parts that you
-> assemble with your business code to obtain an app. These compo-nents,
-> provided by the framework, don’t fit perfectly, and you need to
-> customize them in different ways. It’s perfectly normal to customize
-> the framework’s components and the style in which they assemble than
-> if you’d developed the functionality from scratch. If you find
-> yourself in such a situation, you have probably chosen the wrong
-> framework (search for alternatives) or you shouldn’t use a framework
-> at all.
+**The testing app may use Spring Integration to send messages to queues or topics.**
+(Ứng dụng thử nghiệm có thể sử dụng Spring Integration để gửi tin nhắn đến hàng đợi hoặc chủ đề.)
 
-####### You won’t benefit from switching to a framework
+**Figure 1.8 A testing app might need to connect to databases or communicate with other systems or the tested system. The developers can use components of the Spring ecosystem to simplify the implementations of these functionalities.**
+(Hình 1.8 Ứng dụng thử nghiệm có thể cần kết nối với cơ sở dữ liệu hoặc liên lạc với các hệ thống khác hoặc hệ thống được thử nghiệm. Các nhà phát triển có thể sử dụng các thành phần của hệ sinh thái Spring để đơn giản hóa việc triển khai các chức năng này.)
 
-> In point four, I mentioned that a potential mistake could be trying to
-> use a framework to replace something that already exists and is
-> working in an app. Sometimes we are tempted to replace an existing
-> architecture with something new. A new framework appears, and it’s
-> popular, and everyone uses it, so why shouldn’t we change our app as
-> well to use this framework? You can, but you need to attentively
-> analyze what you want to achieve by changing something that works. In
-> some cases, like my story from section
->
-> 1.1, it could be helpful to change your app and make it rely on a
-> specific framework. As long as this change brings a benefit, do it! A
-> reason could be that you want to make the app more maintainable, more
-> performant, or more secure. But if this change doesn’t bring you a
-> benefit, and sometimes it might even bring incertitude, then, in the
-> end, you might discover <span id="_bookmark69"
-> class="anchor"></span>you invested the time and money for a worse
-> result. Let me tell you a story from my own experience.
+### Using Spring for the development of a desktop app
+(Sử dụng Spring để phát triển ứng dụng dành cho máy tính để bàn)
 
-###### An avoidable mistake
+Today, desktop applications are not that frequently developed, as web or mobile apps have taken the role of interacting with the user. However, there’s still a small number of desktop applications, and components of the Spring ecosystem could be a good choice in the development of their features. A desktop app could successfully use the Spring IoC container to manage the object instances. This way, the app’s implementa-tion is cleaner and improves its maintainability. Additionally, the app could potentially use Spring’s tools to implement different features, for example to communicate with a backend or other components (calling web services or using other techniques for remote calls) or implement a caching solution.
+(Ngày nay, các ứng dụng dành cho máy tính để bàn không được phát triển thường xuyên vì các ứng dụng web hoặc thiết bị di động đã đóng vai trò tương tác với người dùng. Tuy nhiên, vẫn còn một số lượng nhỏ ứng dụng dành cho máy tính để bàn và các thành phần của hệ sinh thái Spring có thể là một lựa chọn tốt trong việc phát triển các tính năng của chúng. Một ứng dụng dành cho máy tính để bàn có thể sử dụng thành công bộ chứa Spring IoC để quản lý các phiên bản đối tượng. Bằng cách này, quá trình triển khai ứng dụng sẽ rõ ràng hơn và cải thiện khả năng bảo trì của ứng dụng. Ngoài ra, ứng dụng có thể sử dụng các công cụ của Spring để triển khai các tính năng khác nhau, chẳng hạn như để giao tiếp với phần phụ trợ hoặc các thành phần khác (gọi dịch vụ web hoặc sử dụng các kỹ thuật khác cho cuộc gọi từ xa) hoặc triển khai giải pháp bộ nhớ đệm.)
 
-> Using frameworks isn’t always the best choice, and I had to learn that
-> the hard way. Years earlier, we were working on the backend of a web
-> application. Times influence many things, including software
-> architectures. The app was using JDBC to directly connect to an Oracle
-> database. The code was quite ugly. Everywhere the app needed to
-> execute a query on the database it opened a statement and then sent a
-> query that was sometimes written on multiple rows. You might be young
-> enough not to have encountered JDBC direct usage in apps, but trust
-> me, it’s a long and ugly code.
->
-> At that time, some frameworks using another methodology to work with
-> the database were becoming more and more popular. I remember when I
-> first encountered Hibernate. This is an ORM framework, which allows
-> you to treat the tables and their relationships in a database as
-> objects and relationships among objects. When used correctly, it
-> enables you to write less code and more intuitive functionality. When
-> misused, it may slow down your app, make the code less intuitive, and
-> even introduce bugs.
->
-> The application we were developing needed a change. We knew we could
-> improve that ugly JDBC code. In my mind, we could at least minimize
-> the number of lines. This change would have brought great benefits to
-> maintainability. Together with other developers, we suggested using a
-> tool provided by Spring called JdbcTemplat<span id="_bookmark70"
-> class="anchor"></span>e (you’ll learn this tool in chapter 12). But
-> others strongly pushed the decision to use Hibernate. It was quite
-> popular, so why not to use it? (Actually it still is one of the most
-> popular frameworks of its kind, and you’ll learn about integrating it
-> with Spring in chapter 13.) I could see changing that code to a
-> completely new methodology would be a challenge. Moreover, I could see
-> no benefits. The change also implied a greater risk of introducing
-> bugs.
->
-> Fortunately, the change started with a proof of concept. After a
-> couple of months, lots of effort, and stress, the team decided to
-> quit.
->
-> After analyzing our options, we finished the implementation using
-> JdbcTemplate. We managed to write cleaner code by eliminating a large
-> number of lines of code, and we didn’t need to introduce any new
-> framework for this change.
+### Using Spring in mobile apps
+(Sử dụng Spring trong ứng dụng di động)
 
-#### What will you learn in this book
+With its Spring for Android project (<https://spring.io/projects/spring-android>), the Spring community tries to help the development of mobile applications. Even though you?ll probably rarely encounter this situation, it?s worth mentioning that you can use Spring?s tools to develop Android apps. This Spring project provides a REST client for Android and authentication support for accessing secured APIs.
+(V?i d? ?n Spring for Android (<https://spring.io/projects/spring-android>), c?ng ??ng Spring c? g?ng h? tr? vi?c ph?t tri?n ?ng d?ng di ??ng. M?c d? b?n c? th? hi?m khi g?p t?nh hu?ng n?y, v?n ??ng ?? nh?c r?ng b?n c? th? d?ng c?c c?ng c? c?a Spring ?? ph?t tri?n ?ng d?ng Android. D? ?n n?y cung c?p REST client cho Android v? h? tr? x?c th?c ?? truy c?p c?c API ???c b?o v?.)
 
-> Since you opened this book, I assume you’re probably a software
-> developer in the Java ecosystem who found out it’s useful to learn
-> Spring. The purpose of this book is to teach you the foundations of
-> Spring, assuming you know nothing at all about frame-works and, of
-> course, about Spring. When I say Spring, I refer to the Spring
-> ecosys-tem, not just the core part of the framework.
->
-> When you finish the book, you will have learned how to do the
-> following:
+## When not to use frameworks
+(Khi nào không nên sử dụng framework)
+
+In this section, we discuss why you should sometimes avoid using frameworks. It’s essential you know when to use a framework and when to avoid using them. Some-times, using a tool that’s too much for the job might consume more energy and also obtain a worse result. Imagine using a chainsaw to cut bread. While you could try to and even achieve a final result, it’d be more difficult and energy-consuming than using a regular knife (and you may end up with nothing but breadcrumbs instead of sliced bread). We’ll discuss a few scenarios in which using a framework isn’t a great idea, and then I’ll tell you a story about a team I was part of that failed in the implementation of an app because of using a framework.
+(Trong phần này, chúng tôi thảo luận lý do tại sao đôi khi bạn nên tránh sử dụng các framework. Điều cần thiết là bạn phải biết khi nào nên sử dụng một framework và khi nào nên tránh sử dụng chúng. Đôi khi, việc sử dụng một công cụ quá sức cho công việc có thể tiêu tốn nhiều năng lượng hơn và cũng mang lại kết quả tồi tệ hơn. Hãy tưởng tượng bạn sử dụng cưa máy để cắt bánh mì. Mặc dù bạn có thể cố gắng và thậm chí đạt được kết quả cuối cùng, nhưng việc này sẽ khó khăn và tốn nhiều năng lượng hơn so với việc sử dụng một con dao thông thường (và bạn có thể không nhận được gì ngoài vụn bánh mì thay vì bánh mì cắt lát). Chúng ta sẽ thảo luận về một số tình huống trong đó việc sử dụng một framework không phải là một ý tưởng hay và sau đó tôi sẽ kể cho bạn câu chuyện về một nhóm mà tôi tham gia đã thất bại trong việc triển khai một ứng dụng do sử dụng một framework.)
+
+It turns out that, like everything else in software development, you shouldn’t apply a framework in all cases. You’ll find situations in which a framework is not a good fit—or maybe a framework is a good fit, but not the Spring framework. In which of the following scenarios should you consider not using a framework?
+(Hóa ra, giống như mọi thứ khác trong phát triển phần mềm, bạn không nên áp dụng một khuôn khổ nào đó trong mọi trường hợp. Bạn sẽ tìm thấy các tình huống trong đó một framework không phù hợp—hoặc có thể một framework phù hợp nhưng không phù hợp với framework Spring. Bạn nên cân nhắc việc không sử dụng framework trong trường hợp nào sau đây?)
+
+**1** You need to implement a particular functionality with a footprint as small as possible. By footprint, I mean the storage memory occupied by the app’s files.
+(1 Bạn cần triển khai một chức năng cụ thể với dung lượng nhỏ nhất có thể. Theo dấu chân, ý tôi là bộ nhớ lưu trữ bị chiếm bởi các tệp của ứng dụng.)
+
+**2** Specific security requirements force you to implement only custom code in your app without making use of any open source framework.
+(2 Các yêu cầu bảo mật cụ thể buộc bạn chỉ triển khai mã tùy chỉnh trong ứng dụng của mình mà không sử dụng bất kỳ framework nguồn mở nào.)
+
+**3** You’d have to make so many customizations over the framework that you’d write more code than if you’d simply not used it at all.
+(3 Bạn sẽ phải thực hiện nhiều tùy chỉnh trên framework đến mức bạn sẽ viết nhiều mã hơn so với khi bạn hoàn toàn không sử dụng nó.)
+
+**4** You already have a functional app, and by changing it to use a framework you don’t gain any benefit.
+(4 Bạn đã có một ứng dụng chức năng và bằng cách thay đổi nó để sử dụng một framework, bạn sẽ không thu được bất kỳ lợi ích nào.)
+
+Let’s discuss these points in more detail.
+(Hãy thảo luận về những điểm này chi tiết hơn.)
+
+### You need to have a small footprint
+(Bạn cần phải có một dấu chân nhỏ)
+
+For point one, I refer to situations in which you need to make your application small. In today’s systems, we find more and more cases in which the services are delivered in containers. You’ve likely heard about containers, such as Docker, Kubernetes, or other terms related to this subject (if not, again, that’s okay).
+(Đối với điểm một, tôi đề cập đến các tình huống mà bạn cần làm cho ứng dụng của mình trở nên nhỏ gọn. Trong các hệ thống ngày nay, chúng ta thấy ngày càng nhiều trường hợp dịch vụ được cung cấp trong container. Bạn có thể đã nghe nói về các container, chẳng hạn như Docker, Kubernetes hoặc các thuật ngữ khác liên quan đến chủ đề này (nếu không thì cũng không sao).)
+
+Containers in their entirety is a topic beyond the scope of this book, so for now the only thing I need you to know is that when you use such a deployment fashion, you want your application to be as small as possible. A container is like a box in which your application lives. One crucial principle regarding app deployment in containers is that the containers should be easily disposable: they can be destroyed and recreated as fast as possible. The size of the app (footprint) matters a lot here. You can save sec-onds from the app initialization by making it smaller. That doesn’t mean you won’t use frameworks for all the apps deployed in containers.
+(Toàn bộ vùng chứa là một chủ đề nằm ngoài phạm vi của cuốn sách này, vì vậy bây giờ điều duy nhất tôi cần bạn biết là khi bạn sử dụng kiểu triển khai như vậy, bạn muốn ứng dụng của mình càng nhỏ càng tốt. Vùng chứa giống như một chiếc hộp chứa ứng dụng của bạn. Một nguyên tắc quan trọng liên quan đến việc triển khai ứng dụng trong vùng chứa là vùng chứa phải dễ dàng sử dụng một lần: chúng có thể bị phá hủy và tạo lại nhanh nhất có thể. Kích thước của ứng dụng (dấu chân) rất quan trọng ở đây. Bạn có thể tiết kiệm vài giây khi khởi chạy ứng dụng bằng cách làm cho nó nhỏ hơn. Điều đó không có nghĩa là bạn sẽ không sử dụng framework cho tất cả ứng dụng được triển khai trong vùng chứa.)
+
+But for some apps, which are usually also quite small, it makes more sense to improve their initialization and make their footprint smaller rather than adding depen-dencies to different frameworks. Such a case is a kind of application called *server-less function*. These server-less functions are tiny applications deployed in containers.
+(Nhưng đối với một số ứng dụng, thường cũng khá nhỏ, sẽ hợp lý hơn nếu cải thiện quá trình khởi tạo và làm cho dấu chân của chúng nhỏ hơn thay vì thêm các phần phụ thuộc vào các framework khác nhau. Trường hợp như vậy là một loại ứng dụng được gọi là chức năng không có máy chủ. Các chức năng không có máy chủ này là các ứng dụng nhỏ được triển khai trong các vùng chứa.)
+
+Because you don’t have too much access to the way they’re deployed, it looks like they execute without a server (hence their name). These apps need to be small, and that’s why, for this specific case of apps, you’ll want to avoid adding a framework as much as possible. Because of its size, it’s also possible that you won’t need a framework anyway.
+(Vì bạn không có quá nhiều quyền truy cập vào cách chúng được triển khai nên có vẻ như chúng thực thi mà không cần máy chủ (do đó có tên như vậy). Các ứng dụng này cần phải nhỏ và đó là lý do tại sao, đối với trường hợp ứng dụng cụ thể này, bạn sẽ muốn tránh thêm framework càng nhiều càng tốt. Vì kích thước của nó nên cũng có thể bạn sẽ không cần đến framework.)
+
+### Security needs dictate custom code
+(Nhu cầu bảo mật ra lệnh cho mã tùy chỉnh)
+
+I said in point two that in specific situations, apps could not use frameworks because of security requirements. This scenario usually happens with apps in the field of defense or governmental organizations. Again, it doesn’t mean all the apps used in governmental organizations are prohibited from using frameworks, but for some, restrictions are applied. You may wonder why. Well, say an open source framework like Spring is used. If someone finds a specific vulnerability, it will become known, and a hacker could use this knowledge to exploit it. Sometimes, stakeholders of such apps want to make sure the chances of someone hacking into their system is as close to zero as possible. This could lead to even rebuilding a functionality instead of using it from a third-party source.
+(Tôi đã nói ở điểm thứ hai rằng trong các tình huống cụ thể, ứng dụng không thể sử dụng framework vì yêu cầu bảo mật. Tình huống này thường xảy ra với các ứng dụng trong lĩnh vực quốc phòng hoặc tổ chức chính phủ. Một lần nữa, điều đó không có nghĩa là tất cả các ứng dụng được sử dụng trong các tổ chức chính phủ đều bị cấm sử dụng các khuôn khổ, nhưng đối với một số ứng dụng, các hạn chế vẫn được áp dụng. Bạn có thể thắc mắc tại sao. Vâng, giả sử một framework nguồn mở như Spring được sử dụng. Nếu ai đó tìm thấy một lỗ hổng cụ thể, lỗ hổng đó sẽ được biết đến và tin tặc có thể sử dụng kiến ​​thức này để khai thác nó. Đôi khi, các bên liên quan của những ứng dụng như vậy muốn đảm bảo khả năng ai đó xâm nhập vào hệ thống của họ càng gần bằng 0 càng tốt. Điều này thậm chí có thể dẫn đến việc xây dựng lại một chức năng thay vì sử dụng nó từ nguồn của bên thứ ba.)
+
+**NOTE** Wait! Earlier I said that it’s more secure to use an open
+(LƯU Ý Đợi đã! Trước đó tôi đã nói rằng sẽ an toàn hơn khi sử dụng một)
+source frame-work because if a vulnerability exists, someone will likely discover it. Well, if you invest enough time and money, you probably can achieve this yourself as well. In general, it’s cheaper to use a framework, of course. And if you don’t want to be extra cautious, it makes more sense to use a framework. But in some projects, the stakeholders really want to make sure no information becomes public.
+(source framework-work vì nếu có lỗ hổng bảo mật thì ai đó có thể sẽ phát hiện ra nó. Chà, nếu bạn đầu tư đủ thời gian và tiền bạc, có lẽ bạn cũng có thể tự mình đạt được điều này. Nói chung, tất nhiên là rẻ hơn khi sử dụng một framework. Và nếu bạn không muốn thận trọng hơn thì việc sử dụng một framework sẽ hợp lý hơn. Nhưng trong một số dự án, các bên liên quan thực sự muốn đảm bảo rằng không có thông tin nào được công khai.)
+
+### Abundant existing customizations make a framework impractical
+(Các tùy chỉnh hiện có phong phú làm cho một framework không thực tế)
+
+Another case (point three) in which you might want to avoid using a framework is when you’d have to customize its components so much that you end up writing more code than if it hadn’t been used. As I specified in section 1.1, a framework provides you parts that you assemble with your business code to obtain an app. These compo-nents, provided by the framework, don’t fit perfectly, and you need to customize them in different ways. It’s perfectly normal to customize the framework’s components and the style in which they assemble than if you’d developed the functionality from scratch. If you find yourself in such a situation, you have probably chosen the wrong framework (search for alternatives) or you shouldn’t use a framework at all.
+(Một trường hợp khác (điểm thứ ba) mà bạn có thể muốn tránh sử dụng một framework là khi bạn phải tùy chỉnh các thành phần của nó nhiều đến mức cuối cùng bạn phải viết nhiều mã hơn so với khi nó chưa được sử dụng. Như tôi đã chỉ định trong phần 1.1, một framework cung cấp cho bạn các bộ phận mà bạn lắp ráp với mã doanh nghiệp của mình để có được một ứng dụng. Các thành phần này do framework cung cấp không hoàn toàn phù hợp và bạn cần tùy chỉnh chúng theo nhiều cách khác nhau. Việc tùy chỉnh các thành phần của framework và kiểu lắp ráp của chúng là điều hoàn toàn bình thường so với việc bạn phát triển chức năng này từ đầu. Nếu bạn rơi vào tình huống như vậy thì có thể bạn đã chọn sai framework (tìm kiếm giải pháp thay thế) hoặc bạn hoàn toàn không nên sử dụng một framework nào cả.)
+
+### You won’t benefit from switching to a framework
+(Bạn sẽ không được hưởng lợi từ việc chuyển sang một framework)
+
+In point four, I mentioned that a potential mistake could be trying to use a framework to replace something that already exists and is working in an app. Sometimes we are tempted to replace an existing architecture with something new. A new framework appears, and it’s popular, and everyone uses it, so why shouldn’t we change our app as well to use this framework? You can, but you need to attentively analyze what you want to achieve by changing something that works. In some cases, like my story from section
+(Ở điểm thứ tư, tôi đã đề cập rằng một lỗi tiềm ẩn có thể là cố gắng sử dụng một framework để thay thế thứ gì đó đã tồn tại và đang hoạt động trong một ứng dụng. Đôi khi chúng ta bị cám dỗ thay thế kiến ​​trúc hiện tại bằng một kiến ​​trúc mới. Một framework mới xuất hiện, nó phổ biến và mọi người đều sử dụng nó, vậy tại sao chúng ta không thay đổi ứng dụng của mình để sử dụng framework này? Bạn có thể, nhưng bạn cần phân tích kỹ lưỡng những gì bạn muốn đạt được bằng cách thay đổi điều gì đó có hiệu quả. Trong một số trường hợp, như câu chuyện của tôi ở phần)
+
+1.1, it could be helpful to change your app and make it rely on a specific framework. As long as this change brings a benefit, do it! A reason could be that you want to make the app more maintainable, more performant, or more secure. But if this change doesn’t bring you a benefit, and sometimes it might even bring incertitude, then, in the end, you might discover you invested the time and money for a worse result. Let me tell you a story from my own experience.
+(1.1, việc thay đổi ứng dụng của bạn và làm cho ứng dụng dựa vào một framework cụ thể có thể sẽ hữu ích. Chỉ cần sự thay đổi này mang lại lợi ích thì hãy thực hiện! Lý do có thể là bạn muốn làm cho ứng dụng dễ bảo trì hơn, hiệu suất cao hơn hoặc an toàn hơn. Nhưng nếu sự thay đổi này không mang lại lợi ích cho bạn và đôi khi nó thậm chí có thể mang lại sự thiếu chắc chắn, thì cuối cùng, bạn có thể phát hiện ra rằng mình đã đầu tư thời gian và tiền bạc để đạt được kết quả tồi tệ hơn. Hãy để tôi kể cho bạn một câu chuyện từ kinh nghiệm của chính tôi.)
+
+### An avoidable mistake
+(Một sai lầm có thể tránh được)
+
+Using frameworks isn’t always the best choice, and I had to learn that the hard way. Years earlier, we were working on the backend of a web application. Times influence many things, including software architectures. The app was using JDBC to directly connect to an Oracle database. The code was quite ugly. Everywhere the app needed to execute a query on the database it opened a statement and then sent a query that was sometimes written on multiple rows. You might be young enough not to have encountered JDBC direct usage in apps, but trust me, it’s a long and ugly code.
+(Sử dụng các framework không phải lúc nào cũng là lựa chọn tốt nhất và tôi đã phải học điều đó một cách khó khăn. Nhiều năm trước, chúng tôi đang làm việc ở phần phụ trợ của một ứng dụng web. Thời gian ảnh hưởng đến nhiều thứ, bao gồm cả kiến ​​trúc phần mềm. Ứng dụng đang sử dụng JDBC để kết nối trực tiếp với cơ sở dữ liệu Oracle. Mã này khá xấu. Ở mọi nơi ứng dụng cần thực hiện một truy vấn trên cơ sở dữ liệu, nó sẽ mở một câu lệnh và sau đó gửi một truy vấn đôi khi được viết trên nhiều hàng. Bạn có thể còn trẻ để chưa gặp phải việc sử dụng trực tiếp JDBC trong các ứng dụng, nhưng hãy tin tôi, đó là một đoạn mã dài và xấu.)
+
+At that time, some frameworks using another methodology to work with the database were becoming more and more popular. I remember when I first encountered Hibernate. This is an ORM framework, which allows you to treat the tables and their relationships in a database as objects and relationships among objects. When used correctly, it enables you to write less code and more intuitive functionality. When misused, it may slow down your app, make the code less intuitive, and even introduce bugs.
+(Vào thời điểm đó, một số framework sử dụng phương pháp khác để làm việc với cơ sở dữ liệu ngày càng trở nên phổ biến. Tôi nhớ lần đầu tiên tôi gặp Hibernate. Đây là framework ORM, cho phép bạn coi các bảng và mối quan hệ của chúng trong cơ sở dữ liệu dưới dạng đối tượng và mối quan hệ giữa các đối tượng. Khi được sử dụng đúng cách, nó cho phép bạn viết ít mã hơn và có nhiều chức năng trực quan hơn. Khi sử dụng sai mục đích, nó có thể làm chậm ứng dụng của bạn, làm cho mã kém trực quan hơn và thậm chí gây ra lỗi.)
+
+The application we were developing needed a change. We knew we could improve that ugly JDBC code. In my mind, we could at least minimize the number of lines. This change would have brought great benefits to maintainability. Together with other developers, we suggested using a tool provided by Spring called JdbcTemplate (you’ll learn this tool in chapter 12). But others strongly pushed the decision to use Hibernate. It was quite popular, so why not to use it? (Actually it still is one of the most popular frameworks of its kind, and you’ll learn about integrating it with Spring in chapter 13.) I could see changing that code to a completely new methodology would be a challenge. Moreover, I could see no benefits. The change also implied a greater risk of introducing bugs.
+(Ứng dụng chúng tôi đang phát triển cần một sự thay đổi. Chúng tôi biết mình có thể cải thiện mã JDBC xấu xí đó. Trong suy nghĩ của tôi, ít nhất chúng ta có thể giảm thiểu số lượng dòng. Sự thay đổi này sẽ mang lại lợi ích to lớn cho khả năng bảo trì. Cùng với các nhà phát triển khác, chúng tôi đề xuất sử dụng một công cụ do Spring cung cấp có tên là JdbcTemplate (bạn sẽ tìm hiểu công cụ này trong chương 12). Nhưng những người khác lại thúc đẩy quyết định sử dụng Hibernate một cách mạnh mẽ. Nó khá phổ biến, vậy tại sao không sử dụng nó? (Trên thực tế, nó vẫn là một trong những framework phổ biến nhất thuộc loại này và bạn sẽ tìm hiểu về cách tích hợp nó với Spring ở chương 13.) Tôi có thể thấy việc thay đổi mã đó sang một phương pháp hoàn toàn mới sẽ là một thách thức. Hơn nữa, tôi không thể thấy được lợi ích gì. Sự thay đổi này cũng ngụ ý nguy cơ xuất hiện lỗi cao hơn.)
+
+Fortunately, the change started with a proof of concept. After a couple of months, lots of effort, and stress, the team decided to quit.
+(May mắn thay, sự thay đổi bắt đầu bằng một bằng chứng về khái niệm. Sau vài tháng, rất nhiều nỗ lực và căng thẳng, cả nhóm quyết định nghỉ việc.)
+
+After analyzing our options, we finished the implementation using JdbcTemplate. We managed to write cleaner code by eliminating a large number of lines of code, and we didn’t need to introduce any new framework for this change.
+(Sau khi phân tích các tùy chọn của mình, chúng tôi đã hoàn tất quá trình triển khai bằng JdbcTemplate. Chúng tôi đã cố gắng viết mã sạch hơn bằng cách loại bỏ một số lượng lớn dòng mã và chúng tôi không cần giới thiệu bất kỳ khuôn khổ mới nào cho thay đổi này.)
+
+## What will you learn in this book
+(Bạn sẽ học được gì trong cuốn sách này)
+
+Since you opened this book, I assume you’re probably a software developer in the Java ecosystem who found out it’s useful to learn Spring. The purpose of this book is to teach you the foundations of Spring, assuming you know nothing at all about frame-works and, of course, about Spring. When I say Spring, I refer to the Spring ecosys-tem, not just the core part of the framework.
+(Vì bạn đã mở cuốn sách này nên tôi cho rằng bạn có thể là một nhà phát triển phần mềm trong hệ sinh thái Java, người nhận thấy việc học Spring rất hữu ích. Mục đích của cuốn sách này là dạy cho bạn những nền tảng của Spring, giả sử bạn không biết gì về các framework và tất nhiên là về Spring. Khi tôi nói Mùa xuân, tôi đề cập đến hệ sinh thái Mùa xuân chứ không chỉ là phần cốt lõi của khuôn khổ.)
+
+When you finish the book, you will have learned how to do the following:
+(Khi đọc xong cuốn sách, bạn sẽ học được cách thực hiện những điều sau:)
 
 - Use the Spring context and implement aspects around objects managed by
-  the framework.
+  (Sử dụng bối cảnh Spring và triển khai các khía cạnh xung quanh các đối tượng được quản lý bởi)
+the framework.
+(khuôn khổ.)
 
 - Implement the mechanism of a Spring app to connect to a database and
-  work with the persisted data.
+  (Triển khai cơ chế của ứng dụng Spring để kết nối với cơ sở dữ liệu và)
+work with the persisted data.
+(làm việc với dữ liệu liên tục.)
 
 - Establish data exchange between apps using REST APIs implemented with
-  Spring.
+  (Thiết lập trao đổi dữ liệu giữa các ứng dụng bằng API REST được triển khai với)
+Spring.
+(Mùa xuân.)
 
 - Build basic apps that use the convention-over-configuration approach.
+  (Xây dựng các ứng dụng cơ bản sử dụng phương pháp cấu hình theo quy ước.)
 
 - Use best practices in the standard class design of a Spring
-  application.
+  (Sử dụng các phương pháp hay nhất trong thiết kế lớp tiêu chuẩn của Spring)
+application.
+(ứng dụng.)
 
 - Properly test your Spring implementations.
+  (Kiểm tra đúng việc triển khai Spring của bạn.)
 
-#### Summary
+## Summary
+(Bản tóm tắt)
 
 - An application framework is a set of common software functionalities
-  that pro-vides a foundational structure for developing an application.
-  A framework acts as the skeletal support to build an application.
+  (Khung ứng dụng là một tập hợp các chức năng phần mềm phổ biến)
+that provides a foundational structure for developing an application. A framework acts as the skeletal support to build an application.
+(cung cấp cấu trúc nền tảng để phát triển một ứng dụng. Một framework hoạt động như bộ framework hỗ trợ để xây dựng một ứng dụng.)
 
 - A framework helps you build an app more efficiently by providing
-  functionality that you assemble to your implementation instead of
-  developing it yourself. Using a framework saves you time and helps
-  ensure there are fewer chances of implementing buggy features.
+  (Khung giúp bạn xây dựng ứng dụng hiệu quả hơn bằng cách cung cấp)
+functionality that you assemble to your implementation instead of developing it yourself. Using a framework saves you time and helps ensure there are fewer chances of implementing buggy features.
+(chức năng mà bạn lắp ráp để triển khai thay vì tự phát triển nó. Việc sử dụng một framework giúp bạn tiết kiệm thời gian và giúp đảm bảo có ít cơ hội triển khai các tính năng có lỗi hơn.)
 
 - Using a widely known framework like Spring opens a door to a large
-  community, which makes it more likely that others will faces similar
-  problems. You then have an excellent opportunity to learn about how
-  others solved something similar to an issue you need to address, which
-  will spare you the time of individual research.
+  (Việc sử dụng một framework được biết đến rộng rãi như Spring sẽ mở ra cánh cửa cho một cơ hội lớn)
+community, which makes it more likely that others will faces similar problems. You then have an excellent opportunity to learn about how others solved something similar to an issue you need to address, which will spare you the time of individual research.
+(cộng đồng, điều này khiến nhiều khả năng những người khác sẽ gặp phải những vấn đề tương tự. Sau đó, bạn có cơ hội tuyệt vời để tìm hiểu về cách người khác giải quyết vấn đề tương tự như vấn đề bạn cần giải quyết, điều này sẽ giúp bạn tiết kiệm thời gian nghiên cứu cá nhân.)
 
 - When implementing an application, always think of all possibilities,
-  including not using a framework. If you decide to use one or more
-  frameworks, take into consideration all their alternatives. You should
-  think about the purpose of the framework, who else is using it (how
-  big the community is), and for how long it’s been on the market
-  (maturity).
+  (Khi triển khai một ứng dụng, hãy luôn nghĩ đến mọi khả năng,)
+including not using a framework. If you decide to use one or more frameworks, take into consideration all their alternatives. You should think about the purpose of the framework, who else is using it (how big the community is), and for how long it’s been on the market
+(maturity).
 
 - Spring is not just a framework. We often refer to Spring as “Spring
-  framework” to indicate the core functionalities, but Spring offers an
-  entire ecosystem formed of many projects used in application
-  development. Each project is dedi-cated to a specific domain, and when
-  implementing an app, you might use more of these projects to implement
-  the functionality you desire. The projects of the Spring ecosystem
-  we’ll use in this book are as follows:
+  (Mùa xuân không chỉ là một khuôn khổ. Chúng ta thường gọi mùa xuân là “Mùa xuân)
+framework” to indicate the core functionalities, but Spring offers an entire ecosystem formed of many projects used in application development. Each project is dedi-cated to a specific domain, and when implementing an app, you might use more of these projects to implement the functionality you desire. The projects of the Spring ecosystem we’ll use in this book are as follows:
+(framework" để chỉ ra các chức năng cốt lõi, nhưng Spring cung cấp toàn bộ hệ sinh thái được hình thành từ nhiều dự án được sử dụng trong phát triển ứng dụng. Mỗi dự án được dành riêng cho một miền cụ thể và khi triển khai một ứng dụng, bạn có thể sử dụng nhiều dự án này hơn để triển khai chức năng mà bạn mong muốn. Các dự án trong hệ sinh thái Spring mà chúng ta sẽ sử dụng trong cuốn sách này như sau:)
 
-  - Spring Core, which builds the foundation of Spring and provides
-    features like the context, aspects, and basic data access.
+- Spring Core, which builds the foundation of Spring and provides
+  (Spring Core, xây dựng nền tảng của Spring và cung cấp)
+features like the context, aspects, and basic data access.
+(các tính năng như bối cảnh, khía cạnh và quyền truy cập dữ liệu cơ bản.)
 
-  - Spring Data, which provides a high-level, comfortable-to-use set of
-    tools to implement the persistence layer of your apps. You’ll find
-    how easy it is to use Spring Data to work with both SQL and NoSQL
-    databases.
+- Spring Data, which provides a high-level, comfortable-to-use set of
+  (Spring Data, cung cấp một bộ dữ liệu cấp cao, dễ sử dụng)
+tools to implement the persistence layer of your apps. You’ll find how easy it is to use Spring Data to work with both SQL and NoSQL databases.
+(công cụ để triển khai lớp kiên trì cho ứng dụng của bạn. Bạn sẽ thấy việc sử dụng Spring Data để làm việc với cả cơ sở dữ liệu SQL và NoSQL dễ dàng như thế nào.)
 
-  - Spring Boot, which is a project of the Spring ecosystem that helps
-    you apply a “convention-over-configuration” approach.
+- Spring Boot, which is a project of the Spring ecosystem that helps
+  (Spring Boot là một dự án của hệ sinh thái Spring giúp)
+you apply a “convention-over-configuration” approach.
+(bạn áp dụng cách tiếp cận “cấu hình theo quy ước”.)
 
 - Quite often, learning materials (like books, articles, or video
-  tutorials) offer examples with Spring only for backend applications.
-  While it’s true that it’s widespread to use Spring with backend apps,
-  you can use Spring with <span id="_bookmark72"
-  class="anchor"></span>other kinds of apps as well, even in desktop
-  applications and automation testing apps.
+  (Khá thường xuyên, các tài liệu học tập (như sách, bài báo hoặc video)
+tutorials) offer examples with Spring only for backend applications. While it’s true that it’s widespread to use Spring with backend apps, you can use Spring with other kinds of apps as well, even in desktop applications and automation testing apps.
+(hướng dẫn) đưa ra các ví dụ về Spring chỉ dành cho các ứng dụng phụ trợ. Mặc dù đúng là việc sử dụng Spring với các ứng dụng phụ trợ là phổ biến, nhưng bạn cũng có thể sử dụng Spring với các loại ứng dụng khác, ngay cả trong các ứng dụng dành cho máy tính để bàn và ứng dụng thử nghiệm tự động hóa.)
 
-> ***This chapter covers***
+***This chapter covers***
 
 - Understanding the need for Spring context
 
 - Adding new object instances to the Spring context
 
-> In this chapter, you start learning how to work with a crucial Spring
-> framework ele-ment: the context (also known as the application context
-> in a Spring app). Imagine the context as a place in the memory of your
-> app in which we add all the object instances that we want the
-> framework to manage. By default, Spring doesn’t know any of the
-> objects you define in your application. To enable Spring to see your
-> objects, you need to add them to the context. Later in this book we
-> discuss using different capabilities provided by Spring in apps.
-> You’ll learn that plugging in such features is done through the
-> context by adding object instances and establishing relationships
-> among them. Spring uses the instances in the context to connect your
-> app to various functionalities it provides. You’ll learn the basics of
-> the most import-ant features (e.g., transactions, testing, etc.)
-> throughout the book.
+In this chapter, you start learning how to work with a crucial Spring framework ele-ment: the context (also known as the application context in a Spring app). Imagine the context as a place in the memory of your app in which we add all the object instances that we want the framework to manage. By default, Spring doesn’t know any of the objects you define in your application. To enable Spring to see your objects, you need to add them to the context. Later in this book we discuss using different capabilities provided by Spring in apps. You’ll learn that plugging in such features is done through the context by adding object instances and establishing relationships among them. Spring uses the instances in the context to connect your app to various functionalities it provides. You’ll learn the basics of the most import-ant features (e.g., transactions, testing, etc.) throughout the book.
 
 **22**
 
-> Learning what Spring context is and how it works is the first step in
-> learning to use Spring, because without knowing how to manage the
-> Spring context, almost nothing else you’ll learn to do with it will be
-> possible. The context is a complex mechanism that enables Spring to
-> control instances you define. This way, it allows you to use the
-> capabilities the framework offers.
->
-> We start in this chapter by learning how to add object instances to
-> the Spring con-text. In chapter 3, you’ll learn how to refer to the
-> instances you added and establish relationships among them.
->
-> We’ll name these object instances “beans.” Of course, for the syntaxes
-> you need to learn we’ll write code snippets, and you can find all
-> these snippets in the projects pro-vided with the book (you can
-> download the projects from the “Book resources” sec-tion of the live
-> book). I’ll enhance the code examples with visuals and detailed
-> explanations of the approaches.
->
-> Because I want to make your introduction to Spring progressive and
-> take every-thing step by step, in this chapter we focus on the
-> syntaxes you need to know for work-ing with the Spring context. You’ll
-> find out later that not all the objects of an app need to be managed
-> by Spring, so you don’t need to add all the object instances of your
-> app to the Spring context. For the moment, I invite you to focus on
-> learning the approaches for adding an instance for Spring to manage.
+Learning what Spring context is and how it works is the first step in learning to use Spring, because without knowing how to manage the Spring context, almost nothing else you’ll learn to do with it will be possible. The context is a complex mechanism that enables Spring to control instances you define. This way, it allows you to use the capabilities the framework offers.
 
-#### Creating a Maven project
+We start in this chapter by learning how to add object instances to the Spring con-text. In chapter 3, you’ll learn how to refer to the instances you added and establish relationships among them.
 
-> In this section, we’ll discuss creating a Maven project. Maven is not
-> a subject directly related to Spring, but it’s a tool you use to
-> easily manage an app’s build process regardless of the framework you
-> use. You need to know Maven project basics to follow the coding
-> examples. Maven is also one of the most used building tools for Spring
-> projects in real-world scenarios (with Gradle, another build tool,
-> taking second place, but we won’t discuss it in this book). Because
-> Maven’s such a well-known tool, you may already know how to create a
-> project and add dependencies to it using its configura-tion. In this
-> case, you can skip this section and go directly to section 2.2.
->
-> A build tool is software we use to build apps more easily. You
-> configure a build tool to do the tasks that are part of building the
-> app instead of manually doing them. Some examples of tasks that are
-> often part of building the app are as follows:
+We’ll name these object instances “beans.” Of course, for the syntaxes you need to learn we’ll write code snippets, and you can find all these snippets in the projects pro-vided with the book (you can download the projects from the “Book resources” sec-tion of the live book). I’ll enhance the code examples with visuals and detailed explanations of the approaches.
+
+Because I want to make your introduction to Spring progressive and take every-thing step by step, in this chapter we focus on the syntaxes you need to know for work-ing with the Spring context. You’ll find out later that not all the objects of an app need to be managed by Spring, so you don’t need to add all the object instances of your app to the Spring context. For the moment, I invite you to focus on learning the approaches for adding an instance for Spring to manage.
+
+## Creating a Maven project
+
+In this section, we’ll discuss creating a Maven project. Maven is not a subject directly related to Spring, but it’s a tool you use to easily manage an app’s build process regardless of the framework you use. You need to know Maven project basics to follow the coding examples. Maven is also one of the most used building tools for Spring projects in real-world scenarios (with Gradle, another build tool, taking second place, but we won’t discuss it in this book). Because Maven’s such a well-known tool, you may already know how to create a project and add dependencies to it using its configura-tion. In this case, you can skip this section and go directly to section 2.2.
+
+A build tool is software we use to build apps more easily. You configure a build tool to do the tasks that are part of building the app instead of manually doing them. Some examples of tasks that are often part of building the app are as follows:
 
 - Downloading the dependencies needed by your app
 
@@ -2025,43 +522,22 @@ style="width:0.24741in;height:0.29687in" />
 
 - Packaging the app in an executable archive
 
-> So that our examples can easily manage dependencies, we need to use a
-> build tool for the projects we develop. This section teaches only what
-> you need to know for develop-ing the examples in this book; we’ll go
-> step by step through the process of creating a
->
-> Maven project, and I’ll teach you the essentials regarding its
-> structure. If you’d like to learn more details about using
-> <span id="_bookmark77" class="anchor"></span>Maven, I
-> <span id="_bookmark76" class="anchor"></span>recommend *Introducing
-> Maven: A Build Tool for Today’s Java Developers* by Balaji Varanasi
-> (APress, 2019).
->
-> Let’s start at the very beginning. <span id="_bookmark78"
-> class="anchor"></span>First, as with developing any other app, you
-> need an integrated development environment (IDE). Any professional IDE
-> nowadays offers support for Maven projects, so you can choose any
-> you’d like: IntelliJ IDEA, Eclipse, Spring STS, Netbeans, and so on.
-> For this book, I use IntelliJ IDEA, which is the IDE I use most often.
-> Don’t worry—the structure of the Maven project is the same regard-less
-> of which IDE you choose.
->
-> Let’s start by creating a new project. You create a new project in
-> IntelliJ from File \> New \> Project. This will get you to a window
-> like the one in figure 2.1.
+So that our examples can easily manage dependencies, we need to use a build tool for the projects we develop. This section teaches only what you need to know for develop-ing the examples in this book; we’ll go step by step through the process of creating a
+
+Maven project, and I’ll teach you the essentials regarding its structure. If you’d like to learn more details about using Maven, I recommend *Introducing Maven: A Build Tool for Today’s Java Developers* by Balaji Varanasi
+(APress, 2019).
+
+Let’s start at the very beginning. <span id="_bookmark78" class="anchor">First, as with developing any other app, you need an integrated development environment (IDE). Any professional IDE nowadays offers support for Maven projects, so you can choose any you’d like: IntelliJ IDEA, Eclipse, Spring STS, Netbeans, and so on. For this book, I use IntelliJ IDEA, which is the IDE I use most often. Don’t worry—the structure of the Maven project is the same regard-less of which IDE you choose.
+
+Let’s start by creating a new project. You create a new project in IntelliJ from File \> New \> Project. This will get you to a window like the one in figure 2.1.
 
 ![](media/image35.jpeg)
 
-> **Figure 2.1 Creating a new Maven project. After going to File \> New
-> \> Project, you get to this window, where you need to select the type
-> of the project from the left panel. In our case, we choose Maven. In
-> the upper part of the window, you select the JDK you wish to use to
-> compile and run the project.**
->
-> Once you’ve selected the type of your project, in the next window
-> (figure 2.2) you need to give it a name. In addition to the project
-> name and choosing the location in which to store it, for a Maven
-> project you can also specify the following:
+**Figure 2.1 Creating a new Maven project. After going to File \> New \> Project, you get to this window, where you need to select the type of the project from the left panel. In our case, we choose Maven. In the upper part of the window, you select the JDK you wish to use to compile and run the project.**
+
+Once you’ve selected the type of your project, in the next window
+(figure 2.2) you need to give it a name. In addition to the project
+name and choosing the location in which to store it, for a Maven project you can also specify the following:
 
 - A group ID, which we use to group multiple related projects
 
@@ -2069,220 +545,145 @@ style="width:0.24741in;height:0.29687in" />
 
 - A version, which is an identifier of the current implementation state
 
-> **Optionally, you provide a group ID, an artifact ID, and a version.
-> If you don’t configure these attributes, your IDE will use default
-> values.**
->
-> **You need to give a name to your project and store it somewhere in
-> your computer.**
->
-> ![](media/image36.png)
->
-> **Figure
-> 2.2 Before you finish creating your project, you need to give it a
-> name and specify where you want your IDE to store the project.
-> Optionally, you can give your project a group ID, an artifact ID, and
-> a version. You then press the Finish button in the lower right corner
-> to complete creating the project.**
->
-> In a real-world app, these three attributes are essential details, and
-> it’s important to provide them. But in our case, because we only work
-> on theoretical examples, you can omit them and leave your IDE to fill
-> in some default values for these characteristics.
->
-> Once you’ve created the project, you’ll find its structure looks like
-> the one pre-sented in figure 2.3. Again, the Maven project structure
-> does not depend on the IDE you choose for developing your projects.
-> When you look first at your project, you observe two main things:
+**Optionally, you provide a group ID, an artifact ID, and a version. If you don’t configure these attributes, your IDE will use default values.**
+
+**You need to give a name to your project and store it somewhere in your computer.**
+
+![](media/image36.png)
+
+**Figure 2.2 Before you finish creating your project, you need to give it a name and specify where you want your IDE to store the project. Optionally, you can give your project a group ID, an artifact ID, and a version. You then press the Finish button in the lower right corner to complete creating the project.**
+
+In a real-world app, these three attributes are essential details, and it’s important to provide them. But in our case, because we only work on theoretical examples, you can omit them and leave your IDE to fill in some default values for these characteristics.
+
+Once you’ve created the project, you’ll find its structure looks like the one pre-sented in figure 2.3. Again, the Maven project structure does not depend on the IDE you choose for developing your projects. When you look first at your project, you observe two main things:
 
 - The “src” folder (also known as the source folder), where you’ll put
-  everything that belongs to the app.
+everything that belongs to the app.
 
 - The pom.xml file, where you write the configurations of your Maven
-  project, like adding new dependencies.
+project, like adding new dependencies.
 
-> Maven organizes the “src” folder into the following folders:
+Maven organizes the “src” folder into the following folders:
 
 - The “main” folder, where you store the application’s source code. This
-  folder contains the Java code and the configurations separately into
-  two different sub-folders named “java” and “resources.”
+folder contains the Java code and the configurations separately into two different sub-folders named “java” and “resources.”
 
 - The “test” folder, where you store the unit tests’ source code (we
-  discuss more about unit tests and how to define them in chapter 15).
+discuss more about unit tests and how to define them in chapter 15).
 
-> ![](media/image37.jpeg)
->
-> **All
-> your source code goes into this folder.**
->
-> **The source code for your app goes into this folder.**
->
-> **The source code for the unit tests**
->
-> **goes into this folder.**
->
-> **The Java source code for your app goes into this folder.**
->
-> **Other resources like properties files or configuration files go into
-> this folder.**
->
-> **You change the pom.xml file to manage the Maven project
-> configuration.**
->
-> **Figure 2.3 How a Maven project is organized. Inside the src folder,
-> we add everything that belongs to the app: the application’s source
-> code goes into the main folder, and the source code for the unit tests
-> goes into the test folder. In the pom.xml file we write configurations
-> for the Maven project (in our examples we’ll primarily use it to
-> define the dependencies).**
->
-> Figure 2.4 shows you how to add new source code to the “main/java”
-> folder of the Maven project. New classes of the app go into this
-> folder.
->
-> **Inside the “java” folder you create your usual Java packages and
-> classes. Here, I’ve created**
->
-> ![](media/image38.jpeg)
->
-> **a
-> package named “main” and a new Main class inside it.**
->
-> **Figure 2.4 Inside the “java” folder, you create the usual Java
-> packages and classes of your application. These are the classes that
-> define the whole logic of your app and make use of the dependencies
-> you provide.**
->
-> In the projects we create in this book, we use plenty of external
-> dependencies: librar-ies or frameworks we use to implement the
-> functionality of the examples. To add these dependencies to your Maven
-> projects, we need to change the content of the pom.xml file. In the
-> following listing, you find the default content of the pom.xml file
-> immediately after creating the Maven project.
->
-> **Listing 2.1 The default content of the pom.xml file**
->
-> \<?xml version="1.0" encoding="UTF-8"?\>
->
-> \<project xmlns="<http://maven.apache.org/POM/4.0.0>"
-> xmlns:xsi="<http://www.w3.org/2001/XMLSchema-instance>"
-> xsi:schemaLocation="<http://maven.apache.org/POM/4.0.0>
-> <http://maven.apache.org/xsd/maven-4.0.0.xsd>"\>
->
-> \<modelVersion\>4.0.0\</modelVersion\>
->
-> \<groupId\>org.example\</groupId\>
->
-> \<artifactId\>sq-ch2-ex1\</artifactId\>
->
-> \<version\>1.0-SNAPSHOT\</version\>
->
-> \</project\>
->
-> With this pom.xml file, the project doesn’t use any external
-> dependency. If you look in the project’s external dependencies folder,
-> you should only see the JDK (figure 2.5).
->
-> ![](media/image39.jpeg)
->
-> **Initially,
-> inside the External Libraries section of your project, you only have**
->
-> **the JDK. Once you add more dependencies to your project, other files
-> will appear**
->
-> **here, represented as external dependencies.**
->
-> **Figure 2.5 With a default pom.xml file, your project only uses the
-> JDK as an external dependency. One of the reasons you change the
-> pom.xml file (and the one we’ll use in this book) is to add new
-> dependencies your app needs.**
->
-> The following listing shows you how to <span id="_bookmark79"
-> class="anchor"></span>add external dependencies to your project. You
-> write all the dependencies between the \<dependencies\>
-> \</dependencies\> tags. Each dependency is represented by a
-> \<dependency\> \</dependency\> group of tags where you write the
-> dependency’s attributes: the dependency’s group ID, artifact name, and
-> version. Maven will search for the dependency by the values you
-> provided for these three attributes and will download the dependencies
-> from a repository. I won’t go into detail on how to configure a custom
-> repository. You just need to be aware that Maven will download the
-> dependencies (usually jar files) by default from a repository named
-> the Maven central. You can find the downloaded jar files in your
-> project’s external dependencies folder, as presented in figure 2.6.
->
-> **Listing 2.2 Adding a new dependency in the pom.xml file**
->
-> \<?xml version="1.0" encoding="UTF-8"?\>
->
-> \<project xmlns="<http://maven.apache.org/POM/4.0.0>"
-> xmlns:xsi="<http://www.w3.org/2001/XMLSchema-instance>"
-> xsi:schemaLocation="<http://maven.apache.org/POM/4.0.0>
-> <http://maven.apache.org/xsd/maven-4.0.0.xsd>"\>
->
-> \<modelVersion\>4.0.0\</modelVersion\>
->
-> \<groupId\>org.example\</groupId\>
->
-> \<artifactId\>sq_ch2_ex1\</artifactId\>
->
-> \<version\>1.0-SNAPSHOT\</version\>
+![](media/image37.jpeg)
+
+**All your source code goes into this folder.**
+
+**The source code for your app goes into this folder.**
+
+**The source code for the unit tests**
+
+**goes into this folder.**
+
+**The Java source code for your app goes into this folder.**
+
+**Other resources like properties files or configuration files go into this folder.**
+
+**You change the pom.xml file to manage the Maven project configuration.**
+
+**Figure 2.3 How a Maven project is organized. Inside the src folder, we add everything that belongs to the app: the application’s source code goes into the main folder, and the source code for the unit tests goes into the test folder. In the pom.xml file we write configurations for the Maven project (in our examples we’ll primarily use it to define the dependencies).**
+
+Figure 2.4 shows you how to add new source code to the “main/java” folder of the Maven project. New classes of the app go into this folder.
+
+**Inside the “java” folder you create your usual Java packages and classes. Here, I’ve created**
+
+![](media/image38.jpeg)
+
+**a package named “main” and a new Main class inside it.**
+
+**Figure 2.4 Inside the “java” folder, you create the usual Java packages and classes of your application. These are the classes that define the whole logic of your app and make use of the dependencies you provide.**
+
+In the projects we create in this book, we use plenty of external dependencies: librar-ies or frameworks we use to implement the functionality of the examples. To add these dependencies to your Maven projects, we need to change the content of the pom.xml file. In the following listing, you find the default content of the pom.xml file immediately after creating the Maven project.
+
+**Listing 2.1 The default content of the pom.xml file**
+
+\<?xml version="1.0" encoding="UTF-8"?\>
+
+\<project xmlns="<http://maven.apache.org/POM/4.0.0>" xmlns:xsi="<http://www.w3.org/2001/XMLSchema-instance>" xsi:schemaLocation="<http://maven.apache.org/POM/4.0.0> <http://maven.apache.org/xsd/maven-4.0.0.xsd>"\>
+
+\<modelVersion\>4.0.0\</modelVersion\>
+
+\<groupId\>org.example\</groupId\>
+
+\<artifactId\>sq-ch2-ex1\</artifactId\>
+
+\<version\>1.0-SNAPSHOT\</version\>
+
+\</project\>
+
+With this pom.xml file, the project doesn’t use any external dependency. If you look in the project’s external dependencies folder, you should only see the JDK (figure 2.5).
+
+![](media/image39.jpeg)
+
+**Initially, inside the External Libraries section of your project, you only have**
+
+**the JDK. Once you add more dependencies to your project, other files will appear**
+
+**here, represented as external dependencies.**
+
+**Figure 2.5 With a default pom.xml file, your project only uses the JDK as an external dependency. One of the reasons you change the pom.xml file (and the one we’ll use in this book) is to add new dependencies your app needs.**
+
+The following listing shows you how to <span id="_bookmark79" class="anchor">add external dependencies to your project. You write all the dependencies between the \<dependencies\> \</dependencies\> tags. Each dependency is represented by a \<dependency\> \</dependency\> group of tags where you write the dependency’s attributes: the dependency’s group ID, artifact name, and version. Maven will search for the dependency by the values you provided for these three attributes and will download the dependencies from a repository. I won’t go into detail on how to configure a custom repository. You just need to be aware that Maven will download the dependencies (usually jar files) by default from a repository named the Maven central. You can find the downloaded jar files in your project’s external dependencies folder, as presented in figure 2.6.
+
+**Listing 2.2 Adding a new dependency in the pom.xml file**
+
+\<?xml version="1.0" encoding="UTF-8"?\>
+
+\<project xmlns="<http://maven.apache.org/POM/4.0.0>" xmlns:xsi="<http://www.w3.org/2001/XMLSchema-instance>" xsi:schemaLocation="<http://maven.apache.org/POM/4.0.0> <http://maven.apache.org/xsd/maven-4.0.0.xsd>"\>
+
+\<modelVersion\>4.0.0\</modelVersion\>
+
+\<groupId\>org.example\</groupId\>
+
+\<artifactId\>sq_ch2_ex1\</artifactId\>
+
+\<version\>1.0-SNAPSHOT\</version\>
 
 \<dependencies\>
 
 \<dependency\>
 
-> **You need to write the dependencies for the project between the
-> \<dependencies\> and**
->
-> **\</dependecies\> tags.**
->
-> \<groupId\>org.springframework\</groupId\>
->
-> \<artifactId\>spring-jdbc\</artifactId\>
->
-> \<version\>5.2.6.RELEASE\</version\>
+**You need to write the dependencies for the project between the \<dependencies\> and**
+
+**\</dependecies\> tags.**
+
+\<groupId\>org.springframework\</groupId\>
+
+\<artifactId\>spring-jdbc\</artifactId\>
+
+\<version\>5.2.6.RELEASE\</version\>
 
 \</dependency\>
 
 \</dependencies\>
 
-> \</project\>
->
-> **A dependency is represented by a group of \<dependency\>**
->
-> **\</dependency\> tags.**
->
-> Once you’ve added the dependency in the pom.xml file, as presented in
-> the previous listing, the IDE downloads them, and you’ll now find
-> these dependencies in the “External Libraries” folder (figure 2.6).
->
-> Now we can move to the next section, where we discuss the basics of
-> the Spring context. You’ll create Maven projects, and
-> <span id="_bookmark80" class="anchor"></span>you’ll learn to use a
-> Spring dependency named spring-context, to manage the Spring context.
->
-> ![](media/image40.jpeg)
->
-> **Adding
-> the Spring context dependency**
->
-> **adds multiple files as external dependencies.**
->
-> **Figure 2.6 When you add a new dependency to the pom.xml file, Maven
-> downloads the jar files representing that dependency. You find these
-> jar files in the External Libraries folder of the project.**
+\</project\>
 
-#### Adding new beans to the Spring context
+**A dependency is represented by a group of \<dependency\>**
 
-> In this section, you’ll learn how to add new object instances (i.e.,
-> beans) to the Spring context. You’ll find out that you have multiple
-> ways to add beans in the Spring context such that Spring can manage
-> them and plug features it provides into your app. Depending on the
-> action, you’ll choose a specific way to add the bean; we’ll discuss
-> when to select one or another. You can add beans in the context in the
-> following ways (which we’ll describe later in this chapter):
+**\</dependency\> tags.**
+
+Once you’ve added the dependency in the pom.xml file, as presented in the previous listing, the IDE downloads them, and you’ll now find these dependencies in the “External Libraries” folder (figure 2.6).
+
+Now we can move to the next section, where we discuss the basics of the Spring context. You’ll create Maven projects, and you’ll learn to use a Spring dependency named spring-context, to manage the Spring context.
+
+![](media/image40.jpeg)
+
+**Adding the Spring context dependency**
+
+**adds multiple files as external dependencies.**
+
+**Figure 2.6 When you add a new dependency to the pom.xml file, Maven downloads the jar files representing that dependency. You find these jar files in the External Libraries folder of the project.**
+
+## Adding new beans to the Spring context
+
+In this section, you’ll learn how to add new object instances (i.e., beans) to the Spring context. You’ll find out that you have multiple ways to add beans in the Spring context such that Spring can manage them and plug features it provides into your app. Depending on the action, you’ll choose a specific way to add the bean; we’ll discuss when to select one or another. You can add beans in the context in the following ways (which we’ll describe later in this chapter):
 
 - Using the @Bean annotation
 
@@ -2290,671 +691,442 @@ style="width:0.24741in;height:0.29687in" />
 
 - Programmatically
 
-> Let’s first create a project with a reference to no framework—not even
-> Spring. We’ll then add the dependencies needed to use the Spring
-> context and create it (figure 2.7). This example will serve as a
-> prerequisite to adding beans to the Spring context examples that we’re
-> going to work on in sections 2.2.1 through 2.2.3.
->
-> We create a Maven project and define a class. Because it’s funny to
-> imagine, I’ll consider a class named Parrot with only a String
-> attribute representing the name of the parrot (listing 2.3). Remember,
-> in this chapter, we only focus on adding beans to the Spring context,
-> so it’s okay to use any object that helps you better remember the
->
-> **What you want to achieve**
->
-> **We’ll start by independently creating an object of the type Parrot
-> and the Spring context.**
->
-> <img
-> src="media/image41.png"
-> style="width:0.35261in;height:0.3526in" />**The Spring context is
-> initially empty.**
->
-> **Later, we move the Parrot instance into the context to let Spring
-> know the instance and be able to manage it for us.**
->
-> **Figure 2.7 To start, we create an object instance and the empty
-> Spring context.**
->
-> syntaxes. You find the code for this example in the project
-> “sq-ch2-ex1” (you can download the projects from the “Resources”
-> section of the live book). For your proj-ect, you can use the same
-> name or choose the one you prefer.
->
-> **Listing 2.3 The Parrot class**
->
-> public class Parrot { private String name;
->
-> // Omitted getters and setters
->
-> }
->
-> You can now define a class containing the main method and create an
-> instance of the class Parrot, as presented in the following listing. I
-> usually name this class Main.
->
-> **Listing 2.4 Creating an instance of the Parrot class**
->
-> public class Main {
->
-> public static void main(String\[\] args) { Parrot p = new Parrot();
->
-> }
->
-> }
->
-> It’s now time to add the needed dependencies to our project. Because
-> we’re using Maven, I’ll add the dependencies in the pom.xml file, as
-> presented in the following listing.
->
-> **Listing 2.5 Adding the dependency for Spring context**
->
-> \<project xmlns="<http://maven.apache.org/POM/4.0.0>"
-> xmlns:xsi="<http://www.w3.org/2001/XMLSchema-instance>"
-> xsi:schemaLocation="<http://maven.apache.org/POM/4.0.0>
->
-> <http://maven.apache.org/xsd/maven-4.0.0.xsd>"\>
->
-> \<modelVersion\>4.0.0\</modelVersion\>
->
-> \<groupId\>org.example\</groupId\>
->
-> \<artifactId\>sq-ch2-ex1\</artifactId\>
->
-> \<version\>1.0-SNAPSHOT\</version\>
+Let’s first create a project with a reference to no framework—not even Spring. We’ll then add the dependencies needed to use the Spring context and create it (figure 2.7). This example will serve as a prerequisite to adding beans to the Spring context examples that we’re going to work on in sections 2.2.1 through 2.2.3.
+
+We create a Maven project and define a class. Because it’s funny to imagine, I’ll consider a class named Parrot with only a String attribute representing the name of the parrot (listing 2.3). Remember, in this chapter, we only focus on adding beans to the Spring context, so it’s okay to use any object that helps you better remember the
+
+**What you want to achieve**
+
+**We’ll start by independently creating an object of the type Parrot and the Spring context.**
+
+<img src="media/image41.png" style="width:0.35261in;height:0.3526in" />**The Spring context is initially empty.**
+
+**Later, we move the Parrot instance into the context to let Spring know the instance and be able to manage it for us.**
+
+**Figure 2.7 To start, we create an object instance and the empty Spring context.**
+
+syntaxes. You find the code for this example in the project “sq-ch2-ex1” (you can download the projects from the “Resources” section of the live book). For your proj-ect, you can use the same name or choose the one you prefer.
+
+**Listing 2.3 The Parrot class**
+
+public class Parrot { private String name;
+
+// Omitted getters and setters
+
+}
+
+You can now define a class containing the main method and create an instance of the class Parrot, as presented in the following listing. I usually name this class Main.
+
+**Listing 2.4 Creating an instance of the Parrot class**
+
+public class Main {
+
+public static void main(String\[\] args) { Parrot p = new Parrot();
+
+}
+
+}
+
+It’s now time to add the needed dependencies to our project. Because we’re using Maven, I’ll add the dependencies in the pom.xml file, as presented in the following listing.
+
+**Listing 2.5 Adding the dependency for Spring context**
+
+\<project xmlns="<http://maven.apache.org/POM/4.0.0>" xmlns:xsi="<http://www.w3.org/2001/XMLSchema-instance>" xsi:schemaLocation="<http://maven.apache.org/POM/4.0.0>
+
+<http://maven.apache.org/xsd/maven-4.0.0.xsd>"\>
+
+\<modelVersion\>4.0.0\</modelVersion\>
+
+\<groupId\>org.example\</groupId\>
+
+\<artifactId\>sq-ch2-ex1\</artifactId\>
+
+\<version\>1.0-SNAPSHOT\</version\>
 
 \<dependencies\>
 
 \<dependency\>
 
-> \<groupId\>org.springframework\</groupId\>
->
-> \<artifactId\>spring-context\</artifactId\>
->
-> \<version\>5.2.6.RELEASE\</version\>
+\<groupId\>org.springframework\</groupId\>
+
+\<artifactId\>spring-context\</artifactId\>
+
+\<version\>5.2.6.RELEASE\</version\>
 
 \</dependency\>
 
 \</dependencies\>
 
-> \</project\>
->
-> A critical thing to observe is that Spring is designed to be modular.
-> By modular, I mean that you don’t need to add the whole Spring to your
-> app when you use some-thing out of the Spring ecosystem. You just need
-> to add those parts that you use. For this <span id="_bookmark83"
-> class="anchor"></span>reason, in listing 2.5, you see that I’ve only
-> added the spring-context depen-dency, which instructs Maven to pull
-> the needed dependencies for us to use the Spring context. Throughout
-> the book, we’ll add various dependencies to our projects according to
-> what we implement, but we’ll always only add what we need.
->
-> **NOTE** You might wonder how I knew which Maven dependency I should
-> add. The truth is that I’ve used them so many times I know them by
-> heart. How-ever, you don’t need to memorize them. Whenever you work
-> with a new Spring project, you can search for the dependencies you
-> need to add directly in the Spring reference
-> ([https://docs.spring.io/spring-framework/docs/](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html)
-> [current/spring-framework-reference/core.html](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html)).
-> <span id="_bookmark84" class="anchor"></span>Generally, Spring
-> depen-dencies are part of the org.springframework group ID.
->
-> With the dependency added to our project, we can create an instance of
-> the Spring context. In the next listing, you can see how I’ve changed
-> the main method to create the Spring context instance.
->
-> **Listing 2.6 Creating the instance of the Spring context**
->
-> public class Main {
->
-> public static void main(String\[\] args) { var context =
->
-> new AnnotationConfigApplicationContext();
->
-> **Creates an instance of the Spring context**
->
-> <img
-> src="media/image42.png"
-> style="width:0.26167in;height:0.28167in" />Parrot p = new Parrot();
->
-> }
->
-> }
->
-> **NOTE** We use the AnnotationConfigApplicationContext class to create
-> the Spring context instance. Spring offers multiple implementations.
-> Because in most cases you’ll use the
-> AnnotationConfigApplicationContext class (the implementation that uses
-> the most used today’s approach: annotations), we’ll focus on this one
-> in this book. Also, I only tell you what you need to know for the
-> current discussion. If you’re just getting started with Spring, my
-> recom-mendation is to avoid getting into details with context
-> implementations and these classes’ inheritance chains. Chances are
-> that if you do you’ll get lost with unimportant details instead of
-> focusing on the essential things.
->
-> As presented in figure 2.8, you created an instance of Parrot, added
-> the Spring con-text dependencies to your project, and created an
-> instance of the Spring context. Your objective is to add the Parrot
-> object to the context, which is the next step.
->
-> **What you did**
->
-> **You created a parrot instance, but it’s not in the Spring context.**
->
-> **What you want to achieve**
->
-> **Adding the parrot instance in the Spring context will allow Spring
-> to “see” the instance.**
->
-> <img
-> src="media/image43.png"
-> style="width:0.34501in;height:0.34375in" />![](media/image44.png)**Spring
-> context**
->
-> **You defined the Spring context, but it’s now empty.**
->
-> **Figure 2.8 You created the Spring context instance and a Parrot
-> instance. Now, you want to add the Parrot instance inside the Spring
-> context to make Spring aware of this instance.**
->
-> We just finished creating the prerequisite (skeleton) project, which
-> we’ll use in the next sections to understand how to add beans to the
-> Spring context. In section 2.2.1, we continue learning how to add the
-> instance to the Spring context using the @Bean annotation. Further, in
-> sections 2.2.2 and 2.2.3, you’ll also learn the alternatives of adding
-> the instance using stereotype annotations and doing it
-> programmatically. After discussing all three approaches, we’ll compare
-> them, and you’ll learn the best circum-stances for using each.
+\</project\>
 
-####### Using the @Bean annotation to add beans into the Spring context
+A critical thing to observe is that Spring is designed to be modular. By modular, I mean that you don’t need to add the whole Spring to your app when you use some-thing out of the Spring ecosystem. You just need to add those parts that you use. For this <span id="_bookmark83" class="anchor">reason, in listing 2.5, you see that I’ve only added the spring-context depen-dency, which instructs Maven to pull the needed dependencies for us to use the Spring context. Throughout the book, we’ll add various dependencies to our projects according to what we implement, but we’ll always only add what we need.
 
-> In this section, we’ll discuss adding an object instance to the Spring
-> context using the @Bean annotation. This makes it possible for you to
-> add the instances of the classes defined in your project (like Parrot
-> in our case), as well as classes you didn’t create yourself but you
-> use in your app. I believe this approach is the easiest to understand
-> when starting out. Remember that the reason you learn to add beans to
-> the Spring con-text is that Spring can manage only the objects that
-> are part of it. First, I’ll give you a straightforward example of how
-> to add a bean to the Spring context using the @Bean annotation. Then
-> I’ll show you how to add multiple beans of the same or different type.
+**NOTE** You might wonder how I knew which Maven dependency I should
+add. The truth is that I’ve used them so many times I know them by heart. How-ever, you don’t need to memorize them. Whenever you work with a new Spring project, you can search for the dependencies you need to add directly in the Spring reference
+([https://docs.spring.io/spring-framework/docs/](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html)
+[current/spring-framework-reference/core.html](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html)). Generally, Spring depen-dencies are part of the org.springframework group ID.
 
-The steps you need to follow to add a bean to the Spring context using
-the @Bean
+With the dependency added to our project, we can create an instance of the Spring context. In the next listing, you can see how I’ve changed the main method to create the Spring context instance.
 
-> annotation are as follows (figure 2.9):
->
-> **1** Define a configuration class (annotated with @Configuration) for
-> your project, which, as we’ll discuss later, we use to configure the
-> context of Spring.
->
-> **2** Add a method to the configuration class that returns the object
-> instance you want to add to the context and annotate the method with
-> the @Bean annotation.
->
-> **3** Make Spring use the configuration class defined in step 1. As
-> you’ll learn later, we use configuration classes to write different
-> configurations for the framework.
->
-> Let’s follow these steps and apply them in the project named
-> “sq-c2-ex2.” To keep all the steps we discuss separated, I recommend
-> you create new projects for each example.
->
-> **NOTE** Remember, you can find the book’s projects in the “Resources”
-> sec-tion of the live book.
->
-> @**Configuration**
->
-> public class ProjectConfig {
->
-> ![](media/image47.png)@**Bean**
->
-> Parrot parrot() {
->
-> var p = new Parrot(); p.setName("Koko"); return p;
+**Listing 2.6 Creating the instance of the Spring context**
+
+public class Main {
+
+public static void main(String\[\] args) { var context =
+
+new AnnotationConfigApplicationContext();
+
+**Creates an instance of the Spring context**
+
+<img src="media/image42.png" style="width:0.26167in;height:0.28167in" />Parrot p = new Parrot();
+
+}
+
+}
+
+**NOTE** We use the AnnotationConfigApplicationContext class to create
+the Spring context instance. Spring offers multiple implementations. Because in most cases you’ll use the AnnotationConfigApplicationContext class (the implementation that uses the most used today’s approach: annotations), we’ll focus on this one in this book. Also, I only tell you what you need to know for the current discussion. If you’re just getting started with Spring, my recom-mendation is to avoid getting into details with context implementations and these classes’ inheritance chains. Chances are that if you do you’ll get lost with unimportant details instead of focusing on the essential things.
+
+As presented in figure 2.8, you created an instance of Parrot, added the Spring con-text dependencies to your project, and created an instance of the Spring context. Your objective is to add the Parrot object to the context, which is the next step.
+
+**What you did**
+
+**You created a parrot instance, but it’s not in the Spring context.**
+
+**What you want to achieve**
+
+**Adding the parrot instance in the Spring context will allow Spring to “see” the instance.**
+
+<img src="media/image43.png" style="width:0.34501in;height:0.34375in" />![](media/image44.png)**Spring context**
+
+**You defined the Spring context, but it’s now empty.**
+
+**Figure 2.8 You created the Spring context instance and a Parrot instance. Now, you want to add the Parrot instance inside the Spring context to make Spring aware of this instance.**
+
+We just finished creating the prerequisite (skeleton) project, which we’ll use in the next sections to understand how to add beans to the Spring context. In section 2.2.1, we continue learning how to add the instance to the Spring context using the @Bean annotation. Further, in sections 2.2.2 and 2.2.3, you’ll also learn the alternatives of adding the instance using stereotype annotations and doing it programmatically. After discussing all three approaches, we’ll compare them, and you’ll learn the best circum-stances for using each.
+
+### Using the @Bean annotation to add beans into the Spring context
+
+In this section, we’ll discuss adding an object instance to the Spring context using the @Bean annotation. This makes it possible for you to add the instances of the classes defined in your project (like Parrot in our case), as well as classes you didn’t create yourself but you use in your app. I believe this approach is the easiest to understand when starting out. Remember that the reason you learn to add beans to the Spring con-text is that Spring can manage only the objects that are part of it. First, I’ll give you a straightforward example of how to add a bean to the Spring context using the @Bean annotation. Then I’ll show you how to add multiple beans of the same or different type.
+
+The steps you need to follow to add a bean to the Spring context using the @Bean
+
+annotation are as follows (figure 2.9):
+
+**1** Define a configuration class (annotated with @Configuration) for your project, which, as we’ll discuss later, we use to configure the context of Spring.
+
+**2** Add a method to the configuration class that returns the object instance you want to add to the context and annotate the method with the @Bean annotation.
+
+**3** Make Spring use the configuration class defined in step 1. As you’ll learn later, we use configuration classes to write different configurations for the framework.
+
+Let’s follow these steps and apply them in the project named “sq-c2-ex2.” To keep all the steps we discuss separated, I recommend you create new projects for each example.
+
+**NOTE** Remember, you can find the book’s projects in the “Resources”
+sec-tion of the live book.
+
+@**Configuration**
+
+public class ProjectConfig {
+
+![](media/image47.png)@**Bean**
+
+Parrot parrot() {
+
+var p = new Parrot(); p.setName("Koko"); return p;
 
 **Step 2**
 
-> **Step 1**
->
-> **Spring context**
->
-> }
->
-> }
->
-> **Step 3**
->
-> var **context** = new
-> AnnotationConfigApplicationContext(**ProjectConfig.class**);
->
-> **Figure 2.9 Steps for adding the bean to the context using the @Bean
-> annotation. By adding the instance to the Spring context, you make the
-> framework aware of the object, enabling it to manage the instance.**
->
-> **NOTE** A configuration class is a special class in Spring
-> applications that we use to instruct Spring to do specific actions.
-> For example, we can tell Spring to cre-ate beans or to enable certain
-> functionalities. You will learn different things you can define in
-> configuration classes throughout the rest of the book.
->
-> **<span class="smallcaps">Step</span>** <span id="_bookmark87"
-> class="anchor"></span>**<span class="smallcaps">1: Defining a
-> configuration class in your project</span>**
->
-> The first step is to create a configuration class in the project. A
-> Spring configuration <span id="_bookmark88"
-> class="anchor"></span>class is characterized by the fact that it is
-> annotated with the @Configuration annota-tion. We use the
-> configuration classes to define various Spring-related configurations
-> for the project. Throughout the book, you’ll learn different things
-> you can configure using the configuration classes. For the moment we
-> focus only on adding new instances to the Spring context. The next
-> listing shows you how to define the configu-ration class. I named this
-> configuration class ProjectConfig.
->
-> **Listing 2.7 Defining a configuration class for the project**
->
-> @Configuration
->
-> public class ProjectConfig {
->
-> }
->
-> **We use the @Configuration annotation to define this class as a
-> Spring configuration class.**
->
-> **NOTE** I separate the classes into different packages to make the
-> code easier to understand. For example, I create the configuration
-> classes in a package named config, and the Main class in a package
-> named main. Organizing the classes into packages is a good practice; I
-> recommend you follow it in your real-world implementations as well.
->
-> **<span class="smallcaps">Step</span>** <span id="_bookmark89"
-> class="anchor"></span>**<span class="smallcaps">2: Create a method
-> that returns the bean, and annotate the method with @Bean</span>**
->
-> One of the things you can do with a configuration class is add beans
-> to the Spring con-text. To do this, we need to define a method that
-> returns the object instance we wish to add to the context and annotate
-> that method with the @Bean annotation, which lets Spring know that it
-> needs to call this method when it initializes its context and adds the
-> returned value to the context. The next listing shows the changes to
-> the configura-tion class to implement the current step.
->
-> **NOTE** For the projects in this book, I use Java 11: the latest
-> long-term sup-ported Java version. More and more projects are adopting
-> this version. Gener-ally, the only specific feature I use in the code
-> snippets that doesn’t work with an earlier version of Java is the var
-> reserved type name. I use var here and there to make the code shorter
-> and easier to read, but if you’d like <span id="_bookmark90"
-> class="anchor"></span>to use an earlier version of Java (say Java 8,
-> for example), you can replace var with the inferred type. This way,
-> you’ll make the projects work with Java 8 as well.
->
-> **Listing 2.8 Defining the @Bean method**
->
-> @Configuration
->
-> public class ProjectConfig { @Bean
->
-> **By adding the @Bean annotation, we instruct Spring to call this
-> method when at context initialization and add the returned value to
-> the context.**
->
-> Parrot parrot() {
->
-> <img
-> src="media/image50.png"
-> style="width:0.26333in;height:0.30417in" />var p = new Parrot();
-> p.setName("Koko"); return p;
->
-> }
->
-> }
->
-> **Set a name for the parrot we’ll use later when we test the app.**
->
-> **Spring adds to its context the Parrot instance returned by the
-> method.**
->
-> Observe that the name I used for the method doesn’t contain a verb.
-> You probably learned that a Java best practice is to put verbs in
-> method names because the methods generally represent actions. But for
-> methods we use to add beans in the Spring con-text, we don’t follow
-> this convention. Such methods represent the object instances they
-> return and that will now be part of the Spring context. The method’s
-> name also becomes the bean’s name (as in listing 2.8, the bean’s name
-> is now “parrot”<span id="_bookmark91" class="anchor"></span>). By
-> con-vention, you can use nouns, and most often they have the same name
-> as the class.
->
-> **<span class="smallcaps">Step 3</span>**<span id="_bookmark92"
-> class="anchor"></span>**<span class="smallcaps">: Make Spring
-> initialize its context using the newly created configuration
-> class</span>**
->
-> We’ve implemented a configuration class in which we tell Spring the
-> object instance that needs to become a bean. Now we need to make sure
-> Spring uses this configura-tion class when initializing its context.
-> The next listing shows you how to change the instantiation of the
-> Spring context in the main class to use the configuration class we
-> implemented in the first two steps.
->
-> **Listing 2.9 Initializing the Spring context based on the defined
-> configuration class**
->
-> public class Main {
->
-> public static void main(String\[\] args) { var context =
->
-> new AnnotationConfigApplicationContext( ProjectConfig.class);
->
-> **When creating the Spring context instance, send the configuration
-> class as a parameter to instruct Spring to use it.**
->
-> }
->
-> }
->
-> To verify the Parrot instance is indeed part of the context now, you
-> can refer to the instance and print its name in the console, as
-> presented in the following listing.
->
-> **Listing 2.10 Referring to the Parrot instance from the context**
->
-> public class Main {
->
-> public static void main(String\[\] args) { var context =
->
-> <img
-> src="media/image51.png"
-> style="width:0.26167in;height:0.2825in" />new
-> AnnotationConfigApplicationContext( ProjectConfig.class);
->
-> Parrot p = context.getBean(Parrot.class);
->
-> **Gets a reference of a bean of type Parrot from the Spring context**
->
-> System.out.println(p.getName());
->
-> }
->
-> }
->
-> Now you’ll see the name you gave to the parrot you added in the
-> context in the con-sole, in my case Koko.
->
-> **NOTE** In real-world scenarios, we use unit and integration tests to
-> validate that our implementations work as desired. The projects in
-> this book imple-ment unit tests to validate the discussed behavior.
-> Because this is a “getting started” book, you might not yet be aware
-> of unit tests. To avoid creating con-fusion and allow you to focus on
-> the discussed subject, we won’t discuss unit tests until chapter 15.
-> However, if you already know how to write unit tests and reading them
-> helps you better understand the subject, you can find all the unit
-> tests implemented in the test folder of each of our Maven projects. If
-> you don’t yet know how unit tests work, I recommend focusing only on
-> the discussed subject.
->
-> As in the previous example, you can add any kind of object to the
-> Spring context (fig-ure 2.10). Let’s also add a String and an Integer
-> and see that it’s working.
->
-> ![](media/image52.png)
->
-> **Adding
-> more beans of different types into the Spring context**
->
-> **Spring context**
+**Step 1**
+
+**Spring context**
+
+}
+
+}
+
+**Step 3**
+
+var **context** = new AnnotationConfigApplicationContext(**ProjectConfig.class**);
+
+**Figure 2.9 Steps for adding the bean to the context using the @Bean annotation. By adding the instance to the Spring context, you make the framework aware of the object, enabling it to manage the instance.**
+
+**NOTE** A configuration class is a special class in Spring
+applications that we use to instruct Spring to do specific actions. For example, we can tell Spring to cre-ate beans or to enable certain functionalities. You will learn different things you can define in configuration classes throughout the rest of the book.
+
+**Step** <span id="_bookmark87" class="anchor">**1: Defining a configuration class in your project**
+
+The first step is to create a configuration class in the project. A Spring configuration <span id="_bookmark88" class="anchor">class is characterized by the fact that it is annotated with the @Configuration annota-tion. We use the configuration classes to define various Spring-related configurations for the project. Throughout the book, you’ll learn different things you can configure using the configuration classes. For the moment we focus only on adding new instances to the Spring context. The next listing shows you how to define the configu-ration class. I named this configuration class ProjectConfig.
+
+**Listing 2.7 Defining a configuration class for the project**
+
+@Configuration
+
+public class ProjectConfig {
+
+}
+
+**We use the @Configuration annotation to define this class as a Spring configuration class.**
+
+**NOTE** I separate the classes into different packages to make the
+code easier to understand. For example, I create the configuration classes in a package named config, and the Main class in a package named main. Organizing the classes into packages is a good practice; I recommend you follow it in your real-world implementations as well.
+
+**Step** <span id="_bookmark89" class="anchor">**2: Create a method that returns the bean, and annotate the method with @Bean**
+
+One of the things you can do with a configuration class is add beans to the Spring con-text. To do this, we need to define a method that returns the object instance we wish to add to the context and annotate that method with the @Bean annotation, which lets Spring know that it needs to call this method when it initializes its context and adds the returned value to the context. The next listing shows the changes to the configura-tion class to implement the current step.
+
+**NOTE** For the projects in this book, I use Java 11: the latest
+long-term sup-ported Java version. More and more projects are adopting this version. Gener-ally, the only specific feature I use in the code snippets that doesn’t work with an earlier version of Java is the var reserved type name. I use var here and there to make the code shorter and easier to read, but if you’d like <span id="_bookmark90" class="anchor">to use an earlier version of Java (say Java 8, for example), you can replace var with the inferred type. This way, you’ll make the projects work with Java 8 as well.
+
+**Listing 2.8 Defining the @Bean method**
+
+@Configuration
+
+public class ProjectConfig { @Bean
+
+**By adding the @Bean annotation, we instruct Spring to call this method when at context initialization and add the returned value to the context.**
+
+Parrot parrot() {
+
+<img src="media/image50.png" style="width:0.26333in;height:0.30417in" />var p = new Parrot(); p.setName("Koko"); return p;
+
+}
+
+}
+
+**Set a name for the parrot we’ll use later when we test the app.**
+
+**Spring adds to its context the Parrot instance returned by the method.**
+
+Observe that the name I used for the method doesn’t contain a verb. You probably learned that a Java best practice is to put verbs in method names because the methods generally represent actions. But for methods we use to add beans in the Spring con-text, we don’t follow this convention. Such methods represent the object instances they return and that will now be part of the Spring context. The method’s name also becomes the bean’s name (as in listing 2.8, the bean’s name is now “parrot”). By con-vention, you can use nouns, and most often they have the same name as the class.
+
+**Step 3**<span id="_bookmark92" class="anchor">**: Make Spring initialize its context using the newly created configuration class**
+
+We’ve implemented a configuration class in which we tell Spring the object instance that needs to become a bean. Now we need to make sure Spring uses this configura-tion class when initializing its context. The next listing shows you how to change the instantiation of the Spring context in the main class to use the configuration class we implemented in the first two steps.
+
+**Listing 2.9 Initializing the Spring context based on the defined configuration class**
+
+public class Main {
+
+public static void main(String\[\] args) { var context =
+
+new AnnotationConfigApplicationContext( ProjectConfig.class);
+
+**When creating the Spring context instance, send the configuration class as a parameter to instruct Spring to use it.**
+
+}
+
+}
+
+To verify the Parrot instance is indeed part of the context now, you can refer to the instance and print its name in the console, as presented in the following listing.
+
+**Listing 2.10 Referring to the Parrot instance from the context**
+
+public class Main {
+
+public static void main(String\[\] args) { var context =
+
+<img src="media/image51.png" style="width:0.26167in;height:0.2825in" />new AnnotationConfigApplicationContext( ProjectConfig.class);
+
+Parrot p = context.getBean(Parrot.class);
+
+**Gets a reference of a bean of type Parrot from the Spring context**
+
+System.out.println(p.getName());
+
+}
+
+}
+
+Now you’ll see the name you gave to the parrot you added in the context in the con-sole, in my case Koko.
+
+**NOTE** In real-world scenarios, we use unit and integration tests to
+validate that our implementations work as desired. The projects in this book imple-ment unit tests to validate the discussed behavior. Because this is a “getting started” book, you might not yet be aware of unit tests. To avoid creating con-fusion and allow you to focus on the discussed subject, we won’t discuss unit tests until chapter 15. However, if you already know how to write unit tests and reading them helps you better understand the subject, you can find all the unit tests implemented in the test folder of each of our Maven projects. If you don’t yet know how unit tests work, I recommend focusing only on the discussed subject.
+
+As in the previous example, you can add any kind of object to the Spring context (fig-ure 2.10). Let’s also add a String and an Integer and see that it’s working.
+
+![](media/image52.png)
+
+**Adding more beans of different types into the Spring context**
+
+**Spring context**
 
 Hello
 
 10
 
-**Figure 2.10 You can add any object to the Spring context to make
-Spring aware of it.**
+**Figure 2.10 You can add any object to the Spring context to make Spring aware of it.**
 
-> The next li<span id="_bookmark94" class="anchor"></span>sting shows
-> you how I chang<span id="_bookmark93" class="anchor"></span>ed the
-> configuration class to also add a bean of type String and a bean of
-> type Integer.
->
-> **Listing 2.11 Adding two more beans to the context**
->
-> @Configuration
->
-> public class ProjectConfig {
->
-> @Bean
->
-> Parrot parrot() {
->
-> var p = new Parrot(); p.setName("Koko"); return p;
->
-> <img
-> src="media/image55.png"
-> style="width:0.26167in;height:0.28167in" />}
->
-> @Bean
->
-> String hello() { return "Hello";
->
-> **Adds the string “Hello” to the Spring context**
->
-> }
->
-> <img
-> src="media/image56.png"
-> style="width:0.26333in;height:0.2775in" />@Bean
->
-> Integer ten() { return 10;
->
-> **Adds the integer 10 to the Spring context**
->
-> }
->
-> }
->
-> **NOTE** Remember the Spring context’s purpose: we add the instances
-> we expect Spring needs to manage. (This way, we plug in
-> functionalities offered by the framework.) In a real-world app, we
-> won’t add every object to the Spring context. Starting with chapter 4,
-> when our examples will become closer to code in a production-ready
-> app, we’ll also focus more on which objects Spring needs to manage.
-> For the moment, focus on the approaches you can use to add beans to
-> the Spring context.
->
-> You can now refer to these two new beans in the same way we did with
-> the parrot. The next listing shows you how to change the main method
-> to print the new beans’ values.
->
-> **Listing 2.12 Printing the two new beans in the console**
->
-> public class Main {
->
-> public static void main(String\[\] args) {
->
-> var context = new AnnotationConfigApplicationContext(
-> ProjectConfig.class);
->
-> Parrot p = context.getBean(Parrot.class);
-> System.out.println(p.getName());
->
-> String s = context.getBean(String.class); System.out.println(s);
->
-> Integer n = context.getBean(Integer.class); System.out.println(n);
->
-> }
->
-> }
->
-> **You don’t need to do any explicit casting. Spring looks for a bean
-> of the type you requested in its**
->
-> **context. If such a bean doesn’t exist, Spring will throw an
-> exception.**
->
-> Running the app now, the values of the three beans will be printed in
-> the console, as shown in the next code snippet.
->
-> Koko Hello 10
->
-> Thus far we added one or more beans of different types to the Spring
-> context. But could we add more than one object of the same type
-> (figure 2.11)? If yes, how can we individually refer to these objects?
-> Let’s create a new project, “sq-ch2-ex3,” to demon-strate how you can
-> add multiple beans of the same type to the Spring context and how you
-> can refer to them afterward.
->
-> **Adding more beans of the same type into the Spring context**
->
-> **Spring context**
+The next listing shows you how I changed the configuration class to also add a bean of type String and a bean of type Integer.
+
+**Listing 2.11 Adding two more beans to the context**
+
+@Configuration
+
+public class ProjectConfig {
+
+@Bean
+
+Parrot parrot() {
+
+var p = new Parrot(); p.setName("Koko"); return p;
+
+<img src="media/image55.png" style="width:0.26167in;height:0.28167in" />}
+
+@Bean
+
+String hello() { return "Hello";
+
+**Adds the string “Hello” to the Spring context**
+
+}
+
+<img src="media/image56.png" style="width:0.26333in;height:0.2775in" />@Bean
+
+Integer ten() { return 10;
+
+**Adds the integer 10 to the Spring context**
+
+}
+
+}
+
+**NOTE** Remember the Spring context’s purpose: we add the instances
+we expect Spring needs to manage. (This way, we plug in functionalities offered by the framework.) In a real-world app, we won’t add every object to the Spring context. Starting with chapter 4, when our examples will become closer to code in a production-ready app, we’ll also focus more on which objects Spring needs to manage. For the moment, focus on the approaches you can use to add beans to the Spring context.
+
+You can now refer to these two new beans in the same way we did with the parrot. The next listing shows you how to change the main method to print the new beans’ values.
+
+**Listing 2.12 Printing the two new beans in the console**
+
+public class Main {
+
+public static void main(String\[\] args) {
+
+var context = new AnnotationConfigApplicationContext( ProjectConfig.class);
+
+Parrot p = context.getBean(Parrot.class); System.out.println(p.getName());
+
+String s = context.getBean(String.class); System.out.println(s);
+
+Integer n = context.getBean(Integer.class); System.out.println(n);
+
+}
+
+}
+
+**You don’t need to do any explicit casting. Spring looks for a bean of the type you requested in its**
+
+**context. If such a bean doesn’t exist, Spring will throw an exception.**
+
+Running the app now, the values of the three beans will be printed in the console, as shown in the next code snippet.
+
+Koko Hello 10
+
+Thus far we added one or more beans of different types to the Spring context. But could we add more than one object of the same type
+(figure 2.11)? If yes, how can we individually refer to these objects?
+Let’s create a new project, “sq-ch2-ex3,” to demon-strate how you can add multiple beans of the same type to the Spring context and how you can refer to them afterward.
+
+**Adding more beans of the same type into the Spring context**
+
+**Spring context**
 
 parrot1
 
-> **Each instance has an unique name (identifier). You use the
-> identifier later to refer to the instance.**
->
-> parrot2
+**Each instance has an unique name (identifier). You use the identifier later to refer to the instance.**
+
+parrot2
 
 parrot3
 
-> <img
-> src="media/image57.png"
-> style="width:3.09421in;height:1.30151in" />**Figure 2.11 You can add
-> more beans of the same type to the Spring context by using multiple
-> methods annotated with @Bean. Each instance will have a unique
-> identifier. To refer to them afterward, you’ll need to use the beans’
-> identifiers.**
->
-> **NOTE** Don’t confuse the name of the bean with the name of the
-> parrot. In our example, the beans’ names (or identifiers) in the
-> Spring context are par-rot1, parrot2, and parrot3 (like the name of
-> the @Bean methods defining them). The names I gave to the parrots are
-> Koko, Miki, and Riki. The parrot name is just an attribute of the
-> Parrot object, and it doesn’t mean anything to Spring.
->
-> You can declare as many instances of the same type as you wish by
-> simply declaring more methods annotated with the @Bean annotation. The
-> following listing shows you how I’ve declared three beans of type
-> Parrot in the configuration class. You find this example with the
-> project “sq-ch2-ex3.”
->
-> **Listing 2.13 Adding multiple beans of the same type to the Spring
-> context**
->
-> @Configuration
->
-> public class ProjectConfig {
->
-> @Bean
->
-> Parrot parrot1() {
->
-> var p = new Parrot(); p.setName("Koko"); return p;
->
-> }
->
-> @Bean
->
-> Parrot parrot2() {
->
-> var p = new Parrot(); p.setName("Miki"); return p;
->
-> }
->
-> @Bean
->
-> Parrot parrot3() {
->
-> var p = new Parrot();
->
-> p.setName("Riki"); return p;
->
-> }
->
-> }
->
-> Of course, you can’t get the beans from the context anymore by only
-> specifying the type. If you do, you’ll get an exception because Spring
-> cannot guess which instance you’ve declared you refer to. Look at the
-> following listing. Running such a code throws an exception in which
-> Spring tells you that you need to be precise, which is the instance
-> you want to use.
->
-> **Listing 2.14 Referring to a Parrot instance by type**
->
-> public class Main {
->
-> public static void main(String\[\] args) { var context = new
->
-> AnnotationConfigApplicationContext(ProjectConfig.class);
->
-> Parrot p = context.getBean(Parrot.class);
-> System.out.println(p.getName());
->
-> }
->
-> }
->
-> **You’ll get an exception on this line because Spring cannot guess
-> which of the three Parrot instances you refer to.**
->
-> When running your application, you’ll get an exception similar to the
-> one presented by the next code snippet.
->
-> <img
-> src="media/image58.png"
-> style="width:0.26333in;height:0.27833in" />Exception in thread "main"
-> org.springframework.beans.factory.NoUniqueBeanDefinitionException: No
-> qualifying bean of type 'main.Parrot' available: expected single
-> matching bean but found 3:
->
-> parrot1,parrot2,parrot3 at …
->
-> **Names of the Parrot beans in the context**
->
-> To solve this ambiguity problem, you need to refer precisely to one of
-> the instances by using the bean’s name. By default, Spring uses the
-> names of the methods annotated with @Bean as the beans’ names
-> themselves. Remember that’s why we don’t name the @Bean methods using
-> verbs. In our case, the beans have the names parrot1, parrot2, and
-> parrot3 (remember, the method represents the bean). You can find these
-> names in the previous code snippet in the message of the exception.
-> Did you spot them? Let’s change the main method to refer to one of
-> these beans explicitly by using its name. Observe how I referred to
-> the parrot2 bean in the following listing.
->
-> **Listing 2.15 Referring to a bean by its identifier**
->
-> public class Main {
->
-> public static void main(String\[\] args) { var context = new
->
-> AnnotationConfigApplicationContext(ProjectConfig.class);
->
-> Parrot p = context.getBean("parrot2", Parrot.class); <img
-> src="media/image59.png" />
-> System.out.println(p.getName());
->
-> }
->
-> }
->
-> **First parameter is the name of the instance to which we refer**
->
-> Running the app now, you’ll no longer get an exception. Instead,
-> you’ll see in the console the name of the second parrot, Miki.
->
-> If you’d like to give another name to the bean, you can use either one
-> of the name
->
-> or the value attributes of the @Bean annotation. Any of the following
-> syntaxes will change the name of the bean in "miki":
+<img src="media/image57.png" style="width:3.09421in;height:1.30151in" />**Figure 2.11 You can add more beans of the same type to the Spring context by using multiple methods annotated with @Bean. Each instance will have a unique identifier. To refer to them afterward, you’ll need to use the beans’ identifiers.**
+
+**NOTE** Don’t confuse the name of the bean with the name of the
+parrot. In our example, the beans’ names (or identifiers) in the Spring context are par-rot1, parrot2, and parrot3 (like the name of the @Bean methods defining them). The names I gave to the parrots are Koko, Miki, and Riki. The parrot name is just an attribute of the Parrot object, and it doesn’t mean anything to Spring.
+
+You can declare as many instances of the same type as you wish by simply declaring more methods annotated with the @Bean annotation. The following listing shows you how I’ve declared three beans of type Parrot in the configuration class. You find this example with the project “sq-ch2-ex3.”
+
+**Listing 2.13 Adding multiple beans of the same type to the Spring context**
+
+@Configuration
+
+public class ProjectConfig {
+
+@Bean
+
+Parrot parrot1() {
+
+var p = new Parrot(); p.setName("Koko"); return p;
+
+}
+
+@Bean
+
+Parrot parrot2() {
+
+var p = new Parrot(); p.setName("Miki"); return p;
+
+}
+
+@Bean
+
+Parrot parrot3() {
+
+var p = new Parrot();
+
+p.setName("Riki"); return p;
+
+}
+
+}
+
+Of course, you can’t get the beans from the context anymore by only specifying the type. If you do, you’ll get an exception because Spring cannot guess which instance you’ve declared you refer to. Look at the following listing. Running such a code throws an exception in which Spring tells you that you need to be precise, which is the instance you want to use.
+
+**Listing 2.14 Referring to a Parrot instance by type**
+
+public class Main {
+
+public static void main(String\[\] args) { var context = new
+
+AnnotationConfigApplicationContext(ProjectConfig.class);
+
+Parrot p = context.getBean(Parrot.class); System.out.println(p.getName());
+
+}
+
+}
+
+**You’ll get an exception on this line because Spring cannot guess which of the three Parrot instances you refer to.**
+
+When running your application, you’ll get an exception similar to the one presented by the next code snippet.
+
+<img src="media/image58.png" style="width:0.26333in;height:0.27833in" />Exception in thread "main" org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'main.Parrot' available: expected single matching bean but found 3:
+
+parrot1,parrot2,parrot3 at …
+
+**Names of the Parrot beans in the context**
+
+To solve this ambiguity problem, you need to refer precisely to one of the instances by using the bean’s name. By default, Spring uses the names of the methods annotated with @Bean as the beans’ names themselves. Remember that’s why we don’t name the @Bean methods using verbs. In our case, the beans have the names parrot1, parrot2, and parrot3 (remember, the method represents the bean). You can find these names in the previous code snippet in the message of the exception. Did you spot them? Let’s change the main method to refer to one of these beans explicitly by using its name. Observe how I referred to the parrot2 bean in the following listing.
+
+**Listing 2.15 Referring to a bean by its identifier**
+
+public class Main {
+
+public static void main(String\[\] args) { var context = new
+
+AnnotationConfigApplicationContext(ProjectConfig.class);
+
+Parrot p = context.getBean("parrot2", Parrot.class); <img src="media/image59.png" /> System.out.println(p.getName());
+
+}
+
+}
+
+**First parameter is the name of the instance to which we refer**
+
+Running the app now, you’ll no longer get an exception. Instead, you’ll see in the console the name of the second parrot, Miki.
+
+If you’d like to give another name to the bean, you can use either one of the name
+
+or the value attributes of the @Bean annotation. Any of the following syntaxes will change the name of the bean in "miki":
 
 - @Bean(name = "miki")
 
@@ -2962,603 +1134,344 @@ parrot3
 
 - @Bean("miki")
 
-> In the next code snippet, you can observe the change
-> <span id="_bookmark96" class="anchor"></span>as it
-> a<span id="_bookmark95" class="anchor"></span>ppears in code, and if
-> you’d like to run this example, you find it in the project named
-> “sq-ch2-ex4”:
->
-> @Bean(name = "miki") Parrot parrot2() {
->
-> var p = new Parrot(); p.setName("Miki"); return p;
->
-> **Sets the name of the bean**
->
-> **Sets the name of the parrot**
->
-> }
->
-> **Defining a bean as primary**
->
-> Earlier in this section we discussed that you could have multiple
-> beans of the same kind in the Spring context, but you need to refer to
-> them using their names. There’s another option when referring to beans
-> in the context when you have more of the same type.
->
-> When you have multiple beans of the same kind in the Spring context
-> you can make one of the<span id="_bookmark97" class="anchor"></span>m
-> *primary*. You mark the bean you want to be primary using the @Primary
-> annotation. A primary bean is the one Spring will choose if it has
-> multiple options and you don’t specify a name; the primary bean is
-> simply Spring’s default choice. The next code snippet shows you what
-> the @Bean method annotated as primary looks like:
->
-> @Bean @Primary
->
-> Parrot parrot2() {
->
-> var p = new Parrot(); p.setName("Miki"); return p;
->
-> }
->
-> If you refer to a Parrot without specifying the name, Spring will now
-> select Miki by default. Of course, you can only define one bean of a
-> type as primary. You find this example implemented in the project
-> “sq-ch2-ex5.”
+In the next code snippet, you can observe the change as it appears in code, and if you’d like to run this example, you find it in the project named “sq-ch2-ex4”:
 
-####### Using stereotype annotations to add beans to the Spring context
+@Bean(name = "miki") Parrot parrot2() {
 
-> In this section, you’ll learn a different approach for adding beans to
-> the Spring con-text (later in this chapter, we also compare the
-> approaches and discuss when to choose one or another). Remember,
-> adding beans to the Spring context is essential because it’s how you
-> make Spring aware of the object instances of your application, which
-> need to be managed by the framework. Spring offers you more ways to
-> add beans to its context. In different scenarios, you’ll find using
-> one of these approaches is more comfortable than another. For example,
-> with stereotype annotations, you’ll observe you write less code to
-> instruct Spring to add a bean to its context.
->
-> Later you’ll learn that Spring offers multiple stereotype annotations.
-> But in this section, I want you to focus on how to use a stereotype
-> annotation in general. We’ll take the most basic of these, @Component,
-> and use it to demonstrate our examples.
->
-> With stereotype annotations, you add the annotation above the class
-> for which you
->
-> need to have an instance in the Spring context. When doing so, we say
-> that you’ve marked the class as a component. When the app creates the
-> Spring context, Spring creates an instance of the class you marked as
-> a component and adds that instance to its context. We’ll still have a
-> configuration class when we use this approach to tell Spring where to
-> look for the classes annotated with stereotype annotations. Moreover,
-> you can use both the approaches (using @Bean and stereotype
-> annotations together; we’ll work on these types of complex examples in
-> later chapters).
->
-> The steps we need to follow in the <span id="_bookmark100"
-> class="anchor"></span>process are as follows (figure 2.12):
->
-> **1** Using the @Component annotation, mark the classes for which you
-> want Spring to add an instance to its context <span id="_bookmark101"
-> class="anchor"></span>(in our case Parrot).
->
-> **2** Using @ComponentScan annotation over the configuration class,
-> instruct Spring on where to find the classes you marked.
->
-> Let’s take our example with the Parrot class. We can add an instance
-> of the class in the Spring context by annotating the Parrot class with
-> one of the stereotype annota-tions, say @Component.
->
-> **STEP 1**
->
-> ![](media/image60.png)
->
-> **@Component**
->
-> public class Parrot {
->
-> // Omitted code
+var p = new Parrot(); p.setName("Miki"); return p;
+
+**Sets the name of the bean**
+
+**Sets the name of the parrot**
 
 }
 
-> **Tells Spring where to look for classes annotated with stereotype
-> annotations**
->
-> **STEP 2**
->
-> @Configuration **@ComponentScan(basePackages = "main")** public class
-> ProjectConfig {
->
-> }
->
-> **Figure 2.12 When using stereotype annotations, consider two steps.
-> First, use the stereotype annotation (@Component) to annotate the
-> class for which you want Spring to add a bean to its context. Second,
-> use the @ComponentScan annotation to tell Spring where to look for
-> classes annotated with stereotype annotations.**
->
-> The next listing shows you how to use the @Component annotation for
-> the Parrot class. You can find this example in the project
-> “sq-ch2-ex6.”
->
-> **Listing 2.16 Using a stereotype annotation for the Parrot class**
->
-> @Component
->
-> public class Parrot { private String name;
->
-> public String getName() { return name;
->
-> **By using the @Component annotation over the class, we instruct
-> Spring to create an instance of this class and add it to its
-> context.**
->
-> }
->
-> public void setName(String name) { this.name = name;
->
-> }
->
-> }
->
-> But wait! This code won’t work just yet. By default, Spring doesn’t
-> search for classes annotated with stereotype annotations, so if we
-> just leave the code as-is, Spring won’t add a bean of type Parrot in
-> its context. To tell Spring it needs to search for classes annotated
-> with stereotype annotations, we use the @ComponentScan annotation over
-> the configu-ration class. Also, with the @ComponentScan annotation, we
-> tell Spring where to look for these classes. We enumerate the packages
-> where we defined the classes with stereotype annotations. The next
-> listing shows you how to use the @ComponentScan annotation over the
-> configuration class of the project. In my case, the name of the
-> package is “main.”
->
-> **Listing 2.17 Using the @ComponentScan annotation to tell Spring
-> where to look**
->
-> @Configuration
->
-> @ComponentScan(basePackages = "main") public class ProjectConfig {
->
-> }
->
-> Now you told Spring the following:
->
-> **Using the basePackages attribute of the annotation, we tell Spring
-> where to look for classes annotated with stereotype annotations.**
->
-> **1** Which classes to add an instance to its context (Parrot)
->
-> **2** Where to find these classes (using @ComponentScan)
->
-> **NOTE** We don’t need methods anymore to define the beans. And it now
-> looks like this approach is better because you achieve the same thing
-> by writ-ing less code. But wait until the end of this chapter. You’ll
-> learn that both approaches are useful, depending on the scenario.
->
-> You can continue writing the main method as presented in the following
-> listing to prove that Spring creates and adds the bean in its context.
->
-> **Listing 2.18 Defining the main method to test the Spring
-> configuration**
->
-> **Prints the default String representation of the instance taken from
-> the Spring context**
->
-> public class Main {
->
-> public static void main(String\[\] args) { var context = new
->
-> AnnotationConfigApplicationContext(ProjectConfig.class);
->
-> Parrot p = context.getBean(Parrot.class);
->
-> System.out.println(p); System.out.println(p.getName());
->
-> }
->
-> }
->
-> **Prints null because we did not assign any name to the parrot
-> instance added by Spring in its context**
->
-> Running this application, you’ll observe Spring added a Parrot
-> instance to its context because the first value printed is the default
-> String representation of this instance. However, the second value
-> printed is null because we did not assign any name to this parrot.
-> Spring just creates the instance of the class, but it’s still our duty
-> if we want to change this instance in any way afterward (like
-> assigning it a name).
->
-> Now that we’ve covered the two most frequently encountered ways you
-> add beans to the Spring context, let’s make a short comparison of them
-> (table 2.1).
->
-> What you’ll observe is that in real-world scenarios you’ll use
-> stereotype annotations as much as possible (because this approach
-> implies writing less code), and you’ll only use the @Bean when you
-> can’t add the bean otherwise (e.g., you create the bean for a
-> <span id="_bookmark102" class="anchor"></span>class that is part of a
-> library so you cannot modify that class to add the stereotype
-> annotation).
->
-> **Table 2.1 Advantages and disadvantages: A comparison of the two ways
-> of adding beans to the Spring context, which tells you when you would
-> use either of them**
+**Defining a bean as primary**
 
-<table style="width:80%;">
-<colgroup>
-<col style="width: 43%" />
-<col style="width: 36%" />
-</colgroup>
-<thead>
-<tr>
-<th><blockquote>
-<p><strong>Using the @Bean annotation</strong></p>
-</blockquote></th>
-<th><blockquote>
-<p><strong>Using stereotype annotations</strong></p>
-</blockquote></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><ol type="1">
-<li><p>You have full control over the instance creation you add to the
-Spring context. It is your responsibility to create and configure the
-instance in the body of the method annotated with @Bean. Spring only
-takes that instance and adds it to the context as-is.</p></li>
-<li><p>You can use this method to add more instances of the same type to
-the Spring context. Remember, in section 2.1.1 we added three Parrot
-instances into the Spring context.</p></li>
-<li><p>You can use the @Bean annotation to add to the Spring context any
-object instance. The class that defines the instance doesn’t need to be
-defined in your app. Remember, earlier we added a String and an Integer
-to the Spring context.</p></li>
-<li><p>You need to write a separate method for each bean you create,
-which adds boilerplate code to your app. For this reason, we prefer
-using @Bean as a second option to stereotype annotations in our
-projects.</p></li>
-</ol></td>
-<td><ol type="1">
-<li><p>You only have control over the instance after the framework
-creates it.</p></li>
-<li><p>This way, you can only add one instance of the class to the
-context.</p></li>
-<li><p>You can use stereotype annotations only to create beans of the
-classes your applica-tion owns. For example, you couldn’t add a bean of
-type String or Integer like we did in section 2.1.1 with the @Bean
-annota-tion because you don’t own these classes to change them by adding
-a stereotype annotation.</p></li>
-<li><p>Using stereotype annotations to add beans to the Spring context
-doesn’t add boiler-plate code to your app. You’ll prefer this approach
-in general for the classes that belong to your app.</p></li>
-</ol></td>
-</tr>
-</tbody>
-</table>
+Earlier in this section we discussed that you could have multiple beans of the same kind in the Spring context, but you need to refer to them using their names. There’s another option when referring to beans in the context when you have more of the same type.
 
-> **Using @PostConstruct to manage the instance after its creation**
->
-> As we’ve discussed in this section, using stereotype annotations you
-> instruct Spring to create a bean and add it to its context. But,
-> unlike using the @Bean annotation, you don’t have full control over
-> the instance creation. Using @Bean, we were able to define a name for
-> each of the Parrot instances we added to the Spring context, but using
-> @Component, we didn’t get a chance to do something after Spring called
-> the constructor of the Parrot class. What if we want to execute some
-> instructions right after Spring creates the bean? We can use the
-> @PostConstruct annotation.
->
-> Spring borrows the @PostConstruct annotation from Java EE. We can also
-> use this annotation with Spring beans to specify a set of instructions
-> Spring executes after the bean creation. You just need to define a
-> method in the component class and annotate that method with
-> @PostConstruct, which instructs Spring to call that method after the
-> constructor finishes its execution.
->
-> Let’s add to pom.xml the Maven dependency needed to use the
-> @PostConstruct
->
-> annotation:
->
-> \<dependency\>
->
-> \<groupId\>javax.annotation\</groupId\>
->
-> \<artifactId\>javax.annotation-api\</artifactId\>
->
-> \<version\>1.3.2\</version\>
->
-> \</dependency\>
->
-> You don’t need to add this dependency if you use a Java version
-> smaller than Java
->
-> 11\. Before Java 11, the Java EE dependencies were part of the JDK.
-> With Java 11, the JDK was cleaned of the APIs not related to SE,
-> including the Java EE dependencies.
->
-> If you wish to use functionalities that were part of the removed APIs
-> (like @PostCon-struct), you now need to explicitly add the dependency
-> in your app.
->
-> Now you can define a method in the Parrot class, as presented in the
-> next code snippet:
->
-> @Component
->
-> public class Parrot { private String name;
->
-> @PostConstruct public void init() {
->
-> this.name = "Kiki";
->
-> }
->
-> // Omitted code
->
-> }
->
-> You find this example in the project “sq-ch2-ex7.” If you now print
-> the name of the parrot in the console, you’ll observe the app prints
-> the value Kiki in the console.
->
-> Very similarly, but less encountered in real-world apps, you can use
-> an annotation named @PreDestroy. With this annotation, you define a
-> method that Spring ca<span id="_bookmark103" class="anchor"></span>lls
-> imme-diately before closing and clearing the context. The @PreDestroy
-> annotation is also described in JSR-250 and borrowed by Spring. But
-> generally I recommend developers avoid using it and find a different
-> approach to executing something before Spring clears the context,
-> mainly because you can expect Spring to fail to clear the context. Say
-> you defined something sensitive (like closing a database connection)
-> in the @Pre-Destroy method; if Spring doesn’t call the method, you may
-> get into big problems.
+When you have multiple beans of the same kind in the Spring context you can make one of them *primary*. You mark the bean you want to be primary using the @Primary annotation. A primary bean is the one Spring will choose if it has multiple options and you don’t specify a name; the primary bean is simply Spring’s default choice. The next code snippet shows you what the @Bean method annotated as primary looks like:
 
-####### Programmatically adding beans to the Spring context
+@Bean @Primary
 
-> In this section, we discuss adding beans programmatically to the
-> Spring context. We’ve had the option of programmatically adding beans
-> to the Spring context with Spring 5, which offers great flexibility
-> because it enables you to add new instances in the context directly by
-> calling a method of the context instance. You’d use this approach when
-> you want to implement a custom way of adding beans to the context and
-> the @Bean or the stereotype annotations are not enough for your needs.
-> Say you need to register specific beans in the Spring context
-> depending on specific configura-tions of your application. With the
-> @Bean and stereotype annotations, you can imple-ment most of the
-> scenarios, but you can’t do something like the code presented in the
-> next snippet:
->
-> if (condition) { registerBean(b1);
->
-> } else {
->
-> registerBean(b2);
->
-> }
->
-> **If the condition is true, add a specific bean to the Spring
-> context.**
->
-> <img
-> src="media/image63.png"
-> style="width:0.26167in;height:0.28167in" /><img
-> src="media/image64.png"
-> style="width:0.26167in;height:0.28167in" />**Otherwise, add another
-> bean to the Spring context.**
->
-> To keep using our parrots example, the scenario is as follows: The app
-> reads a collec-tion of parrots. Some of them are green; others are
-> orange. You want the app to add to the Spring context only the parrots
-> that are green (figure 2.13).
->
-> ![](media/image65.png)![](media/image68.png)
->
-> **From
-> a collection of parrots, you want to add only those that are green to
-> the Spring context.**
->
-> **Spring context**
->
-> for (Parrot p : **parrots**) { if (parrot.isGreen()) {
->
-> context.registerBean(...);
->
-> }
->
-> }
->
-> **Using the registerBean() method you can write custom logic to add
-> the desired instances to the Spring context.**
->
-> **Figure 2.13 Using the registerBean() method to add specific object
-> instances to the Spring context**
->
-> Let’s see how this method works. To add a bean to the Spring context
-> using a pro-grammatic approach, <span id="_bookmark106"
-> class="anchor"></span>you just need to call the registerBean() method
-> of the Appli-cationContext instance. The registerBean() has four
-> parameters, as presented in the next code snippet:
->
-> \<T\> void registerBean( String beanName, Class\<T\> beanClass,
-> Supplier\<T\> supplier,
->
-> BeanDefinitionCustomizer... customizers);
->
-> **1** Use the first parameter beanName to define a name for the bean
-> you add in the Spring context. If you don’t need to give a name to the
-> bean you’re adding, you can use null as a value when you call the
-> method.
->
-> **2** The second parameter is the class that defines the bean you add
-> to the context. Say you want to add an instance of the class Parrot;
-> the value you give to this parameter is Parrot.class.
->
-> **3** The third parameter is an instance of Supplier. The
-> implementation of this Supplier needs to return the value of the
-> instance you add to the context. Remember, Supplier is a functional
-> interface you find in the java.util
->
-> .function package. The purpose of a supplier implementation is to
-> return a value you define without taking parameters.
->
-> **4** The fourth and last parameter is a varargs of
-> BeanDefinitionCustomizer. (If this doesn’t sound familiar, that’s
-> okay; the BeanDefinitionCustomizer is just an interface you implement
-> to configure different characteristics of the bean; e.g., making it
-> primary.) Being defined as a varargs type, you can omit this parameter
-> entirely, or you can give it more values of type
-> BeanDefinitionCustomizer.
->
-> In the project “sq-ch2-ex8,” you find an example of using the
-> registerBean() method. You observe that this project’s configuration
-> class is empty, an<span id="_bookmark107" class="anchor"></span>d the
-> Parrot class we use for our bean definition example is just a plain
-> old Java object (POJO); we use no annotation with it. In the next code
-> snippet, you find the configuration class as I defined it for this
-> example:
->
-> @Configuration
->
-> public class ProjectConfig {
->
-> }
->
-> I defined the class Parrot that we use to create the bean:
->
-> public class Parrot { private String name;
->
-> // Omitted getters and setters
->
-> }
->
-> In the main method of the project, I’ve used the registerBean() method
-> to add an instance of type Parrot to the Spring context. The next
-> listing presents the code of the main method. Figure 2.14 focuses on
-> the syntax for calling the registerBean() method.
->
-> **Listing 2.19 Using the registerBean() method to add a bean to the
-> Spring context**
->
-> public class Main {
->
-> public static void main(String\[\] args) { var context =
->
-> new AnnotationConfigApplicationContext(
->
-> <img
-> src="media/image69.png"
-> style="width:0.2625in;height:0.28167in" />ProjectConfig.class);
->
-> Parrot x = new Parrot(); x.setName("Kiki");
->
-> **We create the instance we want to add to the Spring context.**
->
-> <img
-> src="media/image70.png"
-> style="width:0.23083in;height:0.27in" />**We define a Supplier to**
->
-> <img
-> src="media/image71.png"
-> style="width:0.28833in;height:0.28583in" />Supplier\<Parrot\>
-> parrotSupplier = () -\> x; **return this instance.**
->
-> context.registerBean("parrot1", Parrot.class, parrotSupplier);
->
-> **We call the registerBean() method to add the instance to the Spring
-> context.**
->
-> Parrot p = context.getBean(Parrot.class);
-> System.out.println(p.getName());
->
-> }
->
-> }
->
-> **To verify the bean is now in the context, we refer to the parrot
-> bean and print its name in the console.**
->
-> **The type of the bean**
->
-> context.registerBean("parrot1", Parrot.class, parrotSupplier);
->
-> **The ApplicationContext instance**
->
-> **representing the Spring context**
->
-> **The name we give to the bean that we add to**
->
-> **the Spring context**
->
-> **The Supplier returning the**
->
-> **object instance that we add to the Spring context**
->
-> **Figure 2.14 Calling the registerBean() method to add a bean to the
-> Spring context programmatically**
->
-> Use one or more bean configurator instances as the last parameters to
-> set different characteristics of the beans you add. For example, you
-> can make the bean primary by changing the registerBean() method call,
-> as shown in the next code snippet. A pri-mary bean defines the
-> instance Spring selects by default if you have multiple beans of the
-> same type in the context:
->
-> context.registerBean("parrot1",
->
-> Parrot.class, parrotSupplier,
->
-> bc -\> bc.setPrimary(true));
->
-> You’ve just made a first big step into the Spring world. Learning how
-> to add beans to the Spring context might not seem like much, but it’s
-> more important than it looks. With this skill, <span id="_bookmark109"
-> class="anchor"></span>you <span id="_bookmark108"
-> class="anchor"></span>can now proceed to referring to the beans in the
-> Spring context, which we discuss in chapter 3.
->
-> **NOTE** In this book, we use only modern configuration approaches.
-> However, I find it essential for you also to be aware of how the
-> developers configured the framework in the early days of Spring. At
-> that time, we were using XML to write these configurations. In
-> appendix B, a short example is provided to give you a feeling on how
-> you would use XML to add a bean to the Spring context.
+Parrot parrot2() {
 
-#### Summary
+var p = new Parrot(); p.setName("Miki"); return p;
+
+}
+
+If you refer to a Parrot without specifying the name, Spring will now select Miki by default. Of course, you can only define one bean of a type as primary. You find this example implemented in the project “sq-ch2-ex5.”
+
+### Using stereotype annotations to add beans to the Spring context
+
+In this section, you’ll learn a different approach for adding beans to the Spring con-text (later in this chapter, we also compare the approaches and discuss when to choose one or another). Remember, adding beans to the Spring context is essential because it’s how you make Spring aware of the object instances of your application, which need to be managed by the framework. Spring offers you more ways to add beans to its context. In different scenarios, you’ll find using one of these approaches is more comfortable than another. For example, with stereotype annotations, you’ll observe you write less code to instruct Spring to add a bean to its context.
+
+Later you’ll learn that Spring offers multiple stereotype annotations. But in this section, I want you to focus on how to use a stereotype annotation in general. We’ll take the most basic of these, @Component, and use it to demonstrate our examples.
+
+With stereotype annotations, you add the annotation above the class for which you
+
+need to have an instance in the Spring context. When doing so, we say that you’ve marked the class as a component. When the app creates the Spring context, Spring creates an instance of the class you marked as a component and adds that instance to its context. We’ll still have a configuration class when we use this approach to tell Spring where to look for the classes annotated with stereotype annotations. Moreover, you can use both the approaches (using @Bean and stereotype annotations together; we’ll work on these types of complex examples in later chapters).
+
+The steps we need to follow in the <span id="_bookmark100" class="anchor">process are as follows (figure 2.12):
+
+**1** Using the @Component annotation, mark the classes for which you want Spring to add an instance to its context <span id="_bookmark101" class="anchor">(in our case Parrot).
+
+**2** Using @ComponentScan annotation over the configuration class, instruct Spring on where to find the classes you marked.
+
+Let’s take our example with the Parrot class. We can add an instance of the class in the Spring context by annotating the Parrot class with one of the stereotype annota-tions, say @Component.
+
+**STEP 1**
+
+![](media/image60.png)
+
+**@Component**
+
+public class Parrot {
+
+// Omitted code
+
+}
+
+**Tells Spring where to look for classes annotated with stereotype annotations**
+
+**STEP 2**
+
+@Configuration **@ComponentScan(basePackages = "main")** public class ProjectConfig {
+
+}
+
+**Figure 2.12 When using stereotype annotations, consider two steps. First, use the stereotype annotation (@Component) to annotate the class for which you want Spring to add a bean to its context. Second, use the @ComponentScan annotation to tell Spring where to look for classes annotated with stereotype annotations.**
+
+The next listing shows you how to use the @Component annotation for the Parrot class. You can find this example in the project “sq-ch2-ex6.”
+
+**Listing 2.16 Using a stereotype annotation for the Parrot class**
+
+@Component
+
+public class Parrot { private String name;
+
+public String getName() { return name;
+
+**By using the @Component annotation over the class, we instruct Spring to create an instance of this class and add it to its context.**
+
+}
+
+public void setName(String name) { this.name = name;
+
+}
+
+}
+
+But wait! This code won’t work just yet. By default, Spring doesn’t search for classes annotated with stereotype annotations, so if we just leave the code as-is, Spring won’t add a bean of type Parrot in its context. To tell Spring it needs to search for classes annotated with stereotype annotations, we use the @ComponentScan annotation over the configu-ration class. Also, with the @ComponentScan annotation, we tell Spring where to look for these classes. We enumerate the packages where we defined the classes with stereotype annotations. The next listing shows you how to use the @ComponentScan annotation over the configuration class of the project. In my case, the name of the package is “main.”
+
+**Listing 2.17 Using the @ComponentScan annotation to tell Spring where to look**
+
+@Configuration
+
+@ComponentScan(basePackages = "main") public class ProjectConfig {
+
+}
+
+Now you told Spring the following:
+
+**Using the basePackages attribute of the annotation, we tell Spring where to look for classes annotated with stereotype annotations.**
+
+**1** Which classes to add an instance to its context (Parrot)
+
+**2** Where to find these classes (using @ComponentScan)
+
+**NOTE** We don’t need methods anymore to define the beans. And it now
+looks like this approach is better because you achieve the same thing by writ-ing less code. But wait until the end of this chapter. You’ll learn that both approaches are useful, depending on the scenario.
+
+You can continue writing the main method as presented in the following listing to prove that Spring creates and adds the bean in its context.
+
+**Listing 2.18 Defining the main method to test the Spring configuration**
+
+**Prints the default String representation of the instance taken from the Spring context**
+
+public class Main {
+
+public static void main(String\[\] args) { var context = new
+
+AnnotationConfigApplicationContext(ProjectConfig.class);
+
+Parrot p = context.getBean(Parrot.class);
+
+System.out.println(p); System.out.println(p.getName());
+
+}
+
+}
+
+**Prints null because we did not assign any name to the parrot instance added by Spring in its context**
+
+Running this application, you’ll observe Spring added a Parrot instance to its context because the first value printed is the default String representation of this instance. However, the second value printed is null because we did not assign any name to this parrot. Spring just creates the instance of the class, but it’s still our duty if we want to change this instance in any way afterward (like assigning it a name).
+
+Now that we’ve covered the two most frequently encountered ways you add beans to the Spring context, let’s make a short comparison of them
+(table 2.1).
+
+What you’ll observe is that in real-world scenarios you’ll use stereotype annotations as much as possible (because this approach implies writing less code), and you’ll only use the @Bean when you can’t add the bean otherwise (e.g., you create the bean for a class that is part of a library so you cannot modify that class to add the stereotype annotation).
+
+**Table 2.1 Advantages and disadvantages: A comparison of the two ways of adding beans to the Spring context, which tells you when you would use either of them**
+
+<table style="width:80%;"> <colgroup> <col style="width: 43%" /> <col style="width: 36%" /> </colgroup> <thead> <tr> <th><blockquote> <p><strong>Using the @Bean annotation</strong></p> </blockquote></th> <th><blockquote> <p><strong>Using stereotype annotations</strong></p> </blockquote></th> </tr> </thead> <tbody> <tr> <td><ol type="1"> <li><p>You have full control over the instance creation you add to the Spring context. It is your responsibility to create and configure the instance in the body of the method annotated with @Bean. Spring only takes that instance and adds it to the context as-is.</p></li> <li><p>You can use this method to add more instances of the same type to the Spring context. Remember, in section 2.1.1 we added three Parrot instances into the Spring context.</p></li> <li><p>You can use the @Bean annotation to add to the Spring context any object instance. The class that defines the instance doesn’t need to be defined in your app. Remember, earlier we added a String and an Integer to the Spring context.</p></li> <li><p>You need to write a separate method for each bean you create, which adds boilerplate code to your app. For this reason, we prefer using @Bean as a second option to stereotype annotations in our projects.</p></li> </ol></td> <td><ol type="1"> <li><p>You only have control over the instance after the framework creates it.</p></li> <li><p>This way, you can only add one instance of the class to the context.</p></li> <li><p>You can use stereotype annotations only to create beans of the classes your applica-tion owns. For example, you couldn’t add a bean of type String or Integer like we did in section 2.1.1 with the @Bean annota-tion because you don’t own these classes to change them by adding a stereotype annotation.</p></li> <li><p>Using stereotype annotations to add beans to the Spring context doesn’t add boiler-plate code to your app. You’ll prefer this approach in general for the classes that belong to your app.</p></li> </ol></td> </tr> </tbody> </table>
+
+**Using @PostConstruct to manage the instance after its creation**
+
+As we’ve discussed in this section, using stereotype annotations you instruct Spring to create a bean and add it to its context. But, unlike using the @Bean annotation, you don’t have full control over the instance creation. Using @Bean, we were able to define a name for each of the Parrot instances we added to the Spring context, but using @Component, we didn’t get a chance to do something after Spring called the constructor of the Parrot class. What if we want to execute some instructions right after Spring creates the bean? We can use the @PostConstruct annotation.
+
+Spring borrows the @PostConstruct annotation from Java EE. We can also use this annotation with Spring beans to specify a set of instructions Spring executes after the bean creation. You just need to define a method in the component class and annotate that method with @PostConstruct, which instructs Spring to call that method after the constructor finishes its execution.
+
+Let’s add to pom.xml the Maven dependency needed to use the @PostConstruct
+
+annotation:
+
+\<dependency\>
+
+\<groupId\>javax.annotation\</groupId\>
+
+\<artifactId\>javax.annotation-api\</artifactId\>
+
+\<version\>1.3.2\</version\>
+
+\</dependency\>
+
+You don’t need to add this dependency if you use a Java version smaller than Java
+
+11\. Before Java 11, the Java EE dependencies were part of the JDK. With Java 11, the JDK was cleaned of the APIs not related to SE, including the Java EE dependencies.
+
+If you wish to use functionalities that were part of the removed APIs
+(like @PostCon-struct), you now need to explicitly add the dependency
+in your app.
+
+Now you can define a method in the Parrot class, as presented in the next code snippet:
+
+@Component
+
+public class Parrot { private String name;
+
+@PostConstruct public void init() {
+
+this.name = "Kiki";
+
+}
+
+// Omitted code
+
+}
+
+You find this example in the project “sq-ch2-ex7.” If you now print the name of the parrot in the console, you’ll observe the app prints the value Kiki in the console.
+
+Very similarly, but less encountered in real-world apps, you can use an annotation named @PreDestroy. With this annotation, you define a method that Spring calls imme-diately before closing and clearing the context. The @PreDestroy annotation is also described in JSR-250 and borrowed by Spring. But generally I recommend developers avoid using it and find a different approach to executing something before Spring clears the context, mainly because you can expect Spring to fail to clear the context. Say you defined something sensitive (like closing a database connection) in the @Pre-Destroy method; if Spring doesn’t call the method, you may get into big problems.
+
+### Programmatically adding beans to the Spring context
+
+In this section, we discuss adding beans programmatically to the Spring context. We’ve had the option of programmatically adding beans to the Spring context with Spring 5, which offers great flexibility because it enables you to add new instances in the context directly by calling a method of the context instance. You’d use this approach when you want to implement a custom way of adding beans to the context and the @Bean or the stereotype annotations are not enough for your needs. Say you need to register specific beans in the Spring context depending on specific configura-tions of your application. With the @Bean and stereotype annotations, you can imple-ment most of the scenarios, but you can’t do something like the code presented in the next snippet:
+
+if (condition) { registerBean(b1);
+
+} else {
+
+registerBean(b2);
+
+}
+
+**If the condition is true, add a specific bean to the Spring context.**
+
+<img src="media/image63.png" style="width:0.26167in;height:0.28167in" /><img src="media/image64.png" style="width:0.26167in;height:0.28167in" />**Otherwise, add another bean to the Spring context.**
+
+To keep using our parrots example, the scenario is as follows: The app reads a collec-tion of parrots. Some of them are green; others are orange. You want the app to add to the Spring context only the parrots that are green (figure 2.13).
+
+![](media/image65.png)![](media/image68.png)
+
+**From a collection of parrots, you want to add only those that are green to the Spring context.**
+
+**Spring context**
+
+for (Parrot p : **parrots**) { if (parrot.isGreen()) {
+
+context.registerBean(...);
+
+}
+
+}
+
+**Using the registerBean() method you can write custom logic to add the desired instances to the Spring context.**
+
+**Figure 2.13 Using the registerBean() method to add specific object instances to the Spring context**
+
+Let’s see how this method works. To add a bean to the Spring context using a pro-grammatic approach, <span id="_bookmark106" class="anchor">you just need to call the registerBean() method of the Appli-cationContext instance. The registerBean() has four parameters, as presented in the next code snippet:
+
+\<T\> void registerBean( String beanName, Class\<T\> beanClass, Supplier\<T\> supplier,
+
+BeanDefinitionCustomizer... customizers);
+
+**1** Use the first parameter beanName to define a name for the bean you add in the Spring context. If you don’t need to give a name to the bean you’re adding, you can use null as a value when you call the method.
+
+**2** The second parameter is the class that defines the bean you add to the context. Say you want to add an instance of the class Parrot; the value you give to this parameter is Parrot.class.
+
+**3** The third parameter is an instance of Supplier. The implementation of this Supplier needs to return the value of the instance you add to the context. Remember, Supplier is a functional interface you find in the java.util
+
+.function package. The purpose of a supplier implementation is to return a value you define without taking parameters.
+
+**4** The fourth and last parameter is a varargs of BeanDefinitionCustomizer. (If this doesn’t sound familiar, that’s okay; the BeanDefinitionCustomizer is just an interface you implement to configure different characteristics of the bean; e.g., making it primary.) Being defined as a varargs type, you can omit this parameter entirely, or you can give it more values of type BeanDefinitionCustomizer.
+
+In the project “sq-ch2-ex8,” you find an example of using the registerBean() method. You observe that this project’s configuration class is empty, and the Parrot class we use for our bean definition example is just a plain old Java object (POJO); we use no annotation with it. In the next code snippet, you find the configuration class as I defined it for this example:
+
+@Configuration
+
+public class ProjectConfig {
+
+}
+
+I defined the class Parrot that we use to create the bean:
+
+public class Parrot { private String name;
+
+// Omitted getters and setters
+
+}
+
+In the main method of the project, I’ve used the registerBean() method to add an instance of type Parrot to the Spring context. The next listing presents the code of the main method. Figure 2.14 focuses on the syntax for calling the registerBean() method.
+
+**Listing 2.19 Using the registerBean() method to add a bean to the Spring context**
+
+public class Main {
+
+public static void main(String\[\] args) { var context =
+
+new AnnotationConfigApplicationContext(
+
+<img src="media/image69.png" style="width:0.2625in;height:0.28167in" />ProjectConfig.class);
+
+Parrot x = new Parrot(); x.setName("Kiki");
+
+**We create the instance we want to add to the Spring context.**
+
+<img src="media/image70.png" style="width:0.23083in;height:0.27in" />**We define a Supplier to**
+
+<img src="media/image71.png" style="width:0.28833in;height:0.28583in" />Supplier\<Parrot\> parrotSupplier = () -\> x; **return this instance.**
+
+context.registerBean("parrot1", Parrot.class, parrotSupplier);
+
+**We call the registerBean() method to add the instance to the Spring context.**
+
+Parrot p = context.getBean(Parrot.class); System.out.println(p.getName());
+
+}
+
+}
+
+**To verify the bean is now in the context, we refer to the parrot bean and print its name in the console.**
+
+**The type of the bean**
+
+context.registerBean("parrot1", Parrot.class, parrotSupplier);
+
+**The ApplicationContext instance**
+
+**representing the Spring context**
+
+**The name we give to the bean that we add to**
+
+**the Spring context**
+
+**The Supplier returning the**
+
+**object instance that we add to the Spring context**
+
+**Figure 2.14 Calling the registerBean() method to add a bean to the Spring context programmatically**
+
+Use one or more bean configurator instances as the last parameters to set different characteristics of the beans you add. For example, you can make the bean primary by changing the registerBean() method call, as shown in the next code snippet. A pri-mary bean defines the instance Spring selects by default if you have multiple beans of the same type in the context:
+
+context.registerBean("parrot1",
+
+Parrot.class, parrotSupplier,
+
+bc -\> bc.setPrimary(true));
+
+You’ve just made a first big step into the Spring world. Learning how to add beans to the Spring context might not seem like much, but it’s more important than it looks. With this skill, <span id="_bookmark109" class="anchor">you <span id="_bookmark108" class="anchor">can now proceed to referring to the beans in the Spring context, which we discuss in chapter 3.
+
+**NOTE** In this book, we use only modern configuration approaches.
+However, I find it essential for you also to be aware of how the developers configured the framework in the early days of Spring. At that time, we were using XML to write these configurations. In appendix B, a short example is provided to give you a feeling on how you would use XML to add a bean to the Spring context.
+
+## Summary
 
 - The first thing you need to learn in Spring is adding object instances
-  (which we call beans) to the Spring context. You can imagine the
-  Spring context as a bucket in which you add the instances you expect
-  Spring to be able to manage. Spring can see only the instances you add
-  to its context.
+(which we call beans) to the Spring context. You can imagine the
+Spring context as a bucket in which you add the instances you expect Spring to be able to manage. Spring can see only the instances you add to its context.
 
 - You can add beans to the Spring context in three ways: using the @Bean
-  annota-tion, using stereotype annotations, and doing it
-  programmatically.
+annota-tion, using stereotype annotations, and doing it programmatically.
 
-  - Using the @Bean annotation to add instances to the Spring context
-    enables you to add any kind of object instance as a bean and even
-    multiple instances of the same kind to the Spring context. From this
-    point of view, this approach is more flexible than using stereotype
-    annotations. Still, it requires you to write more code because you
-    need to write a separate method in the configuration class for each
-    independent instance added to the context.
+- Using the @Bean annotation to add instances to the Spring context
+enables you to add any kind of object instance as a bean and even multiple instances of the same kind to the Spring context. From this point of view, this approach is more flexible than using stereotype annotations. Still, it requires you to write more code because you need to write a separate method in the configuration class for each independent instance added to the context.
 
-  - Using stereotype annotations, you can create beans for only the
-    application classes with a specific annotation (e.g., @Component).
-    This configuration approach requires writing less code, which makes
-    your configuration more comfortable to read. You’ll prefer this
-    approach over the @Bean annotation for classes that you define and
-    can annotate.
+- Using stereotype annotations, you can create beans for only the
+application classes with a specific annotation (e.g., @Component). This configuration approach requires writing less code, which makes your configuration more comfortable to read. You’ll prefer this approach over the @Bean annotation for classes that you define and can annotate.
 
-  - Using the registerBean() method enables you to implement custom
-    logic for adding beans to the Spri<span id="_bookmark110"
-    class="anchor"></span>ng context. Remember, you can use this
-    approach only with Spring 5 and later.
+- Using the registerBean() method enables you to implement custom
+logic for adding beans to the Spri<span id="_bookmark110" class="anchor">ng context. Remember, you can use this approach only with Spring 5 and later.
 
 > ***This chapter covers***
 
