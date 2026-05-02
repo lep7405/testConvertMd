@@ -140,6 +140,7 @@ You need to know what features to choose and how to assemble them to achieve the
 (Bạn cần biết nên chọn những tính năng nào và cách lắp ráp chúng để đạt được kết quả phù hợp (hình 1.1).)
 
 **Figure 1.1 David ordered a wardrobe from the UAssemble store. But the store (framework) doesn’t deliver to David (the programmer) just the components (software capabilities) he needs to build his new wardrobe (the app). The store ships him all the possible parts he might need to build the wardrobe. It’s David’s (the programmer’s) choice on which components (software capabilities) are right and how to assemble them to get the right result (the application).**
+![](media/image16.png)
 (Hình 1.1 David đặt mua một chiếc tủ quần áo từ cửa hàng Uassemble. Nhưng cửa hàng (khuôn khổ) không cung cấp cho David (lập trình viên) chỉ các thành phần (khả năng phần mềm) mà anh ấy cần để xây dựng tủ quần áo mới của mình (ứng dụng). Cửa hàng sẽ gửi cho anh ấy tất cả những bộ phận có thể có mà anh ấy có thể cần để đóng tủ quần áo. Đó là sự lựa chọn của David (lập trình viên) về thành phần nào (khả năng của phần mềm) là phù hợp và cách lắp ráp chúng để có được kết quả phù hợp (ứng dụng).)
 
 The idea of a framework isn’t new.
@@ -884,6 +885,7 @@ Your backend app uses a message broker and adds messages in a queue or topic.
 (Ứng dụng phụ trợ của bạn sử dụng trình trung chuyển tin nhắn và thêm tin nhắn vào hàng đợi hoặc chủ đề.)
 
 **Figure 1.5 A backend app interacts in several ways with other apps and uses databases to manage data. Usually, a backend app is complex and may require the use of various technologies. Frameworks simplify the implementation by providing tools you can use to implement the backend solution faster.**
+![](media/image19.png)
 (Hình 1.5 Ứng dụng phụ trợ tương tác theo nhiều cách với các ứng dụng khác và sử dụng cơ sở dữ liệu để quản lý dữ liệu. Thông thường, một ứng dụng phụ trợ rất phức tạp và có thể yêu cầu sử dụng nhiều công nghệ khác nhau. Các framework đơn giản hóa việc triển khai bằng cách cung cấp các công cụ mà bạn có thể sử dụng để triển khai giải pháp phụ trợ nhanh hơn.)
 
 NOTE Don’t worry if you don’t understand all the details of figure 1.5.
@@ -932,6 +934,7 @@ Use Spring Integration or Spring for Apache Kafka to more easily send messages t
 (Sử dụng Spring Integration hoặc Spring for Apache Kafka để gửi tin nhắn đến các chủ đề JMS hoặc Kafka của bạn dễ dàng hơn.)
 
 **Figure 1.6 The possibilities of using Spring in a backend application are endless, from exposing functionalities that other applications can call to managing the database access, and from securing the application to managing integration though third-party message brokers.**
+![](media/image23.png)
 (Hình 1.6 Khả năng sử dụng Spring trong một ứng dụng phụ trợ là vô tận, từ việc hiển thị các chức năng mà các ứng dụng khác có thể gọi đến việc quản lý quyền truy cập cơ sở dữ liệu và từ việc bảo mật ứng dụng đến quản lý tích hợp thông qua các nhà môi giới tin nhắn của bên thứ ba.)
 
 ### Using Spring In An Automation Test App
@@ -982,6 +985,7 @@ Jenkins notifies the team.
 (Jenkins thông báo cho nhóm.)
 
 **Figure 1.7 The team deploys the testing app in a test environment. A continuous integration tool like Jenkins executes the app regularly and sends feedback to the team. This way, the team is always aware of the system’s status, and they know if they break something during development.**
+![](media/image27.png)
 (Hình 1.7 Nhóm triển khai ứng dụng thử nghiệm trong môi trường thử nghiệm. Một công cụ tích hợp liên tục như Jenkins thực thi ứng dụng thường xuyên và gửi phản hồi cho nhóm. Bằng cách này, nhóm luôn biết được trạng thái của hệ thống và họ biết liệu mình có làm hỏng thứ gì đó trong quá trình phát triển hay không.)
 
 Such an application might become as complex as a backend app.
@@ -1021,6 +1025,7 @@ The testing app may use Spring Integration to send messages to queues or topics.
 (Ứng dụng thử nghiệm có thể sử dụng Spring Integration để gửi tin nhắn đến hàng đợi hoặc chủ đề.)
 
 **Figure 1.8 A testing app might need to connect to databases or communicate with other systems or the tested system. The developers can use components of the Spring ecosystem to simplify the implementations of these functionalities.**
+![](media/image30.png)
 (Hình 1.8 Ứng dụng thử nghiệm có thể cần kết nối với cơ sở dữ liệu hoặc liên lạc với các hệ thống khác hoặc hệ thống được thử nghiệm. Các nhà phát triển có thể sử dụng các thành phần của hệ sinh thái Spring để đơn giản hóa việc triển khai các chức năng này.)
 
 ### Using Spring For The Development Of A Desktop App
