@@ -378,30 +378,28 @@ add. The truth is that I’ve used them so many times I know them by heart. How-
 ([current/spring-framework-reference/core.html](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html)). Nói chung, các phần phụ thuộc của Spring là một phần của ID nhóm org.springframework.)
 
 With the dependency added to our project, we can create an instance of the Spring context. In the next listing, you can see how I’ve changed the main method to create the Spring context instance.
-(Với phần phụ thuộc được thêm vào dự án của chúng ta, chúng ta có thể tạo một phiên bản của bối cảnh Spring. Trong danh sách tiếp theo, bạn có thể thấy tôi đã thay đổi phương thức chính như thế nào để tạo phiên bản bối cảnh Spring.)
+(Sau khi đã thêm dependency vào dự án, chúng ta có thể tạo một đối tượng Spring context. Trong listing tiếp theo, bạn có thể thấy cách tôi thay đổi phương thức main để tạo đối tượng Spring context.)
 
 **Listing 2.6 Creating the instance of the Spring context**
-(**Liệt kê 2.6 Tạo cá thể của bối cảnh Spring**)
-
-public class Main {
-
-public static void main(String\[\] args) { var context =
-
-new AnnotationConfigApplicationContext();
+(**Listing 2.6 Tạo đối tượng Spring context**)
 
 **Creates an instance of the Spring context**
-(**Tạo một phiên bản của bối cảnh Mùa xuân**)
+(**Tạo một đối tượng Spring context**)
 
-<img src="media/image42.png" style="width:0.26167in;height:0.28167in" />Parrot p = new Parrot();
+```java
+public class Main {
 
+    public static void main(String[] args) {
+        var context = new AnnotationConfigApplicationContext();
+        Parrot p = new Parrot();
+    }
 }
-
-}
+```
 
 **NOTE** We use the AnnotationConfigApplicationContext class to create
-(**LƯU Ý** Chúng tôi sử dụng lớp AnnotationConfigApplicationContext để tạo)
+(**LƯU Ý** Chúng ta sử dụng class AnnotationConfigApplicationContext để tạo)
 the Spring context instance. Spring offers multiple implementations. Because in most cases you’ll use the AnnotationConfigApplicationContext class (the implementation that uses the most used today’s approach: annotations), we’ll focus on this one in this book. Also, I only tell you what you need to know for the current discussion. If you’re just getting started with Spring, my recom-mendation is to avoid getting into details with context implementations and these classes’ inheritance chains. Chances are that if you do you’ll get lost with unimportant details instead of focusing on the essential things.
-(ví dụ bối cảnh mùa xuân. Mùa xuân cung cấp nhiều triển khai. Bởi vì trong hầu hết các trường hợp, bạn sẽ sử dụng lớp AnnotationConfigApplicationContext (cách triển khai sử dụng cách tiếp cận được sử dụng nhiều nhất hiện nay: chú thích), nên chúng ta sẽ tập trung vào điều này trong cuốn sách này. Ngoài ra, tôi chỉ cho bạn biết những gì bạn cần biết cho cuộc thảo luận hiện tại. Nếu bạn mới bắt đầu với Spring, lời khuyên của tôi là tránh đi sâu vào chi tiết về cách triển khai ngữ cảnh và chuỗi kế thừa của các lớp này. Rất có thể nếu làm vậy bạn sẽ lạc lối với những chi tiết không quan trọng thay vì tập trung vào những điều thiết yếu.)
+(đối tượng Spring context. Spring cung cấp nhiều implementation khác nhau. Vì trong hầu hết các trường hợp bạn sẽ dùng class AnnotationConfigApplicationContext (implementation sử dụng cách tiếp cận phổ biến nhất hiện nay: annotation), nên trong cuốn sách này chúng ta sẽ tập trung vào class này. Ngoài ra, tôi chỉ nói với bạn những gì bạn cần biết cho phần thảo luận hiện tại. Nếu bạn mới bắt đầu với Spring, tôi khuyên bạn nên tránh đi quá sâu vào chi tiết của các implementation context và chuỗi kế thừa của các class này. Rất có khả năng nếu bạn làm vậy, bạn sẽ bị lạc vào những chi tiết không quan trọng thay vì tập trung vào những điều cốt lõi.)
 
 As presented in figure 2.8, you created an instance of Parrot, added the Spring con-text dependencies to your project, and created an instance of the Spring context. Your objective is to add the Parrot object to the context, which is the next step.
 (Như được trình bày trong hình 2.8, bạn đã tạo một phiên bản của Parrot, thêm các phụ thuộc văn bản ngữ cảnh Spring vào dự án của bạn và tạo một phiên bản của ngữ cảnh Spring. Mục tiêu của bạn là thêm đối tượng Parrot vào ngữ cảnh, đây là bước tiếp theo.)
@@ -506,16 +504,17 @@ The first step is to create a configuration class in the project. A Spring confi
 (Bước đầu tiên là tạo một lớp cấu hình trong dự án. Lớp cấu hình Spring được đặc trưng bởi thực tế là nó được chú thích bằng chú thích @Configuration. Chúng tôi sử dụng các lớp cấu hình để xác định các cấu hình khác nhau liên quan đến Spring cho dự án. Xuyên suốt cuốn sách, bạn sẽ học được những điều khác nhau mà bạn có thể cấu hình bằng cách sử dụng các lớp cấu hình. Hiện tại, chúng tôi chỉ tập trung vào việc thêm các phiên bản mới vào ngữ cảnh Spring. Danh sách tiếp theo chỉ cho bạn cách xác định lớp configu-ration. Tôi đặt tên lớp cấu hình này là ProjectConfig.)
 
 **Listing 2.7 Defining a configuration class for the project**
-(**Liệt kê 2.7 Xác định lớp cấu hình cho dự án**)
+(**Listing 2.7 Định nghĩa một class cấu hình cho dự án**)
 
+```java
 @Configuration
-
 public class ProjectConfig {
 
 }
+```
 
 **We use the @Configuration annotation to define this class as a Spring configuration class.**
-(**Chúng tôi sử dụng chú thích @Configuration để định nghĩa lớp này là lớp cấu hình Spring.**)
+(**Chúng ta sử dụng annotation @Configuration để định nghĩa class này là một class cấu hình của Spring.**)
 
 **NOTE** I separate the classes into different packages to make the
 (**LƯU Ý** Tôi tách các lớp thành các gói khác nhau để tạo)
@@ -534,28 +533,29 @@ long-term sup-ported Java version. More and more projects are adopting this vers
 (phiên bản Java được hỗ trợ lâu dài. Ngày càng có nhiều dự án áp dụng phiên bản này. Nhìn chung, tính năng cụ thể duy nhất tôi sử dụng trong các đoạn mã không hoạt động với phiên bản Java cũ hơn là tên loại dành riêng cho var. Tôi sử dụng var ở đây và ở đó để làm cho mã ngắn hơn và dễ đọc hơn, nhưng nếu bạn muốn sử dụng phiên bản Java cũ hơn (ví dụ: Java 8), bạn có thể thay thế var bằng loại được suy ra. Bằng cách này, bạn cũng sẽ làm cho các dự án hoạt động với Java 8.)
 
 **Listing 2.8 Defining the @Bean method**
-(**Liệt kê 2.8 Xác định phương thức @Bean**)
-
-@Configuration
-
-public class ProjectConfig { @Bean
+(**Listing 2.8 Định nghĩa method @Bean**)
 
 **By adding the @Bean annotation, we instruct Spring to call this method when at context initialization and add the returned value to the context.**
-(**Bằng cách thêm chú thích @Bean, chúng tôi hướng dẫn Spring gọi phương thức này khi khởi tạo ngữ cảnh và thêm giá trị trả về vào ngữ cảnh.**)
-
-Parrot parrot() {
-
-<img src="media/image50.png" style="width:0.26333in;height:0.30417in" />var p = new Parrot(); p.setName("Koko"); return p;
-
-}
-
-}
+(**Bằng cách thêm annotation @Bean, chúng ta chỉ dẫn Spring gọi method này khi khởi tạo context và thêm giá trị được trả về vào context.**)
 
 **Set a name for the parrot we’ll use later when we test the app.**
-(**Đặt tên cho chú vẹt mà chúng tôi sẽ sử dụng sau này khi thử nghiệm ứng dụng.**)
+(**Đặt tên cho con vẹt mà chúng ta sẽ dùng sau này khi kiểm thử ứng dụng.**)
 
 **Spring adds to its context the Parrot instance returned by the method.**
-(**Spring thêm vào ngữ cảnh của nó phiên bản Parrot được phương thức trả về.**)
+(**Spring thêm vào context của nó đối tượng Parrot được method trả về.**)
+
+```java
+@Configuration
+public class ProjectConfig {
+
+    @Bean
+    Parrot parrot() {
+        var p = new Parrot();
+        p.setName("Koko");
+        return p;
+    }
+}
+```
 
 Observe that the name I used for the method doesn’t contain a verb. You probably learned that a Java best practice is to put verbs in method names because the methods generally represent actions. But for methods we use to add beans in the Spring con-text, we don’t follow this convention. Such methods represent the object instances they return and that will now be part of the Spring context. The method’s name also becomes the bean’s name (as in listing 2.8, the bean’s name is now “parrot”). By con-vention, you can use nouns, and most often they have the same name as the class.
 (Lưu ý rằng tên tôi sử dụng cho phương thức không chứa động từ. Bạn có thể đã biết rằng cách tốt nhất trong Java là đặt động từ vào tên phương thức vì các phương thức này thường biểu thị các hành động. Nhưng đối với các phương pháp chúng tôi sử dụng để thêm đậu vào ngữ cảnh Mùa xuân, chúng tôi không tuân theo quy ước này. Các phương thức như vậy đại diện cho các thể hiện đối tượng mà chúng trả về và giờ đây sẽ là một phần của bối cảnh Spring. Tên của phương thức cũng trở thành tên của đậu (như trong danh sách 2.8, tên của đậu bây giờ là “con vẹt”). Theo quy ước, bạn có thể sử dụng danh từ và hầu hết chúng thường có cùng tên với lớp.)
@@ -567,43 +567,43 @@ We’ve implemented a configuration class in which we tell Spring the object ins
 (Chúng tôi đã triển khai một lớp cấu hình trong đó chúng tôi thông báo cho Spring phiên bản đối tượng cần trở thành một Bean. Bây giờ chúng ta cần đảm bảo Spring sử dụng lớp cấu hình này khi khởi tạo ngữ cảnh của nó. Danh sách tiếp theo chỉ cho bạn cách thay đổi cách khởi tạo ngữ cảnh Spring trong lớp chính để sử dụng lớp cấu hình mà chúng tôi đã triển khai trong hai bước đầu tiên.)
 
 **Listing 2.9 Initializing the Spring context based on the defined configuration class**
-(**Liệt kê 2.9 Khởi tạo bối cảnh Spring dựa trên lớp cấu hình đã xác định**)
-
-public class Main {
-
-public static void main(String\[\] args) { var context =
-
-new AnnotationConfigApplicationContext( ProjectConfig.class);
+(**Listing 2.9 Khởi tạo Spring context dựa trên class cấu hình đã định nghĩa**)
 
 **When creating the Spring context instance, send the configuration class as a parameter to instruct Spring to use it.**
-(**Khi tạo phiên bản ngữ cảnh Spring, hãy gửi lớp cấu hình dưới dạng tham số để hướng dẫn Spring sử dụng nó.**)
+(**Khi tạo đối tượng Spring context, hãy truyền class cấu hình như một tham số để chỉ dẫn Spring sử dụng nó.**)
 
-}
+```java
+public class Main {
 
+    public static void main(String[] args) {
+        var context =
+                new AnnotationConfigApplicationContext(ProjectConfig.class);
+    }
 }
+```
 
 To verify the Parrot instance is indeed part of the context now, you can refer to the instance and print its name in the console, as presented in the following listing.
 (Để xác minh phiên bản Parrot thực sự là một phần của ngữ cảnh, bạn có thể tham khảo phiên bản đó và in tên của nó trong bảng điều khiển, như được trình bày trong danh sách sau đây.)
 
 **Listing 2.10 Referring to the Parrot instance from the context**
-(**Liệt kê 2.10 Tham chiếu đến cá thể Parrot từ ngữ cảnh**)
-
-public class Main {
-
-public static void main(String\[\] args) { var context =
-
-<img src="media/image51.png" style="width:0.26167in;height:0.2825in" />new AnnotationConfigApplicationContext( ProjectConfig.class);
-
-Parrot p = context.getBean(Parrot.class);
+(**Listing 2.10 Tham chiếu đến đối tượng Parrot từ context**)
 
 **Gets a reference of a bean of type Parrot from the Spring context**
-(**Lấy tham chiếu của một loại đậu Parrot từ ngữ cảnh Spring**)
+(**Lấy một tham chiếu tới một bean kiểu Parrot từ Spring context**)
 
-System.out.println(p.getName());
+```java
+public class Main {
 
+    public static void main(String[] args) {
+        var context =
+                new AnnotationConfigApplicationContext(ProjectConfig.class);
+
+        Parrot p = context.getBean(Parrot.class);
+
+        System.out.println(p.getName());
+    }
 }
-
-}
+```
 
 Now you’ll see the name you gave to the parrot you added in the context in the con-sole, in my case Koko.
 (Bây giờ bạn sẽ thấy tên bạn đặt cho con vẹt mà bạn đã thêm trong ngữ cảnh trên bảng điều khiển, trong trường hợp của tôi là Koko.)
@@ -637,39 +637,36 @@ The next listing shows you how I changed the configuration class to also add a b
 (Danh sách tiếp theo cho bạn thấy cách tôi thay đổi lớp cấu hình để thêm một Bean kiểu String và một Bean kiểu Integer.)
 
 **Listing 2.11 Adding two more beans to the context**
-(**Liệt kê 2.11 Thêm hai loại đậu nữa vào ngữ cảnh**)
-
-@Configuration
-
-public class ProjectConfig {
-
-@Bean
-
-Parrot parrot() {
-
-var p = new Parrot(); p.setName("Koko"); return p;
-
-<img src="media/image55.png" style="width:0.26167in;height:0.28167in" />}
-
-@Bean
-
-String hello() { return "Hello";
+(**Listing 2.11 Thêm hai bean nữa vào context**)
 
 **Adds the string “Hello” to the Spring context**
-(**Thêm chuỗi “Xin chào” vào ngữ cảnh mùa xuân**)
-
-}
-
-<img src="media/image56.png" style="width:0.26333in;height:0.2775in" />@Bean
-
-Integer ten() { return 10;
+(**Thêm chuỗi “Hello” vào Spring context**)
 
 **Adds the integer 10 to the Spring context**
-(**Thêm số nguyên 10 vào ngữ cảnh Spring**)
+(**Thêm số nguyên 10 vào Spring context**)
 
-}
+```java
+@Configuration
+public class ProjectConfig {
 
+    @Bean
+    Parrot parrot() {
+        var p = new Parrot();
+        p.setName("Koko");
+        return p;
+    }
+
+    @Bean
+    String hello() {
+        return "Hello";
+    }
+
+    @Bean
+    Integer ten() {
+        return 10;
+    }
 }
+```
 
 **NOTE** Remember the Spring context’s purpose: we add the instances
 (**LƯU Ý** Hãy nhớ mục đích của bối cảnh Mùa xuân: chúng tôi thêm các phiên bản)
@@ -680,29 +677,31 @@ You can now refer to these two new beans in the same way we did with the parrot.
 (Bây giờ bạn có thể tham khảo hai loại đậu mới này giống như cách chúng ta đã làm với chú vẹt. Danh sách tiếp theo chỉ cho bạn cách thay đổi phương thức chính để in các giá trị của đậu mới.)
 
 **Listing 2.12 Printing the two new beans in the console**
-(**Liệt kê 2.12 In hai hạt đậu mới trong bảng điều khiển**)
-
-public class Main {
-
-public static void main(String\[\] args) {
-
-var context = new AnnotationConfigApplicationContext( ProjectConfig.class);
-
-Parrot p = context.getBean(Parrot.class); System.out.println(p.getName());
-
-String s = context.getBean(String.class); System.out.println(s);
-
-Integer n = context.getBean(Integer.class); System.out.println(n);
-
-}
-
-}
+(**Listing 2.12 In hai bean mới ra console**)
 
 **You don’t need to do any explicit casting. Spring looks for a bean of the type you requested in its**
-(**Bạn không cần phải thực hiện bất kỳ thao tác casting rõ ràng nào. Spring tìm kiếm loại đậu bạn yêu cầu trong**)
+(**Bạn không cần ép kiểu tường minh. Spring sẽ tìm một bean có kiểu mà bạn yêu cầu trong**)
 
 **context. If such a bean doesn’t exist, Spring will throw an exception.**
-(**bối cảnh. Nếu loại đậu đó không tồn tại, Spring sẽ đưa ra một ngoại lệ.**)
+(**context. Nếu bean như vậy không tồn tại, Spring sẽ ném ra một exception.**)
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+        var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
+
+        Parrot p = context.getBean(Parrot.class);
+        System.out.println(p.getName());
+
+        String s = context.getBean(String.class);
+        System.out.println(s);
+
+        Integer n = context.getBean(Integer.class);
+        System.out.println(n);
+    }
+}
+```
 
 Running the app now, the values of the three beans will be printed in the console, as shown in the next code snippet.
 (Chạy ứng dụng ngay bây giờ, giá trị của ba hạt đậu sẽ được in trong bảng điều khiển, như minh họa trong đoạn mã tiếp theo.)

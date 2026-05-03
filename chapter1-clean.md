@@ -685,20 +685,11 @@ To manage users’ transactions, the backend application needs to communicate wi
 In figure 1.5, you can visualize the architecture of such a system.
 (Trong hình 1.5, bạn có thể hình dung kiến ​​trúc của một hệ thống như vậy.)
 
-The users interact with the client apps to manage their data.
-(Người dùng tương tác với các ứng dụng khách để quản lý dữ liệu của họ.)
-
-Other backend solutions make direct requests to your backend app.
-(Các giải pháp phụ trợ khác đưa ra yêu cầu trực tiếp tới ứng dụng phụ trợ của bạn.)
-
-Your backend app directly communicates with other backend solutions.
-(Ứng dụng phụ trợ của bạn giao tiếp trực tiếp với các giải pháp phụ trợ khác.)
-
-The client app make requests to your backend app to resolve users’ requests.
-(Ứng dụng khách đưa ra yêu cầu tới ứng dụng phụ trợ của bạn để giải quyết yêu cầu của người dùng.)
-
-Your backend app uses a message broker and adds messages in a queue or topic.
-(Ứng dụng phụ trợ của bạn sử dụng trình trung chuyển tin nhắn và thêm tin nhắn vào hàng đợi hoặc chủ đề.)
+- The users interact with the client apps to manage their data. (Người dùng tương tác với các ứng dụng khách để quản lý dữ liệu của họ.)
+- Other backend solutions make direct requests to your backend app. (Các giải pháp phụ trợ khác đưa ra yêu cầu trực tiếp tới ứng dụng phụ trợ của bạn.)
+- Your backend app directly communicates with other backend solutions. (Ứng dụng phụ trợ của bạn giao tiếp trực tiếp với các giải pháp phụ trợ khác.)
+- The client app makes requests to your backend app to resolve users’ requests. (Ứng dụng khách đưa ra yêu cầu tới ứng dụng phụ trợ của bạn để giải quyết yêu cầu của người dùng.)
+- Your backend app uses a message broker and adds messages in a queue or topic. (Ứng dụng phụ trợ của bạn sử dụng trình trung chuyển tin nhắn và thêm tin nhắn vào hàng đợi hoặc chủ đề.)
 
 **Figure 1.5 A backend app interacts in several ways with other apps and uses databases to manage data. Usually, a backend app is complex and may require the use of various technologies. Frameworks simplify the implementation by providing tools you can use to implement the backend solution faster.**
 ![](media/image19.png)
@@ -728,23 +719,12 @@ The framework basically offers you everything you need in such implementations a
 Figure 1.6 indicates the possibilities of using Spring for a backend app.
 (Hình 1.6 chỉ ra khả năng sử dụng Spring cho ứng dụng phụ trợ.)
 
-Use the Spring IoC container to manage object instances easier and glue in other functionalities Spring provides.
-(Sử dụng bộ chứa Spring IoC để quản lý các phiên bản đối tượng dễ dàng hơn và kết hợp các chức năng khác mà Spring cung cấp.)
-
-Use Spring MVC or Spring WebFlux to implement the REST endpoints called by the client apps or other backend solutions.
-(Sử dụng Spring MVC hoặc Spring WebFlux để triển khai các điểm cuối REST được ứng dụng khách hoặc các giải pháp phụ trợ khác gọi.)
-
-Use Spring Security to implement the authentication and authorization configurations.
-(Sử dụng Spring Security để triển khai cấu hình xác thực và ủy quyền.)
-
-Use Spring Data to connect to the SQL and NoSQL databases your backend app uses to persist the data.
-(Sử dụng Spring Data để kết nối với cơ sở dữ liệu SQL và NoSQL mà ứng dụng phụ trợ của bạn sử dụng để duy trì dữ liệu.)
-
-Use Spring Boot to ease the complexity of your configurations and write less code to implement the app.
-(Sử dụng Spring Boot để giảm bớt độ phức tạp trong cấu hình của bạn và viết ít mã hơn để triển khai ứng dụng.)
-
-Use Spring Integration or Spring for Apache Kafka to more easily send messages to your JMS or Kafka topics.
-(Sử dụng Spring Integration hoặc Spring for Apache Kafka để gửi tin nhắn đến các chủ đề JMS hoặc Kafka của bạn dễ dàng hơn.)
+- Use the Spring IoC container to manage object instances easier and glue in other functionalities Spring provides. (Sử dụng bộ chứa Spring IoC để quản lý các phiên bản đối tượng dễ dàng hơn và kết hợp các chức năng khác mà Spring cung cấp.)
+- Use Spring MVC or Spring WebFlux to implement the REST endpoints called by the client apps or other backend solutions. (Sử dụng Spring MVC hoặc Spring WebFlux để triển khai các điểm cuối REST được ứng dụng khách hoặc các giải pháp phụ trợ khác gọi.)
+- Use Spring Security to implement the authentication and authorization configurations. (Sử dụng Spring Security để triển khai cấu hình xác thực và ủy quyền.)
+- Use Spring Data to connect to the SQL and NoSQL databases your backend app uses to persist the data. (Sử dụng Spring Data để kết nối với cơ sở dữ liệu SQL và NoSQL mà ứng dụng phụ trợ của bạn sử dụng để duy trì dữ liệu.)
+- Use Spring Boot to ease the complexity of your configurations and write less code to implement the app. (Sử dụng Spring Boot để giảm bớt độ phức tạp trong cấu hình của bạn và viết ít mã hơn để triển khai ứng dụng.)
+- Use Spring Integration or Spring for Apache Kafka to more easily send messages to your JMS or Kafka topics. (Sử dụng Spring Integration hoặc Spring for Apache Kafka để gửi tin nhắn đến các chủ đề JMS hoặc Kafka của bạn dễ dàng hơn.)
 
 **Figure 1.6 The possibilities of using Spring in a backend application are endless, from exposing functionalities that other applications can call to managing the database access, and from securing the application to managing integration though third-party message brokers.**
 ![](media/image7.png)
@@ -782,20 +762,10 @@ While developers add new functionalities to the system, this testing app is also
 The developers eventually use an integration tool and schedule the app to run regu-larly to get feedback as soon as possible for their changes (figure 1.7).
 (Cuối cùng, các nhà phát triển sử dụng một công cụ tích hợp và lên lịch chạy ứng dụng thường xuyên để nhận phản hồi sớm nhất có thể về những thay đổi của họ (hình 1.7).)
 
-The team continuously adds new tests to cover all the flows developed in the system.
-(Nhóm liên tục bổ sung các thử nghiệm mới để bao quát tất cả các luồng được phát triển trong hệ thống.)
-
-Usually, the app is stored in a repository of a version management system like Git.
-(Thông thường, ứng dụng được lưu trữ trong kho lưu trữ của hệ thống quản lý phiên bản như Git.)
-
-A continuous integration tool like Jenkins regularly runs all the tests.
-(Một công cụ tích hợp liên tục như Jenkins thường xuyên chạy tất cả các bài kiểm thử.)
-
-If a test is failing,
-(Nếu một bài kiểm tra thất bại,)
-
-Jenkins notifies the team.
-(Jenkins thông báo cho nhóm.)
+- The team continuously adds new tests to cover all the flows developed in the system. (Nhóm liên tục bổ sung các thử nghiệm mới để bao quát tất cả các luồng được phát triển trong hệ thống.)
+- Usually, the app is stored in a repository of a version management system like Git. (Thông thường, ứng dụng được lưu trữ trong kho lưu trữ của hệ thống quản lý phiên bản như Git.)
+- A continuous integration tool like Jenkins regularly runs all the tests. (Một công cụ tích hợp liên tục như Jenkins thường xuyên chạy tất cả các bài kiểm thử.)
+- If a test is failing, Jenkins notifies the team. (Nếu một bài kiểm tra thất bại, Jenkins thông báo cho nhóm.)
 
 **Figure 1.7 The team deploys the testing app in a test environment. A continuous integration tool like Jenkins executes the app regularly and sends feedback to the team. This way, the team is always aware of the system’s status, and they know if they break something during development.**
 ![](media/image8.png)
@@ -828,14 +798,9 @@ It could send messages to queues or topics of a broker system to simulate specif
 (Remember, it’s okay if this looks too advanced; meaning will be clarified as you progress through the book).
 ((Hãy nhớ rằng, điều này có vẻ quá cao cấp cũng không sao; ý nghĩa sẽ được làm rõ khi bạn đọc hết cuốn sách).)
 
-The testing app may use Spring MVC to simulate calls from other systems.
-(Ứng dụng thử nghiệm có thể sử dụng Spring MVC để mô phỏng cuộc gọi từ các hệ thống khác.)
-
-The testing app may use Spring Data to connect to the SQL and NoSQL database your backend app uses to persist the data.
-(Ứng dụng thử nghiệm có thể sử dụng Spring Data để kết nối với cơ sở dữ liệu SQL và NoSQL mà ứng dụng phụ trợ của bạn sử dụng để duy trì dữ liệu.)
-
-The testing app may use Spring Integration to send messages to queues or topics.
-(Ứng dụng thử nghiệm có thể sử dụng Spring Integration để gửi tin nhắn đến hàng đợi hoặc chủ đề.)
+- The testing app may use Spring MVC to simulate calls from other systems. (Ứng dụng thử nghiệm có thể sử dụng Spring MVC để mô phỏng cuộc gọi từ các hệ thống khác.)
+- The testing app may use Spring Data to connect to the SQL and NoSQL database your backend app uses to persist the data. (Ứng dụng thử nghiệm có thể sử dụng Spring Data để kết nối với cơ sở dữ liệu SQL và NoSQL mà ứng dụng phụ trợ của bạn sử dụng để duy trì dữ liệu.)
+- The testing app may use Spring Integration to send messages to queues or topics. (Ứng dụng thử nghiệm có thể sử dụng Spring Integration để gửi tin nhắn đến hàng đợi hoặc chủ đề.)
 
 **Figure 1.8 A testing app might need to connect to databases or communicate with other systems or the tested system. The developers can use components of the Spring ecosystem to simplify the implementations of these functionalities.**
 ![](media/image8.1.png)
@@ -1039,11 +1004,8 @@ A new framework appears, and it’s popular, and everyone uses it, so why should
 You can, but you need to attentively analyze what you want to achieve by changing something that works.
 (Bạn có thể, nhưng bạn cần phân tích kỹ lưỡng những gì bạn muốn đạt được bằng cách thay đổi điều gì đó có hiệu quả.)
 
-In some cases, like my story from section
-(Trong một số trường hợp, như câu chuyện của tôi ở phần)
-
-1.1, it could be helpful to change your app and make it rely on a specific framework.
-(1.1, việc thay đổi ứng dụng của bạn và làm cho ứng dụng dựa vào một framework cụ thể có thể sẽ hữu ích.)
+In some cases, like my story from section 1.1, it could be helpful to change your app and make it rely on a specific framework.
+(Trong một số trường hợp, như câu chuyện của tôi ở phần 1.1, việc thay đổi ứng dụng của bạn và làm cho ứng dụng dựa vào một framework cụ thể có thể sẽ hữu ích.)
 
 As long as this change brings a benefit, do it!
 (Chỉ cần sự thay đổi này mang lại lợi ích thì hãy thực hiện!)
@@ -1116,8 +1078,11 @@ But others strongly pushed the decision to use Hibernate.
 It was quite popular, so why not to use it?
 (Nó khá phổ biến, vậy tại sao không sử dụng nó?)
 
-(Actually it still is one of the most popular frameworks of its kind, and you’ll learn about integrating it with Spring in chapter 13.) I could see changing that code to a completely new methodology would be a challenge.
-((Trên thực tế, nó vẫn là một trong những framework phổ biến nhất thuộc loại này và bạn sẽ tìm hiểu về cách tích hợp nó với Spring ở chương 13.) Tôi có thể thấy việc thay đổi mã đó sang một phương pháp hoàn toàn mới sẽ là một thách thức.)
+(Actually it still is one of the most popular frameworks of its kind, and you’ll learn about integrating it with Spring in chapter 13.)
+((Trên thực tế, nó vẫn là một trong những framework phổ biến nhất thuộc loại này và bạn sẽ tìm hiểu về cách tích hợp nó với Spring ở chương 13).)
+
+I could see changing that code to a completely new methodology would be a challenge.
+(Tôi có thể thấy việc thay đổi mã đó sang một phương pháp hoàn toàn mới sẽ là một thách thức.)
 
 Moreover, I could see no benefits.
 (Hơn nữa, tôi không thể thấy được lợi ích gì.)
