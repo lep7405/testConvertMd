@@ -437,6 +437,8 @@ For example, Spring can intercept a specific method to log any error that might 
 Without IoC
 (Không có IoC)
 
+![](media/image4.png)
+
 The application executes and controls (uses) the dependencies it needs.
 (Ứng dụng thực thi và kiểm soát (sử dụng) các phần phụ thuộc mà nó cần.)
 
@@ -451,6 +453,8 @@ ControlsDependencyDependencyDependencyControlsDependencyDependencyDependencyAppl
 
 ControlsApplicationControlsApplicationWith IoC
 (Điều khiểnỨng dụngĐiều khiểnỨng dụngVới IoC)
+
+![](media/image6.png)
 
 The application executes being controlled by the framework (dependency).
 (Ứng dụng thực thi được kiểm soát bởi framework (phụ thuộc).)
@@ -935,7 +939,7 @@ Use Spring Integration or Spring for Apache Kafka to more easily send messages t
 (Sử dụng Spring Integration hoặc Spring for Apache Kafka để gửi tin nhắn đến các chủ đề JMS hoặc Kafka của bạn dễ dàng hơn.)
 
 **Figure 1.6 The possibilities of using Spring in a backend application are endless, from exposing functionalities that other applications can call to managing the database access, and from securing the application to managing integration though third-party message brokers.**
-![](media/image23.png)
+![](media/image7.png)
 (Hình 1.6 Khả năng sử dụng Spring trong một ứng dụng phụ trợ là vô tận, từ việc hiển thị các chức năng mà các ứng dụng khác có thể gọi đến việc quản lý quyền truy cập cơ sở dữ liệu và từ việc bảo mật ứng dụng đến quản lý tích hợp thông qua các nhà môi giới tin nhắn của bên thứ ba.)
 
 ### Using Spring In An Automation Test App
@@ -986,7 +990,7 @@ Jenkins notifies the team.
 (Jenkins thông báo cho nhóm.)
 
 **Figure 1.7 The team deploys the testing app in a test environment. A continuous integration tool like Jenkins executes the app regularly and sends feedback to the team. This way, the team is always aware of the system’s status, and they know if they break something during development.**
-![](media/image27.png)
+![](media/image8.png)
 (Hình 1.7 Nhóm triển khai ứng dụng thử nghiệm trong môi trường thử nghiệm. Một công cụ tích hợp liên tục như Jenkins thực thi ứng dụng thường xuyên và gửi phản hồi cho nhóm. Bằng cách này, nhóm luôn biết được trạng thái của hệ thống và họ biết liệu mình có làm hỏng thứ gì đó trong quá trình phát triển hay không.)
 
 Such an application might become as complex as a backend app.
@@ -1026,7 +1030,7 @@ The testing app may use Spring Integration to send messages to queues or topics.
 (Ứng dụng thử nghiệm có thể sử dụng Spring Integration để gửi tin nhắn đến hàng đợi hoặc chủ đề.)
 
 **Figure 1.8 A testing app might need to connect to databases or communicate with other systems or the tested system. The developers can use components of the Spring ecosystem to simplify the implementations of these functionalities.**
-![](media/image30.png)
+![](media/image8.1.png)
 (Hình 1.8 Ứng dụng thử nghiệm có thể cần kết nối với cơ sở dữ liệu hoặc liên lạc với các hệ thống khác hoặc hệ thống được thử nghiệm. Các nhà phát triển có thể sử dụng các thành phần của hệ sinh thái Spring để đơn giản hóa việc triển khai các chức năng này.)
 
 ### Using Spring For The Development Of A Desktop App
