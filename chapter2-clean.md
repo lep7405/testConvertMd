@@ -70,7 +70,7 @@ Let’s start at the very beginning. First, as with developing any other app, yo
 Let’s start by creating a new project. You create a new project in IntelliJ from File \> New \> Project. This will get you to a window like the one in figure 2.1.
 (Hãy bắt đầu bằng việc tạo một dự án mới. Bạn tạo một dự án mới trong IntelliJ từ File \> New \> Project. Thao tác này sẽ đưa bạn đến một cửa sổ giống như trong hình 2.1.)
 
-![](media/image35.jpeg)
+![](media/chapter-2/image1.png)
 
 **Figure 2.1 Creating a new Maven project. After going to File \> New \> Project, you get to this window, where you need to select the type of the project from the left panel. In our case, we choose Maven. In the upper part of the window, you select the JDK you wish to use to compile and run the project.**
 (**Hình 2.1 Tạo một dự án Maven mới. Sau khi vào File \> New \> Project, bạn sẽ đến cửa sổ này, nơi bạn cần chọn loại dự án ở bảng bên trái. Trong trường hợp của chúng ta, chúng ta chọn Maven. Ở phần trên của cửa sổ, bạn chọn JDK mà mình muốn dùng để biên dịch và chạy dự án.**)
@@ -97,7 +97,7 @@ name and choosing the location in which to store it, for a Maven project you can
 **You need to give a name to your project and store it somewhere in your computer.**
 (**Bạn cần đặt tên cho dự án của mình và lưu nó ở đâu đó trên máy tính.**)
 
-![](media/image36.png)
+![](media/chapter-2/image2.png)
 
 **Figure 2.2 Before you finish creating your project, you need to give it a name and specify where you want your IDE to store the project. Optionally, you can give your project a group ID, an artifact ID, and a version. You then press the Finish button in the lower right corner to complete creating the project.**
 (**Hình 2.2 Trước khi hoàn tất việc tạo dự án, bạn cần đặt tên cho nó và chỉ định nơi bạn muốn IDE lưu dự án. Bạn cũng có thể tùy chọn cung cấp group ID, artifact ID và version cho dự án. Sau đó bạn nhấn nút Finish ở góc dưới bên phải để hoàn tất việc tạo dự án.**)
@@ -131,7 +131,7 @@ folder contains the Java code and the configurations separately into two differe
 discuss more about unit tests and how to define them in chapter 15).
 (sẽ bàn kỹ hơn về unit test và cách định nghĩa chúng ở chương 15).)
 
-![](media/image37.jpeg)
+![](media/chapter-2/image3.png)
 
 **All your source code goes into this folder.**
 (**Toàn bộ mã nguồn của bạn nằm trong thư mục này.**)
@@ -163,7 +163,7 @@ Figure 2.4 shows you how to add new source code to the “main/java” folder of
 **Inside the “java” folder you create your usual Java packages and classes. Here, I’ve created**
 (**Bên trong thư mục “java”, bạn tạo các package và class Java thông thường của mình. Ở đây, tôi đã tạo**)
 
-![](media/image38.jpeg)
+![](media/chapter-2/image4.png)
 
 **a package named “main” and a new Main class inside it.**
 (**một package tên là “main” và một class Main mới bên trong nó.**)
@@ -197,7 +197,7 @@ In the projects we create in this book, we use plenty of external dependencies: 
 With this pom.xml file, the project doesn’t use any external dependency. If you look in the project’s external dependencies folder, you should only see the JDK (figure 2.5).
 (Với tệp pom.xml này, dự án không sử dụng bất kỳ dependency bên ngoài nào. Nếu bạn nhìn vào thư mục external dependencies của dự án, bạn chỉ nên thấy JDK (hình 2.5).)
 
-![](media/image39.jpeg)
+![](media/chapter-2/image5.png)
 
 **Initially, inside the External Libraries section of your project, you only have**
 (**Ban đầu, bên trong phần External Libraries của dự án, bạn chỉ có**)
@@ -260,7 +260,7 @@ Once you’ve added the dependency in the pom.xml file, as presented in the prev
 Now we can move to the next section, where we discuss the basics of the Spring context. You’ll create Maven projects, and you’ll learn to use a Spring dependency named spring-context, to manage the Spring context.
 (Bây giờ chúng ta có thể chuyển sang phần tiếp theo, nơi chúng ta thảo luận về những điều cơ bản của Spring context. Bạn sẽ tạo các dự án Maven, và bạn sẽ học cách sử dụng một dependency của Spring có tên là spring-context để quản lý Spring context.)
 
-![](media/image40.jpeg)
+![](media/chapter-2/image6.png)
 
 **Adding the Spring context dependency**
 (**Việc thêm dependency Spring context**)
@@ -298,7 +298,9 @@ We create a Maven project and define a class. Because it’s funny to imagine, I
 **We’ll start by independently creating an object of the type Parrot and the Spring context.**
 (**Chúng ta sẽ bắt đầu bằng cách tạo riêng một đối tượng kiểu Parrot và Spring context.**)
 
-<img src="media/image41.png" style="width:0.35261in;height:0.3526in" />**The Spring context is initially empty.**
+![](media/chapter-2/image7.png)
+
+**The Spring context is initially empty.**
 (**Ban đầu Spring context là rỗng.**)
 
 **Later, we move the Parrot instance into the context to let Spring know the instance and be able to manage it for us.**
@@ -416,7 +418,9 @@ As presented in figure 2.8, you created an instance of Parrot, added the Spring 
 **Adding the parrot instance in the Spring context will allow Spring to “see” the instance.**
 (**Việc thêm phiên bản vẹt vào ngữ cảnh Spring sẽ cho phép Spring “nhìn thấy” phiên bản đó.**)
 
-<img src="media/image43.png" style="width:0.34501in;height:0.34375in" />![](media/image44.png)**Spring context**
+![](media/chapter-2/image8.png)
+
+**Spring context**
 
 **You defined the Spring context, but it’s now empty.**
 (**Bạn đã xác định bối cảnh Spring nhưng hiện tại nó trống.**)
@@ -461,7 +465,9 @@ sec-tion of the live book.
 
 public class ProjectConfig {
 
-![](media/image47.png)@**Bean**
+![](media/chapter-2/image9.png)
+
+@**Bean**
 
 Parrot parrot() {
 
@@ -610,7 +616,7 @@ validate that our implementations work as desired. The projects in this book imp
 As in the previous example, you can add any kind of object to the Spring context (fig-ure 2.10). Let’s also add a String and an Integer and see that it’s working.
 (Như trong ví dụ trước, bạn có thể thêm bất kỳ loại đối tượng nào vào bối cảnh Spring (hình 2.10). Chúng ta cũng hãy thêm Chuỗi và Số nguyên và xem nó có hoạt động không.)
 
-![](media/image52.png)
+![](media/chapter-2/image10.png)
 
 **Adding more beans of different types into the Spring context**
 (**Thêm nhiều loại đậu khác nhau vào bối cảnh Mùa xuân**)
@@ -729,7 +735,9 @@ parrot2
 parrot3
 (vẹt3)
 
-<img src="media/image57.png" style="width:3.09421in;height:1.30151in" />**Figure 2.11 You can add more beans of the same type to the Spring context by using multiple methods annotated with @Bean. Each instance will have a unique identifier. To refer to them afterward, you’ll need to use the beans’ identifiers.**
+![](media/chapter-2/image11.png)
+
+**Figure 2.11 You can add more beans of the same type to the Spring context by using multiple methods annotated with @Bean. Each instance will have a unique identifier. To refer to them afterward, you’ll need to use the beans’ identifiers.**
 
 **NOTE** Don’t confuse the name of the bean with the name of the
 (**LƯU Ý** Đừng nhầm lẫn tên của đậu với tên của)
@@ -913,7 +921,7 @@ Let’s take our example with the Parrot class. We can add an instance of the cl
 **STEP 1**
 (**BƯỚC 1**)
 
-![](media/image60.png)
+![](media/chapter-2/image12.png)
 
 **@Component**
 (**@Thành phần**)
@@ -939,84 +947,85 @@ public class Parrot {
 (**Hình 2.12 Khi sử dụng chú thích khuôn mẫu, hãy xem xét hai bước. Đầu tiên, sử dụng chú thích khuôn mẫu (@Component) để chú thích lớp mà bạn muốn Spring thêm đậu vào ngữ cảnh của nó. Thứ hai, sử dụng chú thích @ComponentScan để cho Spring biết nơi tìm các lớp được chú thích bằng chú thích khuôn mẫu.**)
 
 The next listing shows you how to use the @Component annotation for the Parrot class. You can find this example in the project “sq-ch2-ex6.”
-(Danh sách tiếp theo chỉ cho bạn cách sử dụng chú thích @Component cho lớp Parrot. Bạn có thể tìm thấy ví dụ này trong dự án “sq-ch2-ex6.”)
+(Listing tiếp theo cho bạn thấy cách sử dụng annotation @Component cho class Parrot. Bạn có thể tìm thấy ví dụ này trong dự án “sq-ch2-ex6”.)
 
 **Listing 2.16 Using a stereotype annotation for the Parrot class**
-(**Liệt kê 2.16 Sử dụng chú thích khuôn mẫu cho lớp Parrot**)
-
-@Component
-
-public class Parrot { private String name;
-
-public String getName() { return name;
-(chuỗi công khai getName() { tên trả về;)
+(**Listing 2.16 Sử dụng stereotype annotation cho class Parrot**)
 
 **By using the @Component annotation over the class, we instruct Spring to create an instance of this class and add it to its context.**
-(**Bằng cách sử dụng chú thích @Component trên lớp, chúng tôi hướng dẫn Spring tạo một phiên bản của lớp này và thêm nó vào ngữ cảnh của nó.**)
+(**Bằng cách sử dụng annotation @Component trên class, chúng ta chỉ dẫn Spring tạo một đối tượng của class này và thêm nó vào context.**)
 
+```java
+@Component
+public class Parrot {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
-
-public void setName(String name) { this.name = name;
-
-}
-
-}
+```
 
 But wait! This code won’t work just yet. By default, Spring doesn’t search for classes annotated with stereotype annotations, so if we just leave the code as-is, Spring won’t add a bean of type Parrot in its context. To tell Spring it needs to search for classes annotated with stereotype annotations, we use the @ComponentScan annotation over the configu-ration class. Also, with the @ComponentScan annotation, we tell Spring where to look for these classes. We enumerate the packages where we defined the classes with stereotype annotations. The next listing shows you how to use the @ComponentScan annotation over the configuration class of the project. In my case, the name of the package is “main.”
-(Nhưng chờ đã! Mã này chưa hoạt động. Theo mặc định, Spring không tìm kiếm các lớp được chú thích bằng các chú thích khuôn mẫu, vì vậy nếu chúng ta chỉ để nguyên mã, Spring sẽ không thêm một loại đậu Parrot vào ngữ cảnh của nó. Để báo cho Spring biết nó cần tìm kiếm các lớp được chú thích bằng các chú thích khuôn mẫu, chúng tôi sử dụng chú thích @ComponentScan trên lớp configu-ration. Ngoài ra, với chú thích @ComponentScan, chúng tôi cho Spring biết nơi tìm các lớp này. Chúng tôi liệt kê các gói mà chúng tôi đã xác định các lớp bằng các chú thích khuôn mẫu. Danh sách tiếp theo chỉ cho bạn cách sử dụng chú thích @ComponentScan trên lớp cấu hình của dự án. Trong trường hợp của tôi, tên của gói là “chính”.)
+(Nhưng chờ đã! Đoạn code này vẫn chưa hoạt động ngay. Mặc định, Spring không tìm kiếm các class được gắn stereotype annotation, vì vậy nếu chúng ta cứ để code như vậy, Spring sẽ không thêm bean kiểu Parrot vào context. Để nói với Spring rằng nó cần tìm kiếm các class được gắn stereotype annotation, chúng ta dùng annotation @ComponentScan trên class cấu hình. Ngoài ra, với annotation @ComponentScan, chúng ta nói cho Spring biết nơi cần tìm các class này. Chúng ta liệt kê các package nơi chúng ta đã định nghĩa các class có stereotype annotation. Listing tiếp theo cho bạn thấy cách dùng annotation @ComponentScan trên class cấu hình của dự án. Trong trường hợp của tôi, tên package là “main”.)
 
 **Listing 2.17 Using the @ComponentScan annotation to tell Spring where to look**
-(**Liệt kê 2.17 Sử dụng chú thích @ComponentScan để cho Spring biết nơi cần tìm**)
+(**Listing 2.17 Sử dụng annotation @ComponentScan để nói cho Spring biết nơi cần tìm**)
 
+```java
 @Configuration
-
-@ComponentScan(basePackages = "main") public class ProjectConfig {
+@ComponentScan(basePackages = "main")
+public class ProjectConfig {
 
 }
+```
 
 Now you told Spring the following:
-(Bây giờ bạn đã nói với Spring như sau:)
+(Bây giờ bạn đã nói với Spring những điều sau:)
 
 **Using the basePackages attribute of the annotation, we tell Spring where to look for classes annotated with stereotype annotations.**
-(**Bằng cách sử dụng thuộc tính basePackages của chú thích, chúng tôi cho Spring biết nơi tìm các lớp được chú thích bằng chú thích khuôn mẫu.**)
+(**Bằng cách sử dụng thuộc tính basePackages của annotation, chúng ta nói cho Spring biết nơi cần tìm các class được gắn stereotype annotation.**)
 
 **1** Which classes to add an instance to its context (Parrot)
-(**1** Những lớp nào cần thêm một thể hiện vào ngữ cảnh của nó (Vẹt))
+(**1** Class nào cần thêm một đối tượng vào context của nó (Parrot))
 
 **2** Where to find these classes (using @ComponentScan)
-(**2** Nơi tìm các lớp này (sử dụng @ComponentScan))
+(**2** Tìm các class này ở đâu (bằng cách sử dụng @ComponentScan))
 
 **NOTE** We don’t need methods anymore to define the beans. And it now
-(**LƯU Ý** Chúng ta không cần các phương thức để xác định các hạt nữa. Và bây giờ)
+(**LƯU Ý** Chúng ta không cần method nữa để định nghĩa bean. Và bây giờ)
 looks like this approach is better because you achieve the same thing by writ-ing less code. But wait until the end of this chapter. You’ll learn that both approaches are useful, depending on the scenario.
-(có vẻ như cách tiếp cận này tốt hơn vì bạn đạt được điều tương tự bằng cách viết ít mã hơn. Nhưng hãy đợi đến cuối chương này. Bạn sẽ biết rằng cả hai cách tiếp cận đều hữu ích, tùy thuộc vào tình huống.)
+(có vẻ như cách tiếp cận này tốt hơn vì bạn đạt được cùng một kết quả nhưng viết ít code hơn. Nhưng hãy chờ đến cuối chương này. Bạn sẽ học rằng cả hai cách tiếp cận đều hữu ích, tùy theo tình huống.)
 
 You can continue writing the main method as presented in the following listing to prove that Spring creates and adds the bean in its context.
-(Bạn có thể tiếp tục viết phương thức main như được trình bày trong danh sách sau để chứng minh rằng Spring tạo và thêm Bean vào ngữ cảnh của nó.)
+(Bạn có thể tiếp tục viết phương thức main như được trình bày trong listing sau để chứng minh rằng Spring tạo và thêm bean vào context của nó.)
 
 **Listing 2.18 Defining the main method to test the Spring configuration**
-(**Liệt kê 2.18 Xác định phương thức chính để kiểm tra cấu hình Spring**)
+(**Listing 2.18 Định nghĩa phương thức main để kiểm tra cấu hình Spring**)
 
 **Prints the default String representation of the instance taken from the Spring context**
-(**In biểu diễn Chuỗi mặc định của phiên bản được lấy từ ngữ cảnh Spring**)
-
-public class Main {
-
-public static void main(String\[\] args) { var context = new
-
-AnnotationConfigApplicationContext(ProjectConfig.class);
-(AnnotationConfigApplicationContext(ProjectConfig.class);)
-
-Parrot p = context.getBean(Parrot.class);
-
-System.out.println(p); System.out.println(p.getName());
-
-}
-
-}
+(**In ra biểu diễn String mặc định của đối tượng được lấy từ Spring context**)
 
 **Prints null because we did not assign any name to the parrot instance added by Spring in its context**
-(**In null vì chúng tôi không gán bất kỳ tên nào cho phiên bản vẹt được Spring thêm vào trong ngữ cảnh của nó**)
+(**In ra null vì chúng ta chưa gán bất kỳ tên nào cho đối tượng parrot được Spring thêm vào context của nó**)
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+        var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
+
+        Parrot p = context.getBean(Parrot.class);
+
+        System.out.println(p);
+        System.out.println(p.getName());
+    }
+}
+```
 
 Running this application, you’ll observe Spring added a Parrot instance to its context because the first value printed is the default String representation of this instance. However, the second value printed is null because we did not assign any name to this parrot. Spring just creates the instance of the class, but it’s still our duty if we want to change this instance in any way afterward (like assigning it a name).
 (Chạy ứng dụng này, bạn sẽ quan sát thấy Spring đã thêm một phiên bản Parrot vào ngữ cảnh của nó vì giá trị đầu tiên được in là biểu diễn Chuỗi mặc định của phiên bản này. Tuy nhiên, giá trị thứ hai được in ra là null vì chúng ta chưa gán bất kỳ tên nào cho chú vẹt này. Spring chỉ tạo ra một thể hiện của lớp, nhưng nhiệm vụ của chúng ta vẫn là nếu sau này chúng ta muốn thay đổi thể hiện này theo bất kỳ cách nào (chẳng hạn như đặt tên cho nó).)
@@ -1121,7 +1130,7 @@ registerBean(b2);
 To keep using our parrots example, the scenario is as follows: The app reads a collec-tion of parrots. Some of them are green; others are orange. You want the app to add to the Spring context only the parrots that are green (figure 2.13).
 (Để tiếp tục sử dụng ví dụ về vẹt của chúng tôi, kịch bản như sau: Ứng dụng đọc một bộ sưu tập các loài vẹt. Một số trong số chúng có màu xanh lá cây; những người khác có màu cam. Bạn muốn ứng dụng chỉ thêm những con vẹt có màu xanh lục vào bối cảnh Mùa xuân (hình 2.13).)
 
-![](media/image65.png)![](media/image68.png)
+![](media/chapter-2/image13.png)
 
 **From a collection of parrots, you want to add only those that are green to the Spring context.**
 (**Từ bộ sưu tập vẹt, bạn chỉ muốn thêm những con có màu xanh lục vào bối cảnh Mùa xuân.**)
@@ -1246,6 +1255,8 @@ context.registerBean("parrot1", Parrot.class, parrotSupplier);
 
 **object instance that we add to the Spring context**
 (**đối tượng mà chúng ta thêm vào Spring context**)
+
+![](media/chapter-2/image14.png)
 
 **Figure 2.14 Calling the registerBean() method to add a bean to the Spring context programmatically**
 (**Hình 2.14 Gọi phương thức registerBean() để thêm một bean vào Spring context theo cách lập trình trực tiếp**)

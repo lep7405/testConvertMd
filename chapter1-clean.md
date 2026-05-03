@@ -200,23 +200,13 @@ Some code of the application you develop implements this functionality, and this
 However, any app takes care of several more aspects: security, logging, data con-sistency, and so on (figure 1.2).
 (Tuy nhiên, bất kỳ ứng dụng nào cũng quan tâm đến một số khía cạnh khác: bảo mật, ghi nhật ký, tính nhất quán của dữ liệu, v.v. (hình 1.2).)
 
-Business logic code
-(Mã logic nghiệp vụ)
-
-Transactions
-(Giao dịch)
-
-Caching
-(Bộ nhớ đệm)
-
-Security
-(Bảo vệ)
-
-Logging
-(Ghi nhật ký)
-
-Data transfer Data persistence
-(Truyền dữ liệu Bảo tồn dữ liệu)
+- Business logic code (Mã logic nghiệp vụ)
+- Transactions (Giao dịch)
+- Caching (Bộ nhớ đệm)
+- Security (Bảo mật)
+- Logging (Ghi nhật ký)
+- Data transfer (Truyền dữ liệu)
+- Data persistence (Lưu trữ dữ liệu)
 
 **Figure 1.2 The user’s perspective is like an iceberg. The users mainly observe the results of the business logic code, but this is only a small part of what builds the app’s complete functionality. Like an iceberg has most of it underwater, in an enterprise app we don’t see most of the code because it’s provided by dependencies.**
 ![](media/image2.png)
@@ -389,37 +379,11 @@ We’ll discuss this subject in chapter 15.
 You can initially imagine the Spring framework as a solar system, where Spring Core represents the star in the middle, which holds all the framework together (figure 1.3).
 (Ban đầu bạn có thể hình dung Spring framework như một hệ mặt trời, trong đó Spring Core đại diện cho ngôi sao ở giữa, giữ tất cả các framework lại với nhau (hình 1.3).)
 
-Spring MVC
-(Mùa xuân MVC)
-
-Spring testing
-(Thử nghiệm mùa xuân)
-
-Spring Core
-(Lõi lò xo)
-
-Spring Data Access
-(Truy cập dữ liệu mùa xuân)
-
 **Figure 1.3 You can imagine the Spring framework as a solar system with the Spring Core in the center. The software capabilities are planets around Spring Core kept close to it by its gravitational field.**
+![](media/image_fig1.3.png)
 (Hình 1.3 Bạn có thể tưởng tượng Spring framework như một hệ mặt trời với Spring Core ở trung tâm. Khả năng của phần mềm là các hành tinh xung quanh Spring Core được giữ gần nó bởi trường hấp dẫn của nó.)
 
-The Spring framework (shortly, Spring) is an application framework that is part of the Java ecosystem.(Spring framework (gọi tắt là Spring) là một framework ứng dụng thuộc hệ sinh thái Java.)
-(Spring framework (gọi tắt là Spring) là một framework ứng dụng nằm trong hệ sinh thái Java.(Spring framework (gọi tắt là Spring) là một framework ứng dụng thuộc hệ sinh thái Java.))
-
-An application framework is a set of common software functionalities that provides a foundation structure for developing an application.(Một framework ứng dụng là một tập hợp các chức năng phần mềm chung cung cấp cấu trúc nền tảng để phát triển một ứng dụng.)An application framework eases the effort of writing an application by taking out the effort of writing all the program code from scratch.(Một framework ứng dụng giúp giảm bớt nỗ lực viết ứng dụng bằng cách loại bỏ việc phải viết toàn bộ mã chương trình từ đầu.)
-(Khung ứng dụng là một tập hợp các chức năng phần mềm phổ biến cung cấp cấu trúc nền tảng để phát triển một ứng dụng. (Một framework ứng dụng là một tập hợp các chức năng phần mềm chung cung cấp cấu trúc nền để phát triển một ứng dụng.) Khung ứng dụng giúp giảm bớt nỗ lực viết một ứng dụng bằng cách loại bỏ nỗ lực viết tất cả mã chương trình từ đầu. (Một framework ứng dụng giúp giảm bớt lực viết ứng dụng bằng cách loại bỏ việc bỏ phải viết toàn bộ mã chương trình.))
-
-We use Spring in the development of many kinds of applications nowadays, from large backend solutions to automation testing apps.(Ngày nay, chúng ta sử dụng Spring để phát triển nhiều loại ứng dụng, từ các giải pháp backend lớn đến các ứng dụng kiểm thử tự động.)According to many survey reports on Java technologies, Spring is the most used Java framework today.(Theo nhiều báo cáo khảo sát về công nghệ Java, hiện nay Spring là framework Java được sử dụng nhiều nhất.)
-(Hiện nay, chúng tôi sử dụng Spring để phát triển nhiều loại ứng dụng, từ các giải pháp phụ trợ lớn đến các ứng dụng thử nghiệm tự động hóa. (Ngày nay, chúng tôi sử dụng Spring để phát triển nhiều loại ứng dụng, từ các giải pháp phụ trợ đến các ứng dụng kiểm tra tự động.)Theo nhiều báo cáo khảo sát về công nghệ Java, Spring là framework Java được sử dụng nhiều nhất hiện nay. (Theo nhiều báo cáo khảo sát về công nghệ Java, hiện nay Spring là framework Java được sử dụng nhiều nhất.))
-
-Spring is popular, and developers have started to use it more often with other JVM languages than Java as well.(Spring rất phổ biến, và các lập trình viên cũng bắt đầu sử dụng nó thường xuyên hơn với các ngôn ngữ JVM khác ngoài Java.)
-(Spring rất phổ biến và các nhà phát triển cũng bắt đầu sử dụng nó thường xuyên hơn với các ngôn ngữ JVM khác ngoài Java.(Spring rất phổ biến và các lập trình viên cũng bắt đầu sử dụng thường xuyên hơn so với các ngôn ngữ JVM khác ngoài Java.))
-
-write, which defines the logic of the app.
-(write, xác định logic của ứng dụng.)
-
-Here’s where the “inversion” in IoC comes from: you don’t let the app control the execution by its own code and use dependen-cies.
+Here’s where the “inversion” in IoC comes from: you don’t let the app control the execution by its own code and use dependencies.
 (Đây là nguồn gốc của sự “đảo ngược” trong IoC: bạn không để ứng dụng kiểm soát việc thực thi bằng mã riêng của nó và sử dụng các phần phụ thuộc.)
 
 Instead, we allow the framework (the dependency) to control the app and its code (figure 1.4).
@@ -434,33 +398,9 @@ Based on the configurations that you write, Spring intercepts the method to augm
 For example, Spring can intercept a specific method to log any error that might appear during the method’s execution.
 (Ví dụ: Spring có thể chặn một phương thức cụ thể để ghi lại bất kỳ lỗi nào có thể xuất hiện trong quá trình thực thi phương thức đó.)
 
-Without IoC
-(Không có IoC)
-
 ![](media/image4.png)
 
-The application executes and controls (uses) the dependencies it needs.
-(Ứng dụng thực thi và kiểm soát (sử dụng) các phần phụ thuộc mà nó cần.)
-
-In the last few years, we observed an impressive growth of developers using Spring with Kotlin (another appreciated language from the JVM family).(Trong những năm gần đây, số lượng lập trình viên sử dụng Spring với Kotlin, một ngôn ngữ được đánh giá cao trong hệ JVM, đã tăng trưởng ấn tượng.)In this book, we'll focus on the foundations of Spring, and I'll teach you essential skills for using Spring in real-world examples.(Trong cuốn sách này, chúng ta sẽ tập trung vào nền tảng của Spring, và tôi sẽ hướng dẫn bạn những kỹ năng cốt lõi để sử dụng Spring trong các ví dụ thực tế.)To make the subject more comfortable for you and allow you to focus on Spring, we'll use only Java examples.(Để giúp nội dung dễ tiếp cận hơn và để bạn tập trung vào Spring, chúng ta sẽ chỉ sử dụng các ví dụ bằng Java.)Throughout the book, we'll discuss and apply, with examples, essential skills like connecting to a database, establishing communication between applications, and securing and testing an app.(Xuyên suốt cuốn sách, chúng ta sẽ thảo luận và áp dụng qua ví dụ các kỹ năng quan trọng như kết nối cơ sở dữ liệu, thiết lập giao tiếp giữa các ứng dụng, cũng như bảo mật và kiểm thử ứng dụng.)
-(Trong vài năm gần đây, chúng tôi đã quan sát thấy sự tăng trưởng ấn tượng của số lượng nhà phát triển sử dụng Spring với Kotlin (một ngôn ngữ được đánh giá cao khác từ gia đình JVM).(Trong những năm gần đây, số lượng lập trình viên sử dụng Spring với Kotlin, một ngôn ngữ được đánh giá cao trong hệ thống JVM, đã tăng ấn tượng.)Trong cuốn sách này, chúng tôi sẽ tập trung vào nền tảng của Spring và tôi sẽ dạy bạn những kỹ năng cần thiết để sử dụng Spring trong các ví dụ thực tế.(Trong cuốn sách này, chúng tôi sẽ tập trung vào nền tảng của Spring, và tôi sẽ hướng dẫn bạn những kỹ năng cốt lõi để sử dụng Spring trong các ví dụ thực tế.)Để làm cho chủ đề thoải mái hơn cho bạn và cho phép bạn tập trung vào Spring, chúng tôi sẽ chỉ sử dụng các ví dụ Java.(Để giúp nội dung dễ tiếp cận hơn và để bạn tập trung vào Spring, chúng tôi sẽ chỉ sử dụng các ví dụ bằng Java.) Xuyên suốt cuốn sách, chúng ta sẽ thảo luận và áp dụng, kèm theo các ví dụ, các kỹ năng cần thiết như kết nối với cơ sở dữ liệu, thiết lập giao tiếp giữa các ứng dụng cũng như bảo mật và thử nghiệm một ứng dụng. sách, chúng tôi sẽ thảo luận và áp dụng các ví dụ về các kỹ năng quan trọng như kết nối cơ sở dữ liệu, thiết lập giao diện tiếp theo giữa các ứng dụng, cũng như bảo mật và kiểm tra ứng dụng.))
-
-Before diving into more technical details in the next chapters, let's talk about the Spring framework and where you'll actually use it.(Trước khi đi sâu hơn vào các chi tiết kỹ thuật ở những chương tiếp theo, hãy cùng nói về Spring framework và những nơi bạn thực sự sẽ sử dụng nó.)Why is Spring so appreciated, and when should you even use it?
-(Trước khi đi sâu vào chi tiết kỹ thuật hơn trong các chương tiếp theo, hãy nói về Spring framework và nơi bạn sẽ thực sự sử dụng nó.(Trước khi đi sâu hơn vào các chi tiết kỹ thuật ở những chương trình tiếp theo, hãy cùng nói về Spring framework và những nơi bạn thực sự sẽ sử dụng nó.)Tại sao Spring được đánh giá cao như vậy và khi nào bạn nên sử dụng nó?)
-
-ControlsDependencyDependencyDependencyControlsDependencyDependencyDependencyApplication
-(Điều khiểnPhụ thuộcPhụ thuộcPhụ thuộcĐiều khiểnPhụ thuộcPhụ thuộcPhụ thuộcỨng dụng)
-
-ControlsApplicationControlsApplicationWith IoC
-(Điều khiểnỨng dụngĐiều khiểnỨng dụngVới IoC)
-
 ![](media/image6.png)
-
-The application executes being controlled by the framework (dependency).
-(Ứng dụng thực thi được kiểm soát bởi framework (phụ thuộc).)
-
-Framework (dependency)
-(Khung (phụ thuộc))
 
 **Figure 1.4 Inversion of control. Instead of executing its own code, which makes use of several other dependencies, in case of an IoC scenario, the app execution is controlled by the dependency. The Spring framework controls an app during its execution. Therefore, it implements an IoC scenario of execution.**
 (Hình 1.4 Đảo ngược điều khiển. Thay vì thực thi mã của chính nó, sử dụng một số phần phụ thuộc khác, trong trường hợp kịch bản IoC, việc thực thi ứng dụng được kiểm soát bởi phần phụ thuộc. Khung công tác Spring kiểm soát một ứng dụng trong quá trình thực thi. Do đó, nó thực hiện một kịch bản thực thi IoC.)
@@ -621,46 +561,10 @@ Some of them you encounter more often than others, and some you may not use at a
 In this book, we refer only to the projects that are essential for you to get started: Spring Core, Spring Data, and Spring Boot.
 (Trong cuốn sách này, chúng tôi chỉ đề cập đến các dự án cần thiết để bạn bắt đầu: Spring Core, Spring Data và Spring Boot.)
 
-You can find a full list of projects that are part of the Spring ecosystem on the official
-(Bạn có thể tìm thấy danh sách đầy đủ các dự án thuộc hệ sinh thái Spring trên trang chính thức)
+You can find a full list of projects that are part of the Spring ecosystem on the official Spring website: https://spring.io/projects/.
+(Bạn có thể tìm thấy danh sách đầy đủ các dự án thuộc hệ sinh thái Spring trên trang web chính thức của Spring: https://spring.io/projects/.)
 
-Spring website: https://spring.io/projects/.
-(Trang web mùa xuân: https://spring.io/projects/.)
-
-Alternatives for using SpringWe can’t really discuss alternatives to Spring because someone could misunderstand them as alternatives to the entire ecosystem.
-(Các lựa chọn thay thế cho việc sử dụng SpringChúng tôi thực sự không thể thảo luận về các lựa chọn thay thế cho Spring vì ai đó có thể hiểu nhầm chúng là những lựa chọn thay thế cho toàn bộ hệ sinh thái.)
-
-But for many of the individual components and projects that create the Spring ecosystem, you can find other options like other open source or commercial frameworks or libraries.For example, let’s take the Spring IoC container.
-(Nhưng đối với nhiều thành phần và dự án riêng lẻ tạo ra hệ sinh thái Spring, bạn có thể tìm thấy các tùy chọn khác như các framework hoặc thư viện nguồn mở hoặc thương mại khác. Ví dụ: hãy lấy bộ chứa Spring IoC.)
-
-Years ago, the Java EE specification was a solution very much appreciated by the developers.
-(Nhiều năm trước, đặc tả Java EE là một giải pháp được các nhà phát triển đánh giá rất cao.)
-
-With a slightly different philosophy, Java EE (which in 2017 was open sourced and remade in Jakarta EE, https://jakarta.ee/) offered specifications like Context and Dependency Injection (CDI) or Enterprise Java Beans (EJB).
-(Với triết lý hơi khác một chút, Java EE (năm 2017 là mã nguồn mở và được làm lại ở Jakarta EE, https://jakarta.ee/) đã cung cấp các thông số kỹ thuật như Context and Dependency Insert (CDI) hoặc Enterprise Java Beans (EJB).)
-
-You could use CDI or EJB to manage a context of object instances and implement aspects (named “interceptors” in the EE terminol-ogy).
-(Bạn có thể sử dụng CDI hoặc EJB để quản lý ngữ cảnh của các thể hiện đối tượng và các khía cạnh triển khai (được đặt tên là “các bộ chặn” trong thuật ngữ EE).)
-
-Also, throughout history, Google Guice (https://github.com/google/guice) was an appreciated framework for the management of object instances in a container.Alternatives for using SpringWe can’t really discuss alternatives to Spring because someone could misunderstand them as alternatives to the entire ecosystem.
-(Ngoài ra, trong suốt lịch sử, Google Guice (https://github.com/google/guice) là một framework được đánh giá cao để quản lý các phiên bản đối tượng trong vùng chứa. Các lựa chọn thay thế để sử dụng SpringChúng tôi thực sự không thể thảo luận về các lựa chọn thay thế cho Spring vì ai đó có thể hiểu nhầm chúng là các lựa chọn thay thế cho toàn bộ hệ sinh thái.)
-
-But for many of the individual components and projects that create the Spring ecosystem, you can find other options like other open source or commercial frameworks or libraries.For example, let’s take the Spring IoC container.
-(Nhưng đối với nhiều thành phần và dự án riêng lẻ tạo ra hệ sinh thái Spring, bạn có thể tìm thấy các tùy chọn khác như các framework hoặc thư viện nguồn mở hoặc thương mại khác. Ví dụ: hãy lấy bộ chứa Spring IoC.)
-
-Years ago, the Java EE specification was a solution very much appreciated by the developers.
-(Nhiều năm trước, đặc tả Java EE là một giải pháp được các nhà phát triển đánh giá rất cao.)
-
-With a slightly different philosophy, Java EE (which in 2017 was open sourced and remade in Jakarta EE, https://jakarta.ee/) offered specifications like Context and Dependency Injection (CDI) or Enterprise Java Beans (EJB).
-(Với triết lý hơi khác một chút, Java EE (năm 2017 là mã nguồn mở và được làm lại ở Jakarta EE, https://jakarta.ee/) đã cung cấp các thông số kỹ thuật như Context and Dependency Insert (CDI) hoặc Enterprise Java Beans (EJB).)
-
-You could use CDI or EJB to manage a context of object instances and implement aspects (named “interceptors” in the EE terminol-ogy).
-(Bạn có thể sử dụng CDI hoặc EJB để quản lý ngữ cảnh của các thể hiện đối tượng và các khía cạnh triển khai (được đặt tên là “các bộ chặn” trong thuật ngữ EE).)
-
-Also, throughout history, Google Guice (https://github.com/google/guice) was an appreciated framework for the management of object instances in a container.
-(Ngoài ra, trong suốt lịch sử, Google Guice (https://github.com/google/guice) là một framework được đánh giá cao để quản lý các phiên bản đối tượng trong vùng chứa.)
-
-Alternatives for using Spring
+### Alternatives for Using Spring
 (Các lựa chọn thay thế cho việc sử dụng Spring)
 
 We can’t really discuss alternatives to Spring because someone could misunderstand them as alternatives to the entire ecosystem.
@@ -676,79 +580,19 @@ Years ago, the Java EE specification was a solution very much appreciated by the
 (Nhiều năm trước, đặc tả Java EE là một giải pháp được các nhà phát triển đánh giá rất cao.)
 
 With a slightly different philosophy, Java EE (which in 2017 was open sourced and remade in Jakarta EE, https://jakarta.ee/) offered specifications like Context and Dependency Injection (CDI) or Enterprise Java Beans (EJB).
-(Với triết lý hơi khác một chút, Java EE (năm 2017 là mã nguồn mở và được làm lại ở Jakarta EE, https://jakarta.ee/) đã cung cấp các thông số kỹ thuật như Context and Dependency Insert (CDI) hoặc Enterprise Java Beans (EJB).)
+(Với triết lý hơi khác một chút, Java EE (năm 2017 là mã nguồn mở và được làm lại ở Jakarta EE, https://jakarta.ee/) đã cung cấp các thông số kỹ thuật như Context and Dependency Injection (CDI) hoặc Enterprise Java Beans (EJB).)
 
-You could use CDI or EJB to manage a context of object instances and implement aspects (named “interceptors” in the EE terminol-ogy).
+You could use CDI or EJB to manage a context of object instances and implement aspects (named “interceptors” in the EE terminology).
 (Bạn có thể sử dụng CDI hoặc EJB để quản lý ngữ cảnh của các thể hiện đối tượng và các khía cạnh triển khai (được đặt tên là “các bộ chặn” trong thuật ngữ EE).)
 
 Also, throughout history, Google Guice (https://github.com/google/guice) was an appreciated framework for the management of object instances in a container.
 (Ngoài ra, trong suốt lịch sử, Google Guice (https://github.com/google/guice) là một framework được đánh giá cao để quản lý các phiên bản đối tượng trong vùng chứa.)
-
-Alternatives for using Spring
-(Các lựa chọn thay thế cho việc sử dụng Spring)
-
-We can’t really discuss alternatives to Spring because someone could misunderstand them as alternatives to the entire ecosystem.
-(Chúng ta thực sự không thể thảo luận về các lựa chọn thay thế cho Spring vì ai đó có thể hiểu nhầm chúng là những lựa chọn thay thế cho toàn bộ hệ sinh thái.)
-
-But for many of the individual components and projects that create the Spring ecosystem, you can find other options like other open source or commercial frameworks or libraries.
-(Nhưng đối với nhiều thành phần và dự án riêng lẻ tạo ra hệ sinh thái Spring, bạn có thể tìm thấy các tùy chọn khác như các thư viện hoặc framework thương mại hoặc nguồn mở khác.)
-
-For example, let’s take the Spring IoC container.
-(Ví dụ: hãy lấy bộ chứa Spring IoC.)
-
-Years ago, the Java EE specification was a solution very much appreciated by the developers.
-(Nhiều năm trước, đặc tả Java EE là một giải pháp được các nhà phát triển đánh giá rất cao.)
-
-With a slightly different philosophy, Java EE (which in 2017 was open sourced and remade in Jakarta EE, https://jakarta.ee/) offered specifications like Context and Dependency Injection (CDI) or Enterprise Java Beans (EJB).
-(Với triết lý hơi khác một chút, Java EE (năm 2017 là mã nguồn mở và được làm lại ở Jakarta EE, https://jakarta.ee/) đã cung cấp các thông số kỹ thuật như Context and Dependency Insert (CDI) hoặc Enterprise Java Beans (EJB).)
-
-You could use CDI or EJB to manage a context of object instances and implement aspects (named “interceptors” in the EE terminol-ogy).
-(Bạn có thể sử dụng CDI hoặc EJB để quản lý ngữ cảnh của các thể hiện đối tượng và các khía cạnh triển khai (được đặt tên là “các bộ chặn” trong thuật ngữ EE).)
-
-Also, throughout history, Google Guice (https://github.com/google/guice) was an appreciated framework for the management of object instances in a container.
-(Ngoài ra, trong suốt lịch sử, Google Guice (https://github.com/google/guice) là một framework được đánh giá cao để quản lý các phiên bản đối tượng trong vùng chứa.)
-
-(continued)For some of the projects taken individually, you could find one or more alternatives.
-((tiếp theo) Đối với một số dự án được thực hiện riêng lẻ, bạn có thể tìm thấy một hoặc nhiều lựa chọn thay thế.)
-
-For example, you could choose to use Apache Shiro (https://shiro.apache.org/) instead of Spring Security.
-(Ví dụ: bạn có thể chọn sử dụng Apache Shira (https://shiro.apache.org/) thay vì Spring Security.)
-
-Or you could decide to implement your web app using the Play framework (https://www.playframework.com/) instead of Spring MVC and Spring-related technologies.A more recent project that looks promising is Red Hat Quarkus.
-(Hoặc bạn có thể quyết định triển khai ứng dụng web của mình bằng cách sử dụng framework Play (https://www.playframework.com/) thay vì Spring MVC và các công nghệ liên quan đến Spring. Một dự án gần đây hơn có vẻ đầy hứa hẹn là Red Hat Quarkus.)
-
-Quarkus is designed for cloud native implementations and becomes more and more mature with rapid steps.
-(Quarkus được thiết kế để triển khai trên nền tảng đám mây và ngày càng hoàn thiện hơn với các bước nhanh chóng.)
-
-I wouldn’t be surprised to see it as one of the lead projects in developing enter-prise apps in the Java ecosystem in the future (https://quarkus.io/).My advice for you is to always take into consideration your alternatives.
-(Tôi sẽ không ngạc nhiên khi coi đây là một trong những dự án hàng đầu trong việc phát triển các ứng dụng dành cho doanh nghiệp trong hệ sinh thái Java trong tương lai (https://quarkus.io/). Lời khuyên của tôi dành cho bạn là hãy luôn cân nhắc các lựa chọn thay thế của mình.)
-
-In software development, you need to be open-minded and never trust one solution as being “the one.” You’ll always find scenarios in which a specific technology works better than another.(continued)For some of the projects taken individually, you could find one or more alternatives.
-(Trong quá trình phát triển phần mềm, bạn cần phải có tư duy cởi mở và không bao giờ tin tưởng vào một giải pháp là “duy nhất”. Bạn sẽ luôn tìm thấy các tình huống trong đó một công nghệ cụ thể hoạt động tốt hơn công nghệ khác. (tiếp theo) Đối với một số dự án được thực hiện riêng lẻ, bạn có thể tìm thấy một hoặc nhiều lựa chọn thay thế.)
-
-For example, you could choose to use Apache Shiro (https://shiro.apache.org/) instead of Spring Security.
-(Ví dụ: bạn có thể chọn sử dụng Apache Shira (https://shiro.apache.org/) thay vì Spring Security.)
-
-Or you could decide to implement your web app using the Play framework (https://www.playframework.com/) instead of Spring MVC and Spring-related technologies.A more recent project that looks promising is Red Hat Quarkus.
-(Hoặc bạn có thể quyết định triển khai ứng dụng web của mình bằng cách sử dụng framework Play (https://www.playframework.com/) thay vì Spring MVC và các công nghệ liên quan đến Spring. Một dự án gần đây hơn có vẻ đầy hứa hẹn là Red Hat Quarkus.)
-
-Quarkus is designed for cloud native implementations and becomes more and more mature with rapid steps.
-(Quarkus được thiết kế để triển khai trên nền tảng đám mây và ngày càng hoàn thiện hơn với các bước nhanh chóng.)
-
-I wouldn’t be surprised to see it as one of the lead projects in developing enter-prise apps in the Java ecosystem in the future (https://quarkus.io/).My advice for you is to always take into consideration your alternatives.
-(Tôi sẽ không ngạc nhiên khi coi đây là một trong những dự án hàng đầu trong việc phát triển các ứng dụng dành cho doanh nghiệp trong hệ sinh thái Java trong tương lai (https://quarkus.io/). Lời khuyên của tôi dành cho bạn là hãy luôn cân nhắc các lựa chọn thay thế của mình.)
-
-In software development, you need to be open-minded and never trust one solution as being “the one.” You’ll always find scenarios in which a specific technology works better than another.
-(Trong quá trình phát triển phần mềm, bạn cần phải có tư duy cởi mở và không bao giờ tin tưởng vào một giải pháp là “duy nhất”. Bạn sẽ luôn tìm thấy các tình huống trong đó một công nghệ cụ thể hoạt động tốt hơn một công nghệ khác.)
-
-(continued)
-((tiếp theo))
 
 For some of the projects taken individually, you could find one or more alternatives.
 (Đối với một số dự án được thực hiện riêng lẻ, bạn có thể tìm thấy một hoặc nhiều lựa chọn thay thế.)
 
 For example, you could choose to use Apache Shiro (https://shiro.apache.org/) instead of Spring Security.
-(Ví dụ: bạn có thể chọn sử dụng Apache Shira (https://shiro.apache.org/) thay vì Spring Security.)
+(Ví dụ: bạn có thể chọn sử dụng Apache Shiro (https://shiro.apache.org/) thay vì Spring Security.)
 
 Or you could decide to implement your web app using the Play framework (https://www.playframework.com/) instead of Spring MVC and Spring-related technologies.
 (Hoặc bạn có thể quyết định triển khai ứng dụng web của mình bằng framework Play (https://www.playframework.com/) thay vì Spring MVC và các công nghệ liên quan đến Spring.)
@@ -759,34 +603,7 @@ A more recent project that looks promising is Red Hat Quarkus.
 Quarkus is designed for cloud native implementations and becomes more and more mature with rapid steps.
 (Quarkus được thiết kế để triển khai trên nền tảng đám mây và ngày càng hoàn thiện hơn với các bước nhanh chóng.)
 
-I wouldn’t be surprised to see it as one of the lead projects in developing enter-prise apps in the Java ecosystem in the future (https://quarkus.io/).
-(Tôi sẽ không ngạc nhiên khi coi đây là một trong những dự án hàng đầu trong việc phát triển các ứng dụng dành cho doanh nghiệp trong hệ sinh thái Java trong tương lai (https://quarkus.io/).)
-
-My advice for you is to always take into consideration your alternatives.
-(Lời khuyên của tôi dành cho bạn là hãy luôn cân nhắc các lựa chọn thay thế của mình.)
-
-In software development, you need to be open-minded and never trust one solution as being “the one.” You’ll always find scenarios in which a specific technology works better than another.
-(Trong quá trình phát triển phần mềm, bạn cần phải có tư duy cởi mở và không bao giờ tin tưởng vào một giải pháp là “duy nhất”. Bạn sẽ luôn tìm thấy các tình huống trong đó một công nghệ cụ thể hoạt động tốt hơn một công nghệ khác.)
-
-(continued)
-((tiếp theo))
-
-For some of the projects taken individually, you could find one or more alternatives.
-(Đối với một số dự án được thực hiện riêng lẻ, bạn có thể tìm thấy một hoặc nhiều lựa chọn thay thế.)
-
-For example, you could choose to use Apache Shiro (https://shiro.apache.org/) instead of Spring Security.
-(Ví dụ: bạn có thể chọn sử dụng Apache Shira (https://shiro.apache.org/) thay vì Spring Security.)
-
-Or you could decide to implement your web app using the Play framework (https://www.playframework.com/) instead of Spring MVC and Spring-related technologies.
-(Hoặc bạn có thể quyết định triển khai ứng dụng web của mình bằng framework Play (https://www.playframework.com/) thay vì Spring MVC và các công nghệ liên quan đến Spring.)
-
-A more recent project that looks promising is Red Hat Quarkus.
-(Một dự án gần đây có vẻ hứa hẹn hơn là Red Hat Quarkus.)
-
-Quarkus is designed for cloud native implementations and becomes more and more mature with rapid steps.
-(Quarkus được thiết kế để triển khai trên nền tảng đám mây và ngày càng hoàn thiện hơn với các bước nhanh chóng.)
-
-I wouldn’t be surprised to see it as one of the lead projects in developing enter-prise apps in the Java ecosystem in the future (https://quarkus.io/).
+I wouldn’t be surprised to see it as one of the lead projects in developing enterprise apps in the Java ecosystem in the future (https://quarkus.io/).
 (Tôi sẽ không ngạc nhiên khi coi đây là một trong những dự án hàng đầu trong việc phát triển các ứng dụng dành cho doanh nghiệp trong hệ sinh thái Java trong tương lai (https://quarkus.io/).)
 
 My advice for you is to always take into consideration your alternatives.
@@ -850,11 +667,8 @@ The users access functionalities by using the client apps directly.
 Further, the client apps make requests to the backend app to work with the users’ data.
 (Hơn nữa, các ứng dụng khách sẽ yêu cầu ứng dụng phụ trợ hoạt động với dữ liệu của người dùng.)
 
-The backend app
-(Ứng dụng phụ trợ)
-
-might use databases to store data or communicate with other backend apps in differ-ent fashions.
-(có thể sử dụng cơ sở dữ liệu để lưu trữ dữ liệu hoặc liên lạc với các ứng dụng phụ trợ khác theo các kiểu khác nhau.)
+The backend app might use databases to store data or communicate with other backend apps in different fashions.
+(Ứng dụng phụ trợ có thể sử dụng cơ sở dữ liệu để lưu trữ dữ liệu hoặc liên lạc với các ứng dụng phụ trợ khác theo các kiểu khác nhau.)
 
 You can imagine, in a real-world scenario, that the app would be the backend application managing the transactions in your bank accounts.
 (Bạn có thể tưởng tượng, trong kịch bản thực tế, ứng dụng này sẽ là ứng dụng phụ trợ quản lý các giao dịch trong tài khoản ngân hàng của bạn.)
@@ -871,11 +685,8 @@ To manage users’ transactions, the backend application needs to communicate wi
 In figure 1.5, you can visualize the architecture of such a system.
 (Trong hình 1.5, bạn có thể hình dung kiến ​​trúc của một hệ thống như vậy.)
 
-The users interact with the
-(Người dùng tương tác với)
-
-client apps to manage their data.
-(ứng dụng khách để quản lý dữ liệu của họ.)
+The users interact with the client apps to manage their data.
+(Người dùng tương tác với các ứng dụng khách để quản lý dữ liệu của họ.)
 
 Other backend solutions make direct requests to your backend app.
 (Các giải pháp phụ trợ khác đưa ra yêu cầu trực tiếp tới ứng dụng phụ trợ của bạn.)
@@ -911,11 +722,8 @@ It makes your life easier with the different functionalities you generally imple
 It’s no wonder developers often use Spring for such applications.
 (Không có gì ngạc nhiên khi các nhà phát triển thường sử dụng Spring cho những ứng dụng như vậy.)
 
-The
-(các)
-
-framework basically offers you everything you need in such implementations and is an excellent fit for any kind of architectural style.
-(framework về cơ bản cung cấp cho bạn mọi thứ bạn cần trong quá trình triển khai như vậy và rất phù hợp với bất kỳ loại phong cách kiến ​​trúc nào.)
+The framework basically offers you everything you need in such implementations and is an excellent fit for any kind of architectural style.
+(Framework về cơ bản cung cấp cho bạn mọi thứ bạn cần trong quá trình triển khai như vậy và rất phù hợp với bất kỳ loại phong cách kiến ​​trúc nào.)
 
 Figure 1.6 indicates the possibilities of using Spring for a backend app.
 (Hình 1.6 chỉ ra khả năng sử dụng Spring cho ứng dụng phụ trợ.)
